@@ -41,3 +41,19 @@ msg.addEventListener('keypress', function (event) {
     msg.value = '';         // reset the message input field for next message.
   }
 });
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!'
+      },
+      methods: {
+          say: function (message) {
+            alert(message)
+            channel.push('shout', { // send the message to the server on "shout" channel
+              name: "Test",     // get value of "name" of person sending the message
+              message: message// get message text (value) from msg input field.
+            });
+          }
+        }
+    })

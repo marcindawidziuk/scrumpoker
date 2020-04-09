@@ -3,6 +3,8 @@
   <p>A productive web framework that<br/>does not compromise speed or maintainability.</p>
 </section>
 
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
 <section class="row">
   <article class="column">
     <h2>Resources</h2>
@@ -34,7 +36,6 @@
   </article>
 </section>
 
-
 <!-- The list of messages will appear here: -->
 <ul id='msg-list' class='row' style='list-style: none; min-height:200px; padding: 10px;'></ul>
 
@@ -46,3 +47,29 @@
     <input type="text" id="msg" class="form-control" placeholder="Your Message">
   </div>
 </div>
+
+<div id="app">
+  <div class="row">
+    <div class="col-xs-3">
+      <input type="text" id="name" class="form-control" placeholder="Your Name" autofocus>
+    </div>
+    <div class="col-xs-9">
+        <button v-on:click="say(0)"> 0 </button>
+        <button v-on:click="say(1)"> 1 </button>
+        <button v-on:click="say(2)"> 2 </button>
+        <button v-on:click="say(3)"> 3 </button>
+        <button v-on:click="say(5)"> 5 </button>
+        <button v-on:click="say(8)"> 8 </button>
+        <button v-on:click="say(13)"> 13 </button>
+        <button v-on:click="say(20)"> 20 </button>
+        <button v-on:click="say(40)"> 40 </button>
+        <button v-on:click="say(100)"> 100 </button>
+      <input type="text" id="msg" class="form-control" placeholder="Your Message">
+    </div>
+  </div>
+</div>
+
+<script>
+
+
+</script>
