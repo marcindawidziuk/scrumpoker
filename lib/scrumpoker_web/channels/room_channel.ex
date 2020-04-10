@@ -22,6 +22,21 @@ defmodule ScrumpokerWeb.RoomChannel do
     {:noreply, socket}
   end
 
+  def handle_in("voted", payload, socket) do
+    broadcast socket, "voted", payload
+    {:noreply, socket}
+  end
+
+  def handle_in("show_votes", payload, socket) do
+    broadcast socket, "show_votes", payload
+    {:noreply, socket}
+  end
+
+  def handle_in("clear_votes", payload, socket) do
+    broadcast socket, "clear_votes", payload
+    {:noreply, socket}
+  end
+
   # Add authorization logic here as required.
   defp authorized?(_payload) do
     true

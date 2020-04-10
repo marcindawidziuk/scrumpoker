@@ -5,7 +5,7 @@ config :scrumpoker, Scrumpoker.Repo,
   username: "postgres",
   password: "postgres",
   database: "scrumpoker_dev",
-  hostname: "localhost",
+  hostname: "192.168.0.15",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
