@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\cinek\.Rider2019.3\config\javascript\extLibs\http_cdn.jsdelivr.net_npm_vue_dist_vue.js" t="IncludeRecursive" />
+    <e p="C:\Users\cinek\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\cinek\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_.19.00" t="ExcludeRecursive" />
+    <e p="D:\Development\scrumpoker" t="IncludeFlat">
+      <e p="assets\node_modules\@babel\core" t="IncludeRecursive" />
+      <e p="assets\node_modules\@babel\preset-env" t="IncludeRecursive" />
+      <e p="assets\node_modules\@types" t="IncludeRecursive" />
+      <e p="assets\node_modules\babel-loader" t="IncludeRecursive" />
+      <e p="assets\node_modules\copy-webpack-plugin" t="IncludeRecursive" />
+      <e p="assets\node_modules\css-loader" t="IncludeRecursive" />
+      <e p="assets\node_modules\mini-css-extract-plugin" t="IncludeRecursive" />
+      <e p="assets\node_modules\optimize-css-assets-webpack-plugin" t="IncludeRecursive" />
+      <e p="assets\node_modules\phoenix" t="IncludeRecursive" />
+      <e p="assets\node_modules\phoenix_html" t="IncludeRecursive" />
+      <e p="assets\node_modules\terser-webpack-plugin" t="IncludeRecursive" />
+      <e p="assets\node_modules\webpack" t="IncludeRecursive" />
+      <e p="assets\node_modules\webpack-cli" t="IncludeRecursive" />
+    </e>
+    <e p="D:\Elixir\lib\eex\ebin" t="IncludeRecursive" />
+    <e p="D:\Elixir\lib\Elixir\ebin" t="IncludeRecursive" />
+    <e p="D:\Elixir\lib\ex_unit\ebin" t="IncludeRecursive" />
+    <e p="D:\Elixir\lib\iex\ebin" t="IncludeRecursive" />
+    <e p="D:\Elixir\lib\logger\ebin" t="IncludeRecursive" />
+    <e p="D:\Elixir\lib\mix\ebin" t="IncludeRecursive" />
+  </component>
+</project>

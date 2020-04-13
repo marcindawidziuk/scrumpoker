@@ -1,7 +1,7 @@
 defmodule ScrumpokerWeb.RoomChannel do
   use ScrumpokerWeb, :channel
 
-  def join("room:lobby", payload, socket) do
+  def join("room:" <> _, payload, socket) do
     if authorized?(payload) do
       {:ok, socket}
     else
@@ -34,6 +34,11 @@ defmodule ScrumpokerWeb.RoomChannel do
 
   def handle_in("clear_votes", payload, socket) do
     broadcast socket, "clear_votes", payload
+    {:noreply, socket}
+  end
+
+  def handle_in("joined", payload, socket) do
+    broadcast socket, "joined", payload
     {:noreply, socket}
   end
 
