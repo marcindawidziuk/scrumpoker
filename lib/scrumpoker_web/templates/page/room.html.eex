@@ -6,12 +6,15 @@
 
 
 <div id="app">
-  <div class="row">
-  <h1>Online Scrum Poker</h1>
+  <div class="row" >
+      <a href="http://localhost:4000/poker/<%= @room %>">Invitation link</a>
   </div>
   
   <div class="row">
+      <h1>Scrum Poker - <%= @room %></h1>
   </div>
+  
+  
   <div class="row" style="min-height: 300px;">
       <ul id="votes">
          <li v-for="(vote, name) in votes">

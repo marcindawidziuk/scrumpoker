@@ -1,5 +1,5 @@
 <section class="phx-hero" >
-  <p>A productive web framework that<br/>does not compromise speed or maintainability.</p>
+  <p>Please enter your User Name and Session Name to start a Scum Poker session</p>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -11,7 +11,7 @@
 <div id="app">
   <div class="row">
     <input type="text" class="form-control" placeholder="Your Name" v-model="userName" autofocus>
-    <input type="text" class="form-control" placeholder="Session Name" v-model="roomName" autofocus>
+    <input type="text" class="form-control" placeholder="Session Name" v-model="roomName">
   </div>
   <div class="row">
     <div class="col-xs-9">
@@ -25,7 +25,7 @@ let app = new Vue({
     el: '#app',
     data: {
         userName: "",
-        roomName: "",
+        roomName: "<%= @room %>",
     },
     created: function () { },
     methods: {
@@ -39,7 +39,6 @@ let app = new Vue({
               return;
           }
           window.location.href = "/poker/" + this.roomName + "?name="+this.userName;
-          
         }
     }
 });
