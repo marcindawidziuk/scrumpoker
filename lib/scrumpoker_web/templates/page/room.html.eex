@@ -21,7 +21,7 @@ font-size: 0.9em;
   
   
  <div class="row" style="min-height: 300px;">
-  <div class="column column-60">
+  <div class="column">
       <ul id="votes" style="list-style: square;">
          <li v-for="user in sortedUsers">
             <span >{{ user.name }} {{ user.time | isOnline }}<span>
@@ -30,12 +30,14 @@ font-size: 0.9em;
           </li>
       </ul>
   </div>
+  <div class="column">
+      <label for="message-input">Case/Story</label><textarea id="message-input" @input="onInputChanged($event.target.value)" v-model="message" style="width: 100%; height:150px; margin: 4px;" ></textarea>
+  </div>
   </div>
   
   <div class="row">
     <div class="col-xs-9">
-        <button class="button button-large" v-on:click="vote('?')" :disabled="canVote === false"> ? </button>
-        <button class="button button-large" v-on:click="vote(0)" :disabled="canVote === false"> 0 </button>
+        <button class="button button-large" v-on:click="vote('0.5')" :disabled="canVote === false"> 0.5 </button>
         <button class="button button-large " v-on:click="vote(1)":disabled="canVote === false"> 1 </button>
         <button class="button button-large" v-on:click="vote(2)" :disabled="canVote === false"> 2 </button>
         <button class="button button-large" v-on:click="vote(3)" :disabled="canVote === false"> 3 </button>
@@ -43,8 +45,7 @@ font-size: 0.9em;
         <button class="button button-large" v-on:click="vote(8)" :disabled="canVote === false"> 8 </button>
         <button class="button button-large" v-on:click="vote(13)" :disabled="canVote === false"> 13 </button>
         <button class="button button-large" v-on:click="vote(20)" :disabled="canVote === false"> 20 </button>
-        <button class="button button-large" v-on:click="vote(40)" :disabled="canVote === false"> 40 </button>
-        <button class="button button-large" v-on:click="vote(100)" :disabled="canVote === false"> 100 </button>
+        <button class="button button-large" v-on:click="vote('∞')" :disabled="canVote === false"> ∞ </button>
     </div>
   </div>
   <div class="row">

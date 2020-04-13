@@ -37,7 +37,7 @@ let app = new Vue({
     data: {
         userName: "",
         channelName: channelName,
-        message: 'Hello Vue!',
+        message: "",
         isShowingVotes: false,
         votes: {},
         users: [],
@@ -78,6 +78,13 @@ let app = new Vue({
             }
             app.users.filter(x => x.name === userName).forEach(x => x.time = new Date());
         },
+        onInputChanged: function (input) {
+            console.log(input);
+            channel.push('change_message', { // send the message to the server on "shout" channel
+                name: this.userName,     // get value of "name" of person sending the message
+                message: this.message
+            });
+        },
         vote: function (message) {
             channel.push('voted', { // send the message to the server on "shout" channel
                 name: this.userName,     // get value of "name" of person sending the message
@@ -102,6 +109,27 @@ let app = new Vue({
             channel.push('ping', { // send the message to the server on "shout" channel
                 name: this.userName,     // get value of "name" of person sending the message
             });
+        },
+        debounce: function (func, wait, immediate) {
+            var timeout;
+            return function() {
+                var context = this, args = arguments;
+                var later = function() {
+                    timeout = null;
+                    if (!immediate) func.apply(context, args);
+                };
+                var callNow = immediate && !timeout;
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+                if (callNow) func.apply(context, args);
+            };
+    }
+    },
+    watch: {
+        message: function (val, val2) {
+            // document.getElementById("element")
+            // this.fullName = val + ' ' + this.lastName
+            document.getElementById("element")
         }
     },
     computed: {
@@ -122,9 +150,19 @@ channel.on('ping', function (payload) { // listen to the 'shout' event
     app.markOnline(payload.name)
 });
 
+channel.on('change_message', function (payload) { // listen to the 'shout' event
+    console.log('changed message by ' + payload.name + ' to ' + payload.message);
+    app.markOnline(payload.name);
+    app.message = payload.message;
+    
+});
+
 channel.on('joined', function (payload) {
     console.log('user ' + payload.name + ' joined');
     app.ping();
+    if (app.userName !== payload.name){
+        app.onInputChanged(app.message);
+    }
 
     if (app.myVote != null){
         channel.push('voted', { 

@@ -21,6 +21,11 @@ defmodule ScrumpokerWeb.RoomChannel do
     {:noreply, socket}
   end
 
+  def handle_in("change_message", payload, socket) do
+    broadcast socket, "change_message", payload
+    {:noreply, socket}
+  end
+
   def handle_in("voted", payload, socket) do
     broadcast socket, "voted", payload
     {:noreply, socket}
