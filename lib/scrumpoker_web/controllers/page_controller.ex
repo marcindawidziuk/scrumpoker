@@ -2,7 +2,11 @@ defmodule ScrumpokerWeb.PageController do
   use ScrumpokerWeb, :controller
 
   def rick(conn, _params)do
-    redirect(conn, external: "https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+    if :erlang.date |> :calendar.day_of_the_week >= 5 do
+      redirect(conn, external: "https://youtu.be/4z95SAFud7w")
+    else
+      redirect(conn, external: "https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+    end
   end
 
   def index(conn, %{"room" => room}) do
