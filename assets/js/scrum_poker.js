@@ -15,8 +15,6 @@ import "phoenix_html"
 // Local files can be imported directly using relative paths, for example:
 import socket from "./socket"
 const urlParams = new URLSearchParams(window.location.search);
-// const channelName = urlParams.get('channel');
-// const channelName = document.URL.substr(0,document.URL.lastIndexOf('/'));
 const channelName = window.channelRoomId;
 const userName = urlParams.get('name');
 
@@ -24,14 +22,14 @@ let channel = socket.channel('room:'+ channelName +':lobby', {}); // connect to 
 
 channel.join(); // join the channel.
 
-Vue.filter('moment-ago', function (date) {
+Vue.filter('isOnline', function (date) {
     var b = new Date();
     var difference = (b - date) / 1000;
 
     if (difference > 60){
-        return "offline" + difference;
+        return "(offline)";
     }
-    return "online" + difference;
+    return "";
 });
 
 let app = new Vue({
@@ -55,16 +53,19 @@ let app = new Vue({
 
         channel.on('voted', function (payload) { // listen to the 'shout' event
             console.log(payload.name + " voted");
+            app.markOnline(payload.name);
             app.$set(app.votes, payload.name, payload.message);
         });
 
         channel.on('show_votes', function (payload) { // listen to the 'shout' event
             console.log('show_votes');
+            app.markOnline(payload.name);
             app.isShowingVotes = true
         });
 
         channel.on('clear_votes', function (payload) { // listen to the 'shout' event
             console.log('clear_votes');
+            app.markOnline(payload.name);
             app.isShowingVotes = false;
             app.votes = {};
             app.myVote = null;
@@ -75,6 +76,7 @@ let app = new Vue({
             if (app.users.some(x => x.name === userName) === false){
                 app.users.push({name: userName, time: new Date()})
             }
+            app.users.filter(x => x.name === userName).forEach(x => x.time = new Date());
         },
         vote: function (message) {
             channel.push('voted', { // send the message to the server on "shout" channel
@@ -82,6 +84,9 @@ let app = new Vue({
                 message: message// get message text (value) from msg input field.
             });
             this.myVote = message;
+            if (app.users.some(u => app.userName !== u.name && app.votes[u.name] === undefined) === false){
+                app.showVotes();
+            }
         },
         showVotes: function () {
             channel.push('show_votes', { // send the message to the server on "shout" channel
@@ -102,6 +107,12 @@ let app = new Vue({
     computed: {
         canVote: function() {
             return (this.isShowingVotes && this.votes[this.userName] !== undefined) === false;
+        },
+        sortedUsers: function() {
+            return this.users.sort((a, b) => a.name.localeCompare(b.name)).map(u => {
+                u.vote = app.votes[u.name];
+                return u;
+            });
         }
     }
 });

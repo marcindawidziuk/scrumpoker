@@ -4,6 +4,11 @@
 <!-- The list of messages will appear here: -->
 <script>window.channelRoomId = "<%= @room %>"</script>
 
+<style>
+.button-large{
+font-size: 0.9em;
+}
+</style>
 
 <div id="app">
   <div class="row" >
@@ -15,19 +20,13 @@
   </div>
   
   
-  <div class="row" style="min-height: 300px;">
-  <div class="col-6">
-      <ul id="votes">
-         <li v-for="(vote, name) in votes">
-             {{ name }} voted
-            <span v-if="isShowingVotes" style="font-weight: bold;" >{{ vote }}<span>
-          </li>
-      </ul>
-  </div>
-  <div class="col-3" style="align: right;">
-      <ul >
-         <li v-for="(user) in users">
-             {{ user.name }} {{ user.time | moment-ago }}
+ <div class="row" style="min-height: 300px;">
+  <div class="column column-60">
+      <ul id="votes" style="list-style: square;">
+         <li v-for="user in sortedUsers">
+            <span >{{ user.name }} {{ user.time | isOnline }}<span>
+            <span v-if="user.vote" >voted<span>
+            <span v-if="isShowingVotes" style="font-weight: bold;" > {{ user.vote }}<span>
           </li>
       </ul>
   </div>
@@ -35,21 +34,22 @@
   
   <div class="row">
     <div class="col-xs-9">
-        <button class="button " v-on:click="vote(0)" :disabled="canVote === false"> 0 </button>
-        <button class="button" v-on:click="vote(1)":disabled="canVote === false"> 1 </button>
-        <button class="button" v-on:click="vote(2)" :disabled="canVote === false"> 2 </button>
-        <button class="button" v-on:click="vote(3)" :disabled="canVote === false"> 3 </button>
-        <button v-on:click="vote(5)" :disabled="canVote === false"> 5 </button>
-        <button v-on:click="vote(8)" :disabled="canVote === false"> 8 </button>
-        <button v-on:click="vote(13)" :disabled="canVote === false"> 13 </button>
-        <button v-on:click="vote(20)" :disabled="canVote === false"> 20 </button>
-        <button v-on:click="vote(40)" :disabled="canVote === false"> 40 </button>
-        <button v-on:click="vote(100)" :disabled="canVote === false"> 100 </button>
+        <button class="button button-large" v-on:click="vote('?')" :disabled="canVote === false"> ? </button>
+        <button class="button button-large" v-on:click="vote(0)" :disabled="canVote === false"> 0 </button>
+        <button class="button button-large " v-on:click="vote(1)":disabled="canVote === false"> 1 </button>
+        <button class="button button-large" v-on:click="vote(2)" :disabled="canVote === false"> 2 </button>
+        <button class="button button-large" v-on:click="vote(3)" :disabled="canVote === false"> 3 </button>
+        <button class="button button-large" v-on:click="vote(5)" :disabled="canVote === false"> 5 </button>
+        <button class="button button-large" v-on:click="vote(8)" :disabled="canVote === false"> 8 </button>
+        <button class="button button-large" v-on:click="vote(13)" :disabled="canVote === false"> 13 </button>
+        <button class="button button-large" v-on:click="vote(20)" :disabled="canVote === false"> 20 </button>
+        <button class="button button-large" v-on:click="vote(40)" :disabled="canVote === false"> 40 </button>
+        <button class="button button-large" v-on:click="vote(100)" :disabled="canVote === false"> 100 </button>
     </div>
   </div>
   <div class="row">
         <button class="button button-outline" v-on:click="showVotes()" :disabled="canVote === false"> Show votes </button>
-        <button class="button button-outline" v-on:click="clearVotes()"> Clear votes </button>
+        <button class="button button-outline" style="margin-left: 5px;" v-on:click="clearVotes()"> Clear votes </button>
   </div>
   <div class="row" v-if="isShowingVotes && votes[userName] === undefined">
       <h3 style="color: #dd3235">You didn't vote!</h3>
