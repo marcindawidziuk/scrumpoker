@@ -24,6 +24,16 @@ let channel = socket.channel('room:'+ channelName +':lobby', {}); // connect to 
 
 channel.join(); // join the channel.
 
+Vue.filter('moment-ago', function (date) {
+    var b = new Date();
+    var difference = (b - date) / 1000;
+
+    if (difference > 60){
+        return "offline" + difference;
+    }
+    return "online" + difference;
+});
+
 let app = new Vue({
     el: '#app',
     data: {
@@ -32,10 +42,12 @@ let app = new Vue({
         message: 'Hello Vue!',
         isShowingVotes: false,
         votes: {},
+        users: [],
         myVote: null
     },
     created: function () {
         this.userName = userName;
+        setInterval(function(){ app.ping(); }, 30000);
 
         channel.push('joined', { // send the message to the server on "shout" channel
             name: this.userName     // get value of "name" of person sending the message
@@ -59,6 +71,11 @@ let app = new Vue({
         });
     },
     methods: {
+        markOnline: function (userName) {
+            if (app.users.some(x => x.name === userName) === false){
+                app.users.push({name: userName, time: new Date()})
+            }
+        },
         vote: function (message) {
             channel.push('voted', { // send the message to the server on "shout" channel
                 name: this.userName,     // get value of "name" of person sending the message
@@ -75,6 +92,11 @@ let app = new Vue({
             channel.push('clear_votes', { // send the message to the server on "shout" channel
                 name: this.userName,     // get value of "name" of person sending the message
             });
+        },
+        ping: function () {
+            channel.push('ping', { // send the message to the server on "shout" channel
+                name: this.userName,     // get value of "name" of person sending the message
+            });
         }
     },
     computed: {
@@ -83,8 +105,16 @@ let app = new Vue({
         }
     }
 });
-channel.on('joined', function (payload) { 
+
+channel.on('ping', function (payload) { // listen to the 'shout' event
+    console.log('ping from ' + payload.name);
+    app.markOnline(payload.name)
+});
+
+channel.on('joined', function (payload) {
     console.log('user ' + payload.name + ' joined');
+    app.ping();
+
     if (app.myVote != null){
         channel.push('voted', { 
             name: app.userName, 

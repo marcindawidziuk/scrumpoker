@@ -16,6 +16,7 @@
   
   
   <div class="row" style="min-height: 300px;">
+  <div class="col-6">
       <ul id="votes">
          <li v-for="(vote, name) in votes">
              {{ name }} voted
@@ -23,6 +24,15 @@
           </li>
       </ul>
   </div>
+  <div class="col-3" style="align: right;">
+      <ul >
+         <li v-for="(user) in users">
+             {{ user.name }} {{ user.time | moment-ago }}
+          </li>
+      </ul>
+  </div>
+  </div>
+  
   <div class="row">
     <div class="col-xs-9">
         <button class="button " v-on:click="vote(0)" :disabled="canVote === false"> 0 </button>
