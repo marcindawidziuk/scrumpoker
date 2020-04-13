@@ -4,4 +4,8 @@ defmodule ScrumpokerWeb.PageController do
   def index(conn, _params) do
     render(conn, "index.html")
   end
+
+  def room(conn, %{"room" => room}) do
+      render(conn, "room.html", room: String.downcase(room))
+  end
 end

@@ -15,7 +15,9 @@ import "phoenix_html"
 // Local files can be imported directly using relative paths, for example:
 import socket from "./socket"
 const urlParams = new URLSearchParams(window.location.search);
-const channelName = urlParams.get('channel');
+// const channelName = urlParams.get('channel');
+// const channelName = document.URL.substr(0,document.URL.lastIndexOf('/'));
+const channelName = window.channelRoomId;
 const userName = urlParams.get('name');
 
 let channel = socket.channel('room:'+ channelName +':lobby', {}); // connect to chat "room"
@@ -26,6 +28,7 @@ let app = new Vue({
     el: '#app',
     data: {
         userName: "",
+        channelName: channelName,
         message: 'Hello Vue!',
         isShowingVotes: false,
         votes: {},

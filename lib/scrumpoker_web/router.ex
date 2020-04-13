@@ -16,7 +16,8 @@ defmodule ScrumpokerWeb.Router do
   scope "/", ScrumpokerWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/poker", PageController, :index
+    get "/poker/:room/", PageController, :room
   end
 
   # Other scopes may use custom stacks.

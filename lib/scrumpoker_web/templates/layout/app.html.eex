@@ -11,6 +11,7 @@
   <body>
     <header>
       <section class="container">
+      <a href="/poker">Scrum Poker</a>
       </section>
     </header>
     <main role="main" class="container">

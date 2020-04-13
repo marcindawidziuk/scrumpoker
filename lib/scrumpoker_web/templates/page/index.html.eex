@@ -1,5 +1,4 @@
-<section class="phx-hero" style="display:none">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
+<section class="phx-hero" >
   <p>A productive web framework that<br/>does not compromise speed or maintainability.</p>
 </section>
 
@@ -8,38 +7,41 @@
 <!-- The list of messages will appear here: -->
 <ul id='msg-list' class='row' style='list-style: none; min-height:200px; padding: 10px; display: none;'></ul>
 
+
 <div id="app">
   <div class="row">
-  <h1>Votes </h1> <br/>
-  </div>
-  <div class="row">
-      <ul id="votes">
-         <li v-for="(vote, name) in votes" >
-             {{ name }} voted
-            <span v-if="isShowingVotes" style="font-weight: bold;" >{{ vote }}<span>
-          </li>
-      </ul>
-  </div>
-  
-  <div class="row">
-    <input type="text" id="name" class="form-control" placeholder="Your Name" autofocus>
+    <input type="text" class="form-control" placeholder="Your Name" v-model="userName" autofocus>
+    <input type="text" class="form-control" placeholder="Session Name" v-model="roomName" autofocus>
   </div>
   <div class="row">
     <div class="col-xs-9">
-        <button class="button " v-on:click="vote(0)" :disabled="canVote === false"> 0 </button>
-        <button class="button" v-on:click="vote(1)":disabled="canVote === false"> 1 </button>
-        <button class="button" v-on:click="vote(2)" :disabled="canVote === false"> 2 </button>
-        <button class="button" v-on:click="vote(3)" :disabled="canVote === false"> 3 </button>
-        <button v-on:click="vote(5)" :disabled="canVote === false"> 5 </button>
-        <button v-on:click="vote(8)" :disabled="canVote === false"> 8 </button>
-        <button v-on:click="vote(13)" :disabled="canVote === false"> 13 </button>
-        <button v-on:click="vote(20)" :disabled="canVote === false"> 20 </button>
-        <button v-on:click="vote(40)" :disabled="canVote === false"> 40 </button>
-        <button v-on:click="vote(100)" :disabled="canVote === false"> 100 </button>
-        <button class="button button-outline" v-on:click="showVotes()" :disabled="canVote === false"> Show votes </button>
-        <button class="button button-outline" v-on:click="clearVotes()"> Clear votes </button>
+        <button class="button button-outline" v-on:click="connect()" > Connect </button>
     </div>
   </div>
 </div>
 
-<script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/scrum_poker.js") %>"></script>
+<script>
+let app = new Vue({
+    el: '#app',
+    data: {
+        userName: "",
+        roomName: "",
+    },
+    created: function () { },
+    methods: {
+        connect: function (message) {
+          if (this.userName.length <=2 ){
+              alert("Please enter User Name (min. 3 letters)");
+              return;
+          }
+          if (this.roomName.length <=2 ){
+              alert("Please enter Room Name (min. 3 letters)");
+              return;
+          }
+          window.location.href = "/poker/" + this.roomName + "?name="+this.userName;
+          
+        }
+    }
+});
+
+</script>
