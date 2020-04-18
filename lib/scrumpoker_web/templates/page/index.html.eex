@@ -38,7 +38,7 @@ let app = new Vue({
               alert("Please enter Room Name (min. 3 letters)");
               return;
           }
-          window.location.href = "/poker/" + this.roomName + "?name="+this.userName;
+          window.location.href = "/" + this.roomName + "?name="+this.userName;
         }
     }
 });
