@@ -1,5 +1,5 @@
 <section class="phx-hero" >
-  <p>Please enter your User Name and Session Name to start a Scum Poker session</p>
+  <p>Please enter your User Name and Session Name to start a Scrum Poker session</p>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

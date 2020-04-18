@@ -12,7 +12,7 @@ font-size: 0.9em;
 
 <div id="app">
   <div class="row" >
-      <a href="http://marcin.uk/poker/<%= @room %>">Invitation link</a>
+      <a href="http://poker.marcin.uk/<%= @room %>">Invitation link</a>
   </div>
   
   <div class="row">
