@@ -1,6 +1,8 @@
 defmodule ScrumpokerWeb.PageController do
   use ScrumpokerWeb, :controller
 
+  plug :put_layout, false when action in [:landing]
+  
   def rick(conn, _params)do
     if :erlang.date |> :calendar.day_of_the_week >= 5 do
       redirect(conn, external: "https://youtu.be/4z95SAFud7w")
@@ -17,6 +19,10 @@ defmodule ScrumpokerWeb.PageController do
     render(conn, "index.html", room: "")
   end
 
+  def landing(conn, _params) do
+    render(conn, "landing.html")
+  end
+
   def room(conn, %{"room" => room, "name" => _userName}) do
       render(conn, "room.html", room: String.downcase(room))
   end
@@ -24,4 +30,5 @@ defmodule ScrumpokerWeb.PageController do
   def room(conn, %{"room" => room}) do
     redirect(conn, to: "/poker?room=#{room}")
   end
+
 end

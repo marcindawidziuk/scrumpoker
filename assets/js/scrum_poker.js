@@ -101,6 +101,10 @@ let app = new Vue({
             });
         },
         clearVotes: function () {
+            channel.push('change_message', { // send the message to the server on "shout" channel
+                name: this.userName,     // get value of "name" of person sending the message
+                message: ""
+            });
             channel.push('clear_votes', { // send the message to the server on "shout" channel
                 name: this.userName,     // get value of "name" of person sending the message
             });

@@ -24,9 +24,9 @@ font-size: 0.9em;
   <div class="column">
       <ul id="votes" style="list-style: square;">
          <li v-for="user in sortedUsers">
-            <span >{{ user.name }} {{ user.time | isOnline }}<span>
-            <span v-if="user.vote" >voted<span>
-            <span v-if="isShowingVotes" style="font-weight: bold;" > {{ user.vote }}<span>
+            <span >{{ user.name }} {{ user.time | isOnline }}</span>
+            <span v-if="user.vote" >voted</span>
+            <span v-if="isShowingVotes" style="font-weight: bold;" > {{ user.vote }}</span>
           </li>
       </ul>
   </div>
@@ -50,7 +50,7 @@ font-size: 0.9em;
   </div>
   <div class="row">
         <button class="button button-outline" v-on:click="showVotes()" :disabled="canVote === false"> Show votes </button>
-        <button class="button button-outline" style="margin-left: 5px;" v-on:click="clearVotes()"> Clear votes </button>
+        <button class="button button-outline" style="margin-left: 5px;" v-on:click="clearVotes()"> Next case/story </button>
   </div>
   <div class="row" v-if="isShowingVotes && votes[userName] === undefined">
       <h3 style="color: #dd3235">You didn't vote!</h3>

@@ -18,6 +18,7 @@ defmodule ScrumpokerWeb.Router do
 
     get "/", PageController, :index
     get "/rick", PageController, :rick
+    get "/landing/", PageController, :landing
     get "/:room/", PageController, :room
   end
 
