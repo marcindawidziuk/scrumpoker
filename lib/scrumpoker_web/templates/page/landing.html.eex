@@ -67,7 +67,7 @@
     			<h1 class="my-4 text-3xl md:text-5xl text-purple-800 font-bold leading-tight text-center md:text-left slide-in-bottom-h1">
     			Scrum Pointing Poker</h1>
     			<p class="leading-normal text-base md:text-2xl mb-8 text-center md:text-left slide-in-bottom-subtitle">
-    			Get your scrum session started!</p>
+    			Get your scrum session started! <br/> No sign up required, 100% free.</p>
     			
     			 <div class="mb-4 fade-in">
                       <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
