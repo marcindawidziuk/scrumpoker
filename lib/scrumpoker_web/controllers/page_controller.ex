@@ -1,7 +1,7 @@
 defmodule ScrumpokerWeb.PageController do
   use ScrumpokerWeb, :controller
 
-  plug :put_layout, false when action in [:landing]
+  plug :put_layout, false when action in [:index]
   
   def rick(conn, _params)do
     if :erlang.date |> :calendar.day_of_the_week >= 5 do
@@ -12,11 +12,11 @@ defmodule ScrumpokerWeb.PageController do
   end
 
   def index(conn, %{"room" => room}) do
-    render(conn, "index.html", room: room)
+    render(conn, "landing.html", room: room)
   end
 
   def index(conn, _params) do
-    render(conn, "index.html", room: "")
+    render(conn, "landing.html", room: "")
   end
 
   def landing(conn, _params) do
@@ -28,7 +28,7 @@ defmodule ScrumpokerWeb.PageController do
   end
   
   def room(conn, %{"room" => room}) do
-    redirect(conn, to: "/poker?room=#{room}")
+    render(conn, "landing.html", room: room, layout: false)
   end
 
 end

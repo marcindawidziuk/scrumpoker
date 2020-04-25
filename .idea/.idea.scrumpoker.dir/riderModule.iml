@@ -10,5 +10,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Elixir 1.10.2" level="application" />
     <orderEntry type="library" name="vue" level="application" />
+    <orderEntry type="library" name="tailwind" level="application" />
   </component>
 </module>

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Users\cinek\.Rider2019.3\config\javascript\extLibs\http_cdn.jsdelivr.net_npm_vue_dist_vue.js" t="IncludeRecursive" />
+    <e p="C:\Users\cinek\.Rider2019.3\config\javascript\extLibs\http_unpkg.com_tailwindcss_dist_tailwind.css" t="IncludeRecursive" />
     <e p="C:\Users\cinek\.Rider2019.3\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\cinek\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_.19.00" t="ExcludeRecursive" />
     <e p="D:\Development\scrumpoker" t="IncludeFlat">
