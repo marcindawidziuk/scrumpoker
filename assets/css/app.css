@@ -1,3 +1,16 @@
 /* This file is for your main application css. */
 
-@import "./phoenix.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.myButton{
+    @apply bg-gray-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow
+}
+.myButton:hover{
+    @apply bg-gray-300 text-gray-700
+}
+
+.myButton:disabled{
+    @apply bg-gray-100 text-gray-300
+}

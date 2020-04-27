@@ -1,60 +1,55 @@
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
-<!-- The list of messages will appear here: -->
 <script>window.channelRoomId = "<%= @room %>"</script>
 
-<style>
-.button-large{
-font-size: 0.9em;
-}
-</style>
-
-<div id="app">
-  <div class="row" >
-      <a href="http://poker.marcin.uk/?room=<%= @room %>">Invitation link</a>
-  </div>
-  
-  <div class="row">
-      <h1>Scrum Poker - <%= @room %></h1>
-  </div>
-  
-  
- <div class="row" style="min-height: 300px;">
-  <div class="column">
-      <ul id="votes" style="list-style: square;">
-         <li v-for="user in sortedUsers">
-            <span >{{ user.name }} {{ user.time | isOnline }}</span>
-            <span v-if="user.vote" >voted</span>
-            <span v-if="isShowingVotes" style="font-weight: bold;" > {{ user.vote }}</span>
-          </li>
-      </ul>
-  </div>
-  <div class="column">
-      <label for="message-input">Case/Story</label><textarea id="message-input" @input="onInputChanged($event.target.value)" v-model="message" style="width: 100%; height:150px; margin: 4px;" ></textarea>
-  </div>
-  </div>
-  
-  <div class="row">
-    <div class="col-xs-9">
-        <button class="button button-large" v-on:click="vote('0.5')" :disabled="canVote === false"> 0.5 </button>
-        <button class="button button-large " v-on:click="vote(1)":disabled="canVote === false"> 1 </button>
-        <button class="button button-large" v-on:click="vote(2)" :disabled="canVote === false"> 2 </button>
-        <button class="button button-large" v-on:click="vote(3)" :disabled="canVote === false"> 3 </button>
-        <button class="button button-large" v-on:click="vote(5)" :disabled="canVote === false"> 5 </button>
-        <button class="button button-large" v-on:click="vote(8)" :disabled="canVote === false"> 8 </button>
-        <button class="button button-large" v-on:click="vote(13)" :disabled="canVote === false"> 13 </button>
-        <button class="button button-large" v-on:click="vote(20)" :disabled="canVote === false"> 20 </button>
-        <button class="button button-large" v-on:click="vote('∞')" :disabled="canVote === false"> ∞ </button>
-    </div>
-  </div>
-  <div class="row">
-        <button class="button button-outline" v-on:click="showVotes()" :disabled="canVote === false"> Show votes </button>
-        <button class="button button-outline" style="margin-left: 5px;" v-on:click="clearVotes()"> Next case/story </button>
-  </div>
-  <div class="row" v-if="isShowingVotes && votes[userName] === undefined">
-      <h3 style="color: #dd3235">You didn't vote!</h3>
-  </div>
+<div id="app" class="text-gray-900" style="font-family: 'Source Sans Pro', sans-serif;">
+   <div class="mx-auto max-w-3xl bg-gray-100 rounded-b p-5">
+      <div class="row text-3xl text-indigo-600 font-bold">
+         <h1>Scrum Poker - <%= @room %></h1>
+      </div>
+      <div class="row grid lg:grid-cols-2" style="min-height: 300px;">
+         <div class="text-gray-800 p-2">
+            <ul id="votes" class="list-disc text-xl pl-2" >
+               <li v-for="user in sortedUsers">
+                  <span >{{ user.name }} {{ user.time | isOnline }}</span>
+                  <span v-if="user.vote" >voted</span>
+                  <span v-if="isShowingVotes" style="font-weight: bold;" > {{ user.vote }}</span>
+               </li>
+            </ul>
+         </div>
+         <div class="column p-2">
+            <label for="message-input" class="text-indigo-500 font-semibold p-1 ">Case/Story</label>
+            <textarea id="message-input"
+               class=" min-h-full shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+               @input="onInputChanged($event.target.value)" v-model="message" ></textarea>
+         </div>
+      </div>
+      <div class="grid grid-cols-9 mt-5">
+         <button class="myButton bg-gray-300 h-12 p-2 m-2" v-on:click="vote('0.5')" :disabled="canVote === false"> 0.5 </button>
+         <button class="myButton bg-gray-300 h-12 p-2 m-2" v-on:click="vote(1)":disabled="canVote === false"> 1 </button>
+         <button class="myButton bg-gray-300 h-12 p-2 m-2" v-on:click="vote(2)" :disabled="canVote === false"> 2 </button>
+         <button class="myButton bg-gray-300 h-12 p-2 m-2" v-on:click="vote(3)" :disabled="canVote === false"> 3 </button>
+         <button class="myButton bg-gray-300 h-12 p-2 m-2" v-on:click="vote(5)" :disabled="canVote === false"> 5 </button>
+         <button class="myButton bg-gray-300 h-12 p-2 m-2" v-on:click="vote(8)" :disabled="canVote === false"> 8 </button>
+         <button class="myButton bg-gray-300 h-12 p-2 m-2" v-on:click="vote(13)" :disabled="canVote === false"> 13 </button>
+         <button class="myButton bg-gray-300 h-12 p-2 m-2" v-on:click="vote(20)" :disabled="canVote === false"> 20 </button>
+         <button class="myButton bg-gray-300 h-12 p-2 m-2" v-on:click="vote('∞')" :disabled="canVote === false"> ∞ </button>
+      </div>
+      <div class="grid grid-cols-2">
+         <button class="myButton m-2" type="button" v-on:click="showVotes()" :disabled="canVote === false"> Show votes </button>
+         <button class="myButton m-2 bg-red-200" type="button" v-on:click="clearVotes()"> Next case/story </button>
+      </div>
+      <div class="row" v-if="isShowingVotes && votes[userName] === undefined">
+         <h3 style="color: #dd3235">You didn't vote!</h3>
+      </div>
+      <div class="flex mb-4">
+         <div class="w-1/5 h-10 p-2"><span class="my-auto font-bold align-middle pt-3">Invite:</span></div>
+         <div class="w-4/5 h-10 p-2">
+            <input onClick="this.setSelectionRange(0, this.value.length)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+               value="http://poker.marcin.uk/<%= @room %>" readonly>
+         </div>
+      </div>
+   </div>
 </div>
-
 <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/scrum.js") %>"></script>
+
