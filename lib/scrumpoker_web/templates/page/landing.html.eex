@@ -88,7 +88,7 @@
 					 </button>
     		
     			<div class="flex w-full justify-center md:justify-start pb-24 lg:pb-0 mt-3 fade-in">
-    				<img src="<%= Routes.static_path(@conn, "/images/landing/Play Store.svg")%>" class="h-12 bounce-top-icons">
+    				<% #<img src="<%= Routes.static_path(@conn, "/images/landing/Play Store.svg")% >" class="h-12 bounce-top-icons"> %>
     			</div>
     			
     		</div>
