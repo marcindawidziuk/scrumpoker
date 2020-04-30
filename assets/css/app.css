@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.transition-100{
+    transition: all 150ms ease-in;
+}
+
 .myButton{
     @apply bg-gray-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow
 }
@@ -17,6 +21,52 @@
 }
 
 .myButton:disabled{
-    @apply bg-gray-100 text-gray-300
+    @apply bg-gray-100 text-gray-300 
 }
 
+.cardButtonBig{
+    font-size: 2.5em;
+    height: 130px;
+    @apply bg-white rounded text-gray-900 border-2 border-indigo-500 transition-100
+}
+
+.cardButtonBig:disabled:not(hover){
+    background-position: center;
+    background-size: cover;
+    @apply bg-gray-100 text-gray-300 border-gray-400 shadow
+}
+
+.cardButtonBig:hover{
+    @apply bg-indigo-500 text-white shadow
+}
+
+.cardButtonBig:focus{
+    @apply bg-indigo-600 text-white shadow shadow-lg
+}
+
+.cardButtonBigSelected{
+    @apply bg-indigo-500 text-white font-medium py-2 px-4 border border-gray-400 rounded shadow shadow-xl
+}
+
+
+.loading:after {
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+    -webkit-animation: ellipsis steps(4,end) 1900ms infinite;
+    animation: ellipsis steps(4,end) 1900ms infinite;
+    content: "..."; /* ascii code for the ellipsis character */
+    width: 0px;
+}
+
+@keyframes ellipsis {
+    to {
+        width: 20px;
+    }
+}
+
+@-webkit-keyframes ellipsis {
+    to {
+        width: 20px;
+    }
+}
