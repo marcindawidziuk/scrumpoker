@@ -9,43 +9,43 @@
 }
 
 .myButton{
-    @apply bg-gray-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow
+    /*@apply bg-gray-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow*/
 }
 
 .myButton:hover{
-    @apply bg-gray-300 text-gray-700
+    /*@apply bg-gray-300 text-gray-700*/
 }
 
 .myButton:focus{
-    @apply bg-gray-100 text-gray-400
+    /*@apply bg-gray-100 text-gray-400*/
 }
 
 .myButton:disabled{
-    @apply bg-gray-100 text-gray-300 
+    /*@apply bg-gray-100 text-gray-300 */
 }
 
 .cardButtonBig{
     font-size: 2.5em;
     height: 130px;
-    @apply bg-white rounded text-gray-900 border-2 border-indigo-500 transition-100
+    @apply bg-accent text-on-brand rounded border-2 border-brand transition-100
 }
 
 .cardButtonBig:disabled:not(hover){
     background-position: center;
     background-size: cover;
-    @apply bg-gray-100 text-gray-300 border-gray-400 shadow
+    /*@apply bg-brand text-gray-300 border-gray-400 shadow*/
 }
 
 .cardButtonBig:hover{
-    @apply bg-indigo-500 text-white shadow
+    /*@apply bg-indigo-500 text-white shadow*/
 }
 
 .cardButtonBig:focus{
-    @apply bg-indigo-600 text-white shadow shadow-lg
+    /*@apply bg-indigo-600 text-white shadow shadow-lg*/
 }
 
 .cardButtonBigSelected{
-    @apply bg-indigo-500 text-white font-medium py-2 px-4 border border-gray-400 rounded shadow shadow-xl
+    /*@apply bg-indigo-500 text-white font-medium py-2 px-4 border border-gray-400 rounded shadow shadow-xl*/
 }
 
 

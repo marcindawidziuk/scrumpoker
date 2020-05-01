@@ -24,6 +24,7 @@
       <e p="assets\node_modules\postcss-loader" t="IncludeRecursive" />
       <e p="assets\node_modules\source-map" t="IncludeRecursive" />
       <e p="assets\node_modules\tailwindcss" t="IncludeRecursive" />
+      <e p="assets\node_modules\tailwindcss-theming" t="IncludeRecursive" />
       <e p="assets\node_modules\terser-webpack-plugin" t="IncludeRecursive" />
       <e p="assets\node_modules\webpack" t="IncludeRecursive" />
       <e p="assets\node_modules\webpack-cli" t="IncludeRecursive" />

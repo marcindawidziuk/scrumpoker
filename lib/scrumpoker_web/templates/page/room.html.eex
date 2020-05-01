@@ -3,7 +3,7 @@
 <script>window.channelRoomId = "<%= @room %>"</script>
 
 <div id="app" class="text-gray-900" style="font-family: 'Source Sans Pro', sans-serif;">
-   <div class="mx-auto max-w-8xl bg-indigo-100 border shadow rounded p-5">
+   <div class="mx-auto max-w-8xl bg-secondary border shadow rounded p-5">
        <div class="grid grid-cols-2">
        <div>
         <div class="row lg:text-3xl text-indigo-700 font-bold slide-in-bottom-h1 uppercase">
@@ -41,10 +41,10 @@
          <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected  slide-top': (myVote == 2)}" v-on:click="vote(2)" :disabled="canVote === false"> 2 </button>
          <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == 3)}" v-on:click="vote(3)" :disabled="canVote === false"> 3 </button>
          <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == 5)}" v-on:click="vote(5)" :disabled="canVote === false"> 5 </button>
-         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32"  v-bind:class="{'cardButtonBigSelected slide-top': (myVote == 8)}" v-on:click="vote(8)" :disabled="canVote === false"> 8 </button>
-         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32"  v-bind:class="{'cardButtonBigSelected slide-top': (myVote == 13)}" v-on:click="vote(13)" :disabled="canVote === false"> 13 </button>
-         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32"  v-bind:class="{'cardButtonBigSelected slide-top': (myVote == 20)}" v-on:click="vote(20)" :disabled="canVote === false"> 20 </button>
-         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32"  v-bind:class="{'cardButtonBigSelected slide-top': (myVote == 40)}" v-on:click="vote('40')" :disabled="canVote === false"> 40 </button>
+         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == 8)}" v-on:click="vote(8)" :disabled="canVote === false"> 8 </button>
+         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == 13)}" v-on:click="vote(13)" :disabled="canVote === false"> 13 </button>
+         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == 20)}" v-on:click="vote(20)" :disabled="canVote === false"> 20 </button>
+         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == 40)}" v-on:click="vote('40')" :disabled="canVote === false"> 40 </button>
          <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32 font-size: 4em" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == '∞')}" v-on:click="vote('∞')" :disabled="canVote === false"> ∞ </button>
          <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == '☕')}" v-on:click="vote('☕')" :disabled="canVote === false"> ☕ </button>
       </div>
