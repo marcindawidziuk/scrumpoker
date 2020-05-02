@@ -7,10 +7,18 @@ const mainTheme = new Theme()
         'accent':'#667eea',
         'secondary':'#ebf4ff',
         'third':'#ffffff',
-        'on-secondary':'#ffffff',
+        'on-accent':'#fff',
+        'on-secondary':'rgb(74, 85, 104)',
         'brand':'rgb(90, 103, 216)',
+         'disabled':'#f7fafc',
+         'disabled-secondary': '#e2e8f0',
+        'ideal-background': '#fff',
         'on-brand':'#ffffff',
-        'text-black': '#ffffff'
+        'black': '#000',
+        'card': '#fafafa',
+        'on-card': '#111',
+        'background': '#fff',
+        'foreground': '#111'
     });
 
 const lightTheme = new Theme()
@@ -21,13 +29,17 @@ const lightTheme = new Theme()
 const darkTheme = new Theme()
     .dark()
     .colors({
-        'accent':'#3b3b78',
-        'secondary':'#1f2023',
+        'accent':'#667eea',
+        'secondary':'#24262b',
         'third':'#000000',
+        'ideal-background': '#000',
+         'disabled':'#f7fafc',
         'on-secondary':'#ffffff',
-        'brand':'#ff0000',
+        'brand':'rgb(127, 156, 245)',
         'on-brand':'#ffffff',
-        'text-black': '#00000f'
+        'black': '#000',
+        'background': '#111',
+        'foreground': '#fff'
     })
     .assignable();
 

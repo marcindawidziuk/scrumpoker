@@ -13,6 +13,7 @@
     	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     	-->
     	
+        <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     	<link rel="stylesheet" href="https://unpkg.com/tailwindcss/dist/tailwind.min.css">
     	<!--Replace with your tailwind.css once created-->
     
@@ -36,14 +37,19 @@
     		@-webkit-keyframes bounce-top{0%{-webkit-transform:translateY(-45px);transform:translateY(-45px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in;opacity:1}24%{opacity:1}40%{-webkit-transform:translateY(-24px);transform:translateY(-24px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}65%{-webkit-transform:translateY(-12px);transform:translateY(-12px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}82%{-webkit-transform:translateY(-6px);transform:translateY(-6px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}93%{-webkit-transform:translateY(-4px);transform:translateY(-4px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}25%,55%,75%,87%{-webkit-transform:translateY(0);transform:translateY(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}100%{-webkit-transform:translateY(0);transform:translateY(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;opacity:1}}@keyframes bounce-top{0%{-webkit-transform:translateY(-45px);transform:translateY(-45px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in;opacity:1}24%{opacity:1}40%{-webkit-transform:translateY(-24px);transform:translateY(-24px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}65%{-webkit-transform:translateY(-12px);transform:translateY(-12px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}82%{-webkit-transform:translateY(-6px);transform:translateY(-6px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}93%{-webkit-transform:translateY(-4px);transform:translateY(-4px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}25%,55%,75%,87%{-webkit-transform:translateY(0);transform:translateY(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}100%{-webkit-transform:translateY(0);transform:translateY(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;opacity:1}}
     		@-webkit-keyframes fade-in{0%{opacity:0}100%{opacity:1}}@keyframes fade-in{0%{opacity:0}100%{opacity:1}}
     				
+            body[data-theme="light"]{
+                background-image: url('<%= Routes.static_path(@conn, "/images/landing/bg.svg") %>');
+                background-size: cover;
+                background-position: right;
+            }
     	</style>
     
     </head>
     
     
-    <body class="leading-normal tracking-normal text-gray-900" style="font-family: 'Source Sans Pro', sans-serif;">
+    <body  data-theme="light" class="leading-normal tracking-normal text-gray-900 bg-background" style="font-family: 'Source Sans Pro', sans-serif;">
     
-    <div class="h-screen pb-14 bg-right bg-cover" id="app" style="background-image:url('<%= Routes.static_path(@conn, "/images/landing/bg.svg") %>');">
+    <div class="h-screen pb-14 bg-right bg-cover" id="app" >
     	<!--Nav-->
     	<div class="w-full container mx-auto p-6">
     			
@@ -53,6 +59,7 @@
     			</a>
     			
     			<div class="flex w-1/2 justify-end content-center">		
+                <input type="button" id="theme-button" class="flex bg-transparent border-accent font-semibold border text-accent rounded p-2 uppercase" onclick="toggleTheme()"/>
     			</div>
     			
     		</div>
@@ -64,27 +71,27 @@
     		
     		<!--Left Col-->
     		<div class="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
-    			<h1 class="my-4 text-3xl md:text-5xl text-purple-800 font-bold leading-tight text-center md:text-left slide-in-bottom-h1">
+    			<h1 class="my-4 text-3xl md:text-5xl text-accent font-bold leading-tight text-center md:text-left slide-in-bottom-h1">
     			Scrum Pointing Poker</h1>
-    			<p class="leading-normal text-base md:text-2xl mb-8 text-center md:text-left slide-in-bottom-subtitle">
+    			<p class="leading-normal text-base md:text-2xl mb-8 text-center md:text-left slide-in-bottom-subtitle text-on-secondary">
     			Get your scrum session started! <br/> No sign up required, 100% free.</p>
     			
     			 <div class="mb-4 fade-in">
-                      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                      <label class="block text-on-secondary text-sm font-bold mb-2" for="username">
                         Your Name
                       </label>
                       <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" v-model="userName" v-on:keyup.enter="connect">
                     </div>
                     <div class="mb-6 fade-in">
-                      <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                      <label class="block text-on-secondary text-sm font-bold mb-2" for="password">
                         Room Name
                       </label>
                       <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" v-model="roomName" id="password" type="text" placeholder="Room Name" v-on:keyup.enter="connect">
                     </div>
     			
 					 <button v-on:click="connect"
-					 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline fade-in" type="button">
-						 Start
+					 class="myButton m-2 bg-indigo-500 text-white hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline fade-in" type="button">
+						 Start a Session
 					 </button>
     		
     			<div class="flex w-full justify-center md:justify-start pb-24 lg:pb-0 mt-3 fade-in">
@@ -100,18 +107,13 @@
     		
     		<!--Footer-->
     		<div class="w-full pt-16 pb-6 text-sm text-center md:text-left fade-in">
-    			<a class="text-gray-500 no-underline hover:no-underline" href="#">&copy; Marcin Dawidziuk 2020</a>
+    			<a class="text-gray-500 no-underline hover:no-underline" href="https://github.com/cinekdawidziuk">&copy; Marcin Dawidziuk 2020</a>
     		</div>
     		
     	</div>
     	
     
     </div>
-    
-    
-      <!-- jQuery if you need it
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      -->
     
     </body>
     
@@ -146,7 +148,12 @@ let app = new Vue({
     created: function () {
 		var userNameFromCookie = readCookie("userName");
 		if (userNameFromCookie != null){
-		this.userName = userNameFromCookie;
+          this.userName = userNameFromCookie;
+		}
+		
+		var roomNameFromCookie = readCookie("roomName");
+		if (roomNameFromCookie != null){
+          this.roomName = roomNameFromCookie;
 		}
      },
     methods: {
@@ -159,10 +166,50 @@ let app = new Vue({
               alert("Please enter Room Name (min. 3 letters)");
               return;
           }
+          
+			createCookie("roomName", this.roomName, 14);
 			createCookie("userName", this.userName, 14);
 			window.location.href = "/" + this.roomName + "?name="+this.userName;
         }
     }
 });
+</script>
+
+    <script>
+    
+    const theme = localStorage.getItem('theme');
+    var isDarkThemeDefault = false;
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      isDarkThemeDefault = true;
+    }
+    const article = document.body;
+    article.dataset.theme = theme;
+    let button = document.getElementById("theme-button");
+    if (theme === "dark" || (theme !== "light" && isDarkThemeDefault)){
+      button.value = "Light Theme";
+    }else{
+      button.value = "Dark Theme";
+    }
+    
+function toggleTheme(){
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === "dark" || (currentTheme !== "light" && isDarkThemeDefault)){
+        localStorage.setItem('theme', 'light');
+    }else{
+        localStorage.setItem('theme', 'dark');
+    }
+    const theme = localStorage.getItem('theme');
+    console.log("theme" + theme);
+    const article = document.body;
+    let button = document.getElementById("theme-button");
+    
+    
+    if (theme === "dark" || (theme !== "light" && isDarkThemeDefault)){
+      button.value = "Light Theme";
+    }else{
+      button.value = "Dark Theme";
+    }
+    article.dataset.theme = theme;
+}
 </script>
 </html>
