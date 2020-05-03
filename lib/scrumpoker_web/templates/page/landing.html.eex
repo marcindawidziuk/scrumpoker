@@ -15,8 +15,8 @@
     	
         <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     	<link rel="stylesheet" href="https://unpkg.com/tailwindcss/dist/tailwind.min.css">
-    	<!--Replace with your tailwind.css once created-->
-    
+    	
+        <script src="https://kit.fontawesome.com/4d5ba17133.js" crossorigin="anonymous"></script>
     	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     
@@ -47,7 +47,7 @@
     </head>
     
     
-    <body  data-theme="light" class="leading-normal tracking-normal text-gray-900 bg-background" style="font-family: 'Source Sans Pro', sans-serif;">
+    <body   data-theme="light" class="leading-normal tracking-normal text-gray-900 bg-background" style="font-family: 'Source Sans Pro', sans-serif;">
     
     <div class="h-screen pb-14 bg-right bg-cover" id="app" >
     	<!--Nav-->
@@ -59,7 +59,8 @@
     			</a>
     			
     			<div class="flex w-1/2 justify-end content-center">		
-                <input type="button" id="theme-button" class="flex bg-transparent border-accent font-semibold border text-accent rounded p-2 uppercase" onclick="toggleTheme()"/>
+            <a href="https://github.com/cinekdawidziuk/scrumpoker" target="_blank"><i class="fab fa-github fa-2x text-accent mr-5"></i></a>
+              <button id="theme-button" class="fas flex w-10 bg-transparent border-accent font-semibold border text-accent rounded p-2 uppercase" onclick="toggleTheme()"></button>
     			</div>
     			
     		</div>
@@ -102,7 +103,7 @@
     		
     		<!--Right Col-->
     		<div class="w-full xl:w-3/5 py-6 overflow-y-hidden">
-    			<img class="w-5/6 mx-auto lg:mr-0 slide-in-bottom" src="<%= Routes.static_path(@conn, "/images/landing/devices.svg") %>">
+                <img src="<%= Routes.static_path(@conn, "/images/landing/devices_lg.png") %>" type="image/png"/>
     		</div>
     		
     		<!--Footer-->
@@ -186,8 +187,12 @@ let app = new Vue({
     article.dataset.theme = theme;
     let button = document.getElementById("theme-button");
     if (theme === "dark" || (theme !== "light" && isDarkThemeDefault)){
+      button.classList.remove("fa-moon");
+      button.classList.add("fa-lightbulb");
       button.value = "Light Theme";
     }else{
+      button.classList.remove("fa-lightbulb");
+      button.classList.add("fa-moon");
       button.value = "Dark Theme";
     }
     
@@ -200,16 +205,24 @@ function toggleTheme(){
     }
     const theme = localStorage.getItem('theme');
     console.log("theme" + theme);
-    const article = document.body;
+    const documentBody = document.body;
     let button = document.getElementById("theme-button");
     
     
     if (theme === "dark" || (theme !== "light" && isDarkThemeDefault)){
+      button.classList.remove("fa-moon");
+      button.classList.add("fa-lightbulb");
       button.value = "Light Theme";
     }else{
+      button.classList.add("fa-moon");
+      button.classList.remove("fa-lightbulb");
       button.value = "Dark Theme";
     }
-    article.dataset.theme = theme;
+    documentBody.dataset.theme = theme;
+    
+    document.body.classList.add("transition");
+    document.body.classList.add("duration-500");
+    document.body.classList.add("ease-in-out");
 }
 </script>
 </html>

@@ -11,5 +11,6 @@
     <orderEntry type="library" name="Elixir 1.10.2" level="application" />
     <orderEntry type="library" name="vue" level="application" />
     <orderEntry type="library" name="tailwind" level="application" />
+    <orderEntry type="library" name="4d5ba17133" level="application" />
   </component>
 </module>

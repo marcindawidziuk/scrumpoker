@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss/dist/tailwind.min.css">
+    <script src="https://kit.fontawesome.com/4d5ba17133.js" crossorigin="anonymous"></script>
     <!--Replace with your tailwind.css once created-->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300,400;500&display=swap" rel="stylesheet"> 
     <%= csrf_meta_tag() %>
     
     	<!-- Animation CSS-->
@@ -34,7 +35,7 @@
     				
     	</style>
   </head>
-  <body data-theme="light" class="bg-background">
+  <body data-theme="light" class="bg-background"  style="font-family: 'Roboto', sans-serif;">
     <header>
       <section class="mx-auto">
       <div class="w-full container mx-auto p-6">
@@ -42,7 +43,8 @@
           <a href="/" class="flex items-center text-indigo-400 no-underline hover:no-underline font-bold text-lg lg:text-2xl">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-6 fill-current text-indigo-600 pr-2"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm-5.6-4.29a9.95 9.95 0 0 1 11.2 0 8 8 0 1 0-11.2 0zm6.12-7.64l3.02-3.02 1.41 1.41-3.02 3.02a2 2 0 1 1-1.41-1.41z"></path></svg> SCRUM POKER
                   </a> <div class="flex justify-end content-center">
-            <input type="button" id="theme-button" class="flex bg-transparent border-accent font-semibold border text-accent rounded p-2 uppercase" onclick="toggleTheme()"/>
+            <a href="https://github.com/cinekdawidziuk/scrumpoker" target="_blank"><i class="fab fa-github fa-2x text-accent mr-5"></i></a>
+            <button id="theme-button" class="fas w-10 flex bg-transparent border-accent font-semibold border text-accent rounded p-2 uppercase" onclick="toggleTheme()"></button>
                   </div></div></div>
     </section>
     </header>
@@ -63,8 +65,12 @@
     article.dataset.theme = theme;
     let button = document.getElementById("theme-button");
     if (theme === "dark" || (theme !== "light" && isDarkThemeDefault)){
+     button.classList.remove("fa-moon");
+     button.classList.add("fa-lightbulb");
       button.value = "Light Theme";
     }else{
+     button.classList.remove("fa-lightbulb");
+     button.classList.add("fa-moon");
       button.value = "Dark Theme";
     }
     
@@ -80,13 +86,20 @@ function toggleTheme(){
     const article = document.body;
     let button = document.getElementById("theme-button");
     
-    
     if (theme === "dark" || (theme !== "light" && isDarkThemeDefault)){
+      button.classList.remove("fa-moon");
+      button.classList.add("fa-lightbulb");
       button.value = "Light Theme";
     }else{
+      button.classList.add("fa-moon");
+      button.classList.remove("fa-lightbulb");
       button.value = "Dark Theme";
     }
     article.dataset.theme = theme;
+    
+    document.body.classList.add("transition");
+    document.body.classList.add("duration-500");
+    document.body.classList.add("ease-in-out");
 }
 </script>
   </body>

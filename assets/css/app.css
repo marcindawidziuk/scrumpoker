@@ -49,7 +49,7 @@
 }
 
 .cardButtonBigSelected{
-    @apply bg-accent text-on-accent shadow shadow-2xl
+    @apply bg-accent text-on-accent shadow shadow-2xl 
     /*@apply bg-indigo-500 text-white font-medium py-2 px-4 border border-gray-400 rounded shadow shadow-xl*/
 }
 

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Users\cinek\.Rider2019.3\config\javascript\extLibs\http_cdn.jsdelivr.net_npm_vue_dist_vue.js" t="IncludeRecursive" />
+    <e p="C:\Users\cinek\.Rider2019.3\config\javascript\extLibs\http_kit.fontawesome.com_4d5ba17133.js" t="IncludeRecursive" />
     <e p="C:\Users\cinek\.Rider2019.3\config\javascript\extLibs\http_unpkg.com_tailwindcss_dist_tailwind.css" t="IncludeRecursive" />
     <e p="C:\Users\cinek\.Rider2019.3\config\javascript\nodejs\12.14.1\core-modules" t="IncludeRecursive" />
     <e p="C:\Users\cinek\.Rider2019.3\config\javascript\nodejs\12.14.1\node-typings\node_modules\@types" t="IncludeRecursive" />
