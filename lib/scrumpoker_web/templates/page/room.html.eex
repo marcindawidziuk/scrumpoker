@@ -16,7 +16,9 @@
                     <span>{{ user.name }} {{ user.time | isOnline }}</span>
                     <span v-if="user.vote && isShowingVotes" class="fade-in-quick" >voted</span>
                     <i v-if="user.vote && isShowingVotes == false" class="ml-1 fas fa-check-square fade-in-quick"></i>
-                    <span v-if="user.vote == null && isShowingVotes == false" class="loading" ></span>
+                    <div class="inline-block w-4" v-if="user.vote == null && isShowingVotes == false">
+                        <span class="loading"></span>
+                    </div>
                     <span v-if="user.vote == null && isShowingVotes" >didn't vote</span>
                     <span v-if="isShowingVotes" class="font-bold fade-in-quick" style="font-weight: bold;" > {{ user.vote }}</span>
                  </li>
