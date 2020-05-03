@@ -9,7 +9,7 @@
         <div class="row lg:text-3xl text-accent font-bold slide-in-bottom-h1 uppercase">
            <h1>Scrum Poker - <%= @room %></h1>
         </div>
-        <div class="row grid lg:grid-cols-2" style="min-height: 300px;">
+        <div style="min-height: 300px;">
            <div class="text-on-secondary p-2">
               <ul id="votes" class="list-disc text-xl pl-2" >
                  <li v-for="user in sortedUsers">

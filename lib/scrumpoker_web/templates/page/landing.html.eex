@@ -59,8 +59,10 @@
     			</a>
     			
     			<div class="flex w-1/2 justify-end content-center">		
-            <a href="https://github.com/cinekdawidziuk/scrumpoker" target="_blank"><i class="fab fa-github fa-2x text-accent mr-5"></i></a>
-              <button id="theme-button" class="fas flex w-10 bg-transparent border-accent font-semibold border text-accent rounded p-2 uppercase" onclick="toggleTheme()"></button>
+                <a href="https://github.com/cinekdawidziuk/scrumpoker" class="mr-5" target="_blank" title="GitHub"><i class="fab fa-github fa-2x text-accent "></i></a>
+              <button id="theme-button" class="fas fa-2x flex w-10 bg-transparent font-semibold text-accent" 
+              title="Change theme"
+                  onclick="toggleTheme()"></button>
     			</div>
     			
     		</div>
