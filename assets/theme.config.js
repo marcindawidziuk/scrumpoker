@@ -5,6 +5,7 @@ const mainTheme = new Theme()
     .assignable()
     .colors({
         'accent':'#667eea',
+        'accent-secondary':'#667eea',
         'secondary':'#ebf4ff',
         'third':'#ffffff',
         'on-accent':'#fff',
@@ -30,6 +31,7 @@ const darkTheme = new Theme()
     .dark()
     .colors({
         'accent':'#667eea',
+        'accent-secondary':'rgb(127, 156, 245)',
         'secondary':'#24262b',
         'third':'#000000',
         'ideal-background': '#000',

@@ -9,8 +9,6 @@
     
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss/dist/tailwind.min.css">
     <script src="https://kit.fontawesome.com/4d5ba17133.js" crossorigin="anonymous"></script>
-    <!--Replace with your tailwind.css once created-->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300,400;500&display=swap" rel="stylesheet"> 
     <%= csrf_meta_tag() %>
     
     	<!-- Animation CSS-->
@@ -29,19 +27,20 @@
     		.slide-top{-webkit-animation:slide-top 10ms cubic-bezier(.25,.46,.45,.94) both;animation:slide-top 70ms cubic-bezier(.25,.46,.45,.94) both}
               
             @-webkit-keyframes slide-top{0%{-webkit-transform:translateY(0);transform:translateY(0)}100%{-webkit-transform:translateY(-8px);transform:translateY(-8px)}}@keyframes slide-top{0%{-webkit-transform:translateY(0);transform:translateY(0)}100%{-webkit-transform:translateY(-8px);transform:translateY(-8px)}}
-    		@-webkit-keyframes slide-in-bottom{0%{-webkit-transform:translateY(1000px);transform:translateY(1000px);opacity:0}100%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}}@keyframes slide-in-bottom{0%{-webkit-transform:translateY(1000px);transform:translateY(1000px);opacity:0}100%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}}
+    		@-webkit-keyframes slide-kin-bottom{0%{-webkit-transform:translateY(1000px);transform:translateY(1000px);opacity:0}100%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}}@keyframes slide-in-bottom{0%{-webkit-transform:translateY(1000px);transform:translateY(1000px);opacity:0}100%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}}
     		@-webkit-keyframes bounce-top{0%{-webkit-transform:translateY(-45px);transform:translateY(-45px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in;opacity:1}24%{opacity:1}40%{-webkit-transform:translateY(-24px);transform:translateY(-24px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}65%{-webkit-transform:translateY(-12px);transform:translateY(-12px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}82%{-webkit-transform:translateY(-6px);transform:translateY(-6px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}93%{-webkit-transform:translateY(-4px);transform:translateY(-4px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}25%,55%,75%,87%{-webkit-transform:translateY(0);transform:translateY(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}100%{-webkit-transform:translateY(0);transform:translateY(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;opacity:1}}@keyframes bounce-top{0%{-webkit-transform:translateY(-45px);transform:translateY(-45px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in;opacity:1}24%{opacity:1}40%{-webkit-transform:translateY(-24px);transform:translateY(-24px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}65%{-webkit-transform:translateY(-12px);transform:translateY(-12px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}82%{-webkit-transform:translateY(-6px);transform:translateY(-6px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}93%{-webkit-transform:translateY(-4px);transform:translateY(-4px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}25%,55%,75%,87%{-webkit-transform:translateY(0);transform:translateY(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}100%{-webkit-transform:translateY(0);transform:translateY(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;opacity:1}}
     		@-webkit-keyframes fade-in{0%{opacity:0}100%{opacity:1}}@keyframes fade-in{0%{opacity:0}100%{opacity:1}}
     				
     	</style>
   </head>
-  <body data-theme="light" class="bg-background"  style="font-family: 'Roboto', sans-serif;">
+  <body data-theme="light" class="bg-background">
     <header>
       <section class="mx-auto">
       <div class="w-full container mx-auto p-6">
           <div class="w-full flex items-center justify-between">
           <a href="/" class="flex items-center text-indigo-400 no-underline hover:no-underline font-bold text-lg lg:text-2xl">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-6 fill-current text-indigo-600 pr-2"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm-5.6-4.29a9.95 9.95 0 0 1 11.2 0 8 8 0 1 0-11.2 0zm6.12-7.64l3.02-3.02 1.41 1.41-3.02 3.02a2 2 0 1 1-1.41-1.41z"></path></svg> SCRUM POKER
+          <img src="<%= Routes.static_path(@conn, "/images/poker_logo.svg") %>" class="h-10 mr-2" alt="logo" height="20">
+           SCRUM POKER
                   </a> <div class="flex justify-end content-center">
             <a href="https://github.com/cinekdawidziuk/scrumpoker" class="mr-5" target="_blank"><i class="fab fa-github fa-2x text-accent"></i></a>
               <button id="theme-button" class="fas fa-2x flex w-10 bg-transparent font-semibold text-accent" 

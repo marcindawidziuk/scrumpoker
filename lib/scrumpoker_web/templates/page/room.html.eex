@@ -2,12 +2,12 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>window.channelRoomId = "<%= @room %>"</script>
 
-<div id="app" class="text-gray-900" style="font-family: 'Roboto', sans-serif;">
+<div id="app" class="text-gray-900">
    <div class="mx-auto max-w-8xl bg-secondary text-on-secondary border shadow rounded p-5">
        <div class="grid grid-cols-2">
        <div>
-        <div class="row lg:text-3xl text-accent font-bold slide-in-bottom-h1 uppercase">
-           <h1>Scrum Poker - <%= @room %></h1>
+        <div class="row lg:text-3xl text-accent-secondary font-semibold slide-in-bottom-h1 uppercase">
+           <h1>#<%= @room %></h1>
         </div>
         <div style="min-height: 300px;">
            <div class="text-on-secondary p-2">
@@ -27,14 +27,14 @@
        </div>
         </div>
            <div class="column p-2">
-              <label for="message-input" class="text-accent font-semibold p-1 slide-in-bottom-subtitle font-bold">Case/Story</label>
+              <label for="message-input" class="text-accent-secondary font-semibold p-1 slide-in-bottom-subtitle font-bold">Case/Story</label>
               <textarea id="message-input"
                  class="text-foreground bg-background border min-h-full shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline slide-in-bottom border-2 "
                  @input="onInputChanged($event.target.value)" v-model="message" ></textarea>
            </div>
        </div>
        <div class="mt-5 flex">
-           <span :style="{visibility: myVote == null ? 'visible' : 'hidden'}" class="font-semibold text-indigo-500">Please select your card</span>
+           <span :style="{visibility: myVote == null ? 'visible' : 'hidden'}" class="font-semibold text-accent-secondary">Please select your card</span>
            <a href="https://en.wikipedia.org/wiki/Planning_poker" class="underline ml-auto" target="_blank">How to play?</a> <br/>
        </div>
       <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 pt-3">
