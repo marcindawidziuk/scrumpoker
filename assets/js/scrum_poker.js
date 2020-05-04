@@ -20,7 +20,7 @@ const userName = urlParams.get('name');
 
 let channel = socket.channel('room:'+ channelName +':lobby', {}); // connect to chat "room"
 
-channel.join(); // join the channel.
+socket.connect();
 
 Vue.filter('isOnline', function (date) {
     var b = new Date();
@@ -45,11 +45,18 @@ let app = new Vue({
     },
     created: function () {
         this.userName = userName;
+        window.onbeforeunload = this.disconnect;
         setInterval(function(){ app.ping(); }, 30000);
 
+        channel.join()
+            .receive("ok", ({messages}) => console.log("catching up", messages) )
+        .receive("error", ({reason}) => console.log("failed join", reason) )
+        .receive("timeout", () => console.log("Networking issue. Still waiting..."));
+            
         channel.push('joined', { // send the message to the server on "shout" channel
             name: this.userName     // get value of "name" of person sending the message
         });
+        
 
         channel.on('voted', function (payload) { // listen to the 'shout' event
             console.log(payload.name + " voted");
@@ -72,6 +79,10 @@ let app = new Vue({
         });
     },
     methods: {
+        disconnect: function disconnect(event) {
+            channel.leave();
+            console.log("disconnected from the channel");
+        },
         markOnline: function (userName) {
             if (app.users.some(x => x.name === userName) === false){
                 app.users.push({name: userName, time: new Date()})
