@@ -50,8 +50,8 @@ let app = new Vue({
 
         channel.join()
             .receive("ok", ({messages}) => console.log("catching up", messages) )
-        .receive("error", ({reason}) => console.log("failed join", reason) )
-        .receive("timeout", () => console.log("Networking issue. Still waiting..."));
+            .receive("error", ({reason}) => console.log("failed join", reason) )
+            .receive("timeout", () => console.log("Networking issue. Still waiting..."));
             
         channel.push('joined', { // send the message to the server on "shout" channel
             name: this.userName     // get value of "name" of person sending the message
@@ -168,8 +168,11 @@ channel.on('ping', function (payload) { // listen to the 'shout' event
 channel.on('change_message', function (payload) { // listen to the 'shout' event
     console.log('changed message by ' + payload.name + ' to ' + payload.message);
     app.markOnline(payload.name);
+    if (app.userName === payload.name 
+        && document.getElementById("message-input") === document.activeElement) {
+        return;
+    }
     app.message = payload.message;
-    
 });
 
 channel.on('joined', function (payload) {
