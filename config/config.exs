@@ -15,7 +15,7 @@ config :scrumpoker, ScrumpokerWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "dUCw+1MVXkDsM2Q7ojO44F1x0jS/BsYFAu27pEyAzDqKipsdCLZ/cmzFTgHum7zt",
   render_errors: [view: ScrumpokerWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Scrumpoker.PubSub, adapter: Phoenix.PubSub.PG2],
+  pubsub_server: ScrumpokerWeb.PubSub,
   live_view: [signing_salt: "y4l6Jmw6"]
 
 # Configures Elixir's Logger

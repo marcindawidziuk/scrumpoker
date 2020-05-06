@@ -10,6 +10,8 @@ defmodule Scrumpoker.Application do
     children = [
       # Start the Ecto repository
       # Start the endpoint when the application starts
+      {Phoenix.PubSub, name: ScrumpokerWeb.PubSub},
+      ScrumpokerWeb.Presence,
       ScrumpokerWeb.Endpoint
       # Starts a worker by calling: Scrumpoker.Worker.start_link(arg)
       # {Scrumpoker.Worker, arg},

@@ -23,8 +23,8 @@ defmodule ScrumpokerWeb.PageController do
     render(conn, "landing.html")
   end
 
-  def room(conn, %{"room" => room, "name" => _userName}) do
-      render(conn, "room.html", room: String.downcase(room))
+  def room(conn, %{"room" => room, "name" => userName}) do
+      render(conn, "room.html", %{room: String.downcase(room), user_id: userName})
   end
   
   def room(conn, %{"room" => room}) do

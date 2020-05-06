@@ -14,13 +14,25 @@ import "phoenix_html"
 //
 // Local files can be imported directly using relative paths, for example:
 import socket from "./socket"
+import {Presence} from "phoenix"
 const urlParams = new URLSearchParams(window.location.search);
 const channelName = window.channelRoomId;
 const userName = urlParams.get('name');
 
 let channel = socket.channel('room:'+ channelName +':lobby', {}); // connect to chat "room"
+let presence = new Presence(channel);
 
-socket.connect();
+presence.onSync(() => {
+   console.log("PRESENCE SYNC");
+   app.presences = presence.list(listBy);
+});
+
+let listBy = (id, {metas: [first, ...rest]}) => {
+    first.name = id;
+    first.count = rest.length + 1;
+    return first;
+};
+
 
 Vue.filter('isOnline', function (date) {
     var b = new Date();
@@ -35,6 +47,7 @@ Vue.filter('isOnline', function (date) {
 let app = new Vue({
     el: '#app',
     data: {
+        presences: [],
         userName: "",
         channelName: channelName,
         message: "",
@@ -45,9 +58,9 @@ let app = new Vue({
     },
     created: function () {
         this.userName = userName;
-        window.onbeforeunload = this.disconnect;
         setInterval(function(){ app.ping(); }, 30000);
 
+        socket.connect();
         channel.join()
             .receive("ok", ({messages}) => console.log("catching up", messages) )
             .receive("error", ({reason}) => console.log("failed join", reason) )
@@ -56,7 +69,6 @@ let app = new Vue({
         channel.push('joined', { // send the message to the server on "shout" channel
             name: this.userName     // get value of "name" of person sending the message
         });
-        
 
         channel.on('voted', function (payload) { // listen to the 'shout' event
             console.log(payload.name + " voted");
@@ -79,10 +91,6 @@ let app = new Vue({
         });
     },
     methods: {
-        disconnect: function disconnect(event) {
-            channel.leave();
-            console.log("disconnected from the channel");
-        },
         markOnline: function (userName) {
             if (app.users.some(x => x.name === userName) === false){
                 app.users.push({name: userName, time: new Date()})
@@ -144,7 +152,6 @@ let app = new Vue({
         message: function (val, val2) {
             // document.getElementById("element")
             // this.fullName = val + ' ' + this.lastName
-            document.getElementById("element")
         }
     },
     computed: {
@@ -152,9 +159,21 @@ let app = new Vue({
             return (this.isShowingVotes && this.votes[this.userName] !== undefined) === false;
         },
         sortedUsers: function() {
-            return this.users.sort((a, b) => a.name.localeCompare(b.name)).map(u => {
-                u.vote = app.votes[u.name];
-                return u;
+            let presenceUsers = this.presences.map(x => x.name);
+            let voteKeys = Object.keys(this.votes);
+            let userNames = Array.from(new Set(presenceUsers.concat(voteKeys)));
+            return userNames.sort((a, b) => a.localeCompare(b)).map(u => {
+                // TODO: Save vote in the presence
+                let n = {};
+                let pres = this.presences.filter(function (item) {
+                    return item.name === u;
+                })[0] || null;
+                
+                n.isOffline = pres == null;
+                n.name = u;
+                n.vote = this.votes[u];
+                n.count = (this.presences.filter(x => x.name === u).map(x => x.count)[0]);
+                return n;
             });
         }
     }

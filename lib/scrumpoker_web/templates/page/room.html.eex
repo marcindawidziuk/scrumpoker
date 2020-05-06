@@ -1,6 +1,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>window.channelRoomId = "<%= @room %>"</script>
+<script>window.user_id = "<%= @user_id %>"</script>
 
 <div id="app" class="text-gray-900">
    <div class="mx-auto max-w-8xl bg-secondary text-on-secondary border shadow rounded p-5">
@@ -14,6 +15,8 @@
               <ul id="votes" class="list-disc text-xl pl-2" >
                  <li v-for="user in sortedUsers">
                     <span>{{ user.name }} {{ user.time | isOnline }}</span>
+                    <span v-if="user.isOffline" title="User is no longer connected"> (Offline)</span>
+                    <span v-if="user.count > 1" title="Opened connections"> ({{ user.count }})</span>
                     <span v-if="user.vote && isShowingVotes" class="fade-in-quick" >voted</span>
                     <i v-if="user.vote && isShowingVotes == false" class="ml-1 fas fa-check-square fade-in-quick"></i>
                     <div class="inline-block w-4" v-if="user.vote == null && isShowingVotes == false">

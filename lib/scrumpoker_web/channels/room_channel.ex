@@ -1,9 +1,11 @@
 defmodule ScrumpokerWeb.RoomChannel do
   use ScrumpokerWeb, :channel
+  alias ScrumpokerWeb.Presence
 
-  def join("room:" <> _, payload, socket) do
+  def join("room:" <> room_id, payload, socket) do
     if authorized?(payload) do
-      {:ok, socket}
+      send(self(), :after_join)
+      {:ok, %{channel: "room:#{room_id}"}, assign(socket, :room_id, room_id)}
     else
       {:error, %{reason: "unauthorized"}}
     end
@@ -43,6 +45,15 @@ defmodule ScrumpokerWeb.RoomChannel do
 
   def handle_in("joined", payload, socket) do
     broadcast socket, "joined", payload
+    {:noreply, socket}
+  end
+  
+  def handle_info(:after_join, socket) do
+    {:ok, _} = Presence.track(socket, socket.assigns.user_id, %{
+      online_at: inspect(System.system_time(:second))
+    })
+
+    push socket, "presence_state", Presence.list(socket)
     {:noreply, socket}
   end
 
