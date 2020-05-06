@@ -16,7 +16,7 @@
                  <li v-for="user in sortedUsers">
                     <span>{{ user.name }} {{ user.time | isOnline }}</span>
                     <span v-if="user.isOffline" title="User is no longer connected"> (Offline)</span>
-                    <span v-if="user.count > 1" title="Opened connections"> ({{ user.count }})</span>
+                    <span v-if="user.count > 1" title="Users connected under this name" class="text-brand"> ({{ user.count }} connected)</span>
                     <span v-if="user.vote && isShowingVotes" class="fade-in-quick" >voted</span>
                     <i v-if="user.vote && isShowingVotes == false" class="ml-1 fas fa-check-square fade-in-quick"></i>
                     <div class="inline-block w-4" v-if="user.vote == null && isShowingVotes == false">
