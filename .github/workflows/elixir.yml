@@ -19,7 +19,7 @@ jobs:
         
     - name: Setup Node.js environment
       uses: actions/setup-node@v1.4.2
-    - run: apt-get install sshpass
+    - run: sudo apt-get install sshpass
     
     - name: Setup enviroment variables
       run: echo ::set-env name=MIX_ENV::prod
