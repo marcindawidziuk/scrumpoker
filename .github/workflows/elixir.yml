@@ -3,8 +3,6 @@ name: Elixir CI
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   build:
@@ -34,3 +32,12 @@ jobs:
       run: mix phx.digest
     - name: Run Tests
       run: mix test
+    - name: Copy to server
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        local: . 
+        remote: scp/app
+        host: ${{ secrets.DEPLOY_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.SSH_PORT }}
