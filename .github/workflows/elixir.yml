@@ -14,7 +14,7 @@ jobs:
     - name: Setup elixir
       uses: actions/setup-elixir@v1
       with:
-        elixir-version: 1.9.4 # Define the elixir version [required]
+        elixir-version: 1.10.3 # Define the elixir version [required]
         otp-version: 22.2 # Define the OTP version [required]
         
     - name: Setup Node.js environment
@@ -37,7 +37,7 @@ jobs:
     - name: Copy to server
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: . 
+        local: ./ 
         remote: app
         host: ${{ secrets.DEPLOY_HOST }}
         username: ${{ secrets.SSH_USER }}
