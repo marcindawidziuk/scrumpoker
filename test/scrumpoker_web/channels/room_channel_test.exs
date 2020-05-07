@@ -3,15 +3,10 @@ defmodule ScrumpokerWeb.RoomChannelTest do
 
   setup do
     {:ok, _, socket} =
-      socket(ScrumpokerWeb.UserSocket, "user_id", %{some: :assign})
+      socket(ScrumpokerWeb.UserSocket, "user_id", %{user_id: :assign})
       |> subscribe_and_join(ScrumpokerWeb.RoomChannel, "room:lobby")
 
     {:ok, socket: socket}
-  end
-
-  test "ping replies with status ok", %{socket: socket} do
-    ref = push socket, "ping", %{"hello" => "there"}
-    assert_reply ref, :ok, %{"hello" => "there"}
   end
 
   test "shout broadcasts to room:lobby", %{socket: socket} do
