@@ -36,7 +36,7 @@ jobs:
       run: mix phx.digest
     - name: Phoenix Release
       run: mix release
-    - run: rm -rf ./assets && rm ./deps/
+    - run: rm -rf ./assets && rm -rf ./deps/
     - name: Copy to server
       run: sshpass -p ${{ secrets.PASSWORD }} scp -P ${{ secrets.SSH_PORT }} ./ ${{ secrets.SSH_USER }}@${{ secrets.DEPLOY_HOST }}:app
 
