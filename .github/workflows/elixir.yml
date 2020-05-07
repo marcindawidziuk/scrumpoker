@@ -19,6 +19,7 @@ jobs:
         
     - name: Setup Node.js environment
       uses: actions/setup-node@v1.4.2
+    - run: apt-get install sshpass
     
     - name: Setup enviroment variables
       run: echo ::set-env name=MIX_ENV::prod
@@ -34,11 +35,5 @@ jobs:
     - name: Phoenix Digest
       run: mix phx.digest
     - name: Copy to server
-      uses: garygrossgarten/github-action-scp@release
-      with:
-        local: ./ 
-        remote: scp/app/
-        host: ${{ secrets.DEPLOY_HOST }}
-        username: ${{ secrets.SSH_USER }}
-        password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.SSH_PORT }}
+      run: sshpass -p ${{ secrets.PASSWORD }} scp -P ${{ secrets.SSH_PORT }} ./ ${{ secrets.SSH_USER }}@${{ secrets.DEPLOY_HOST }}:app
+
