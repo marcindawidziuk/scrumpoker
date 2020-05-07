@@ -1,5 +1,7 @@
 defmodule ScrumpokerWeb.Router do
   use ScrumpokerWeb, :router
+  import Plug.BasicAuth
+  import Phoenix.LiveDashboard.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,6 +15,18 @@ defmodule ScrumpokerWeb.Router do
     plug :accepts, ["json"]
   end
 
+
+  pipeline :admins_only do
+    plug :basic_auth, username: "admin", password: System.get_env("ADMIN_PASSWORD") || "password"
+  end
+
+  if Mix.env() == :dev do
+    scope "/" do
+      pipe_through [:browser, :admins_only]
+      live_dashboard "/dashboard"
+    end
+  end
+
   scope "/", ScrumpokerWeb do
     pipe_through :browser
 
@@ -20,6 +34,8 @@ defmodule ScrumpokerWeb.Router do
     get "/rick", PageController, :rick
     get "/landing/", PageController, :landing
     get "/:room/", PageController, :room
+    
+    
   end
 
   # Other scopes may use custom stacks.
