@@ -33,8 +33,6 @@ jobs:
       run: npm run deploy --prefix ./assets/
     - name: Phoenix Digest
       run: mix phx.digest
-    - name: Run Tests
-      run: mix test
     - name: Clean for Deploymeny
       run: rm -rf ./assets/ && rm -rf ./deps/
     - name: Copy to server
