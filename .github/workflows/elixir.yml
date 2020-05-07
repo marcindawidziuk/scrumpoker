@@ -31,6 +31,6 @@ jobs:
     - name: NPM deploy
       run: npm run deploy --prefix ./assets/
     - name: Phoenix Digest
-      run: mix ph.digest
+      run: mix phx.digest
     - name: Run Tests
       run: mix test
