@@ -63,7 +63,7 @@
       </div>
       <div class="flex mb-4">
          <div class="h-10 p-2"><span class="my-auto font-bold align-middle pt-3">Invitation:</span></div>
-            <input onClick="this.setSelectionRange(0, this.value.length)" class="self-strech shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            <input onClick="this.setSelectionRange(0, this.value.length)" class="test self-strech shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                value="http://poker.marcin.uk/<%= @room %>" readonly>
       </div>
    </div>
