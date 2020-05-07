@@ -22,6 +22,7 @@ jobs:
       - run: mix local.rebar --force
       - run: mix deps.get --only prod
       - run: mix compile
+      - run: npm install -S webpack
       - run: npm run deploy --prefix ./assets/
       - run: phx.digest
       - run: mix test
