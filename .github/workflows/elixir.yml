@@ -33,8 +33,6 @@ jobs:
       run: npm run deploy --prefix ./assets/
     - name: Phoenix Digest
       run: mix phx.digest
-    - name: Clean for Deploymeny
-      run: rm -rf ./assets/ && rm -rf ./deps/
     - name: Copy to server
       uses: garygrossgarten/github-action-scp@release
       with:
