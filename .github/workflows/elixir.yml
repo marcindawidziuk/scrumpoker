@@ -21,7 +21,7 @@ jobs:
       uses: actions/setup-node@v1.4.2
     
     - name: Setup enviroment variables
-      run: echo ::set-env name=MIX_ENV::prod
+      run: echo ::set-env name=MIX_ENV::prod,name=SECRET_KEY_BASE::${{ secrets.SECRET_KEY_BASE }}
     - name: Install Dependencies
       run: mix deps.get
     - name: Compile
