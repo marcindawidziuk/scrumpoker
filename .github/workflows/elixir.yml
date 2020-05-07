@@ -38,7 +38,7 @@ jobs:
       uses: garygrossgarten/github-action-scp@release
       with:
         local: ./ 
-        remote: app
+        remote: scp/app/
         host: ${{ secrets.DEPLOY_HOST }}
         username: ${{ secrets.SSH_USER }}
         password: ${{ secrets.PASSWORD }}
