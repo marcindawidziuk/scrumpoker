@@ -24,5 +24,13 @@ jobs:
     
     - name: Install Dependencies
       run: mix deps.get
+    - name: Compile
+      run: mix compile
+    - name: NPM
+      run: cd ./assets/ && npm install -S webpack && npm install
+    - name: NPM deploy
+      run: npm run deploy --prefix ./assets/
+    - name: Phoenix Digest
+      run: mix ph.digest
     - name: Run Tests
       run: mix test
