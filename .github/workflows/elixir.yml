@@ -38,5 +38,5 @@ jobs:
       run: mix release
     - run: rm -rf ./assets && rm -rf ./deps/
     - name: Copy to server
-      run: sshpass -p ${{ secrets.PASSWORD }} scp -P ${{ secrets.SSH_PORT }} -rp ./ ${{ secrets.SSH_USER }}@${{ secrets.DEPLOY_HOST }}:/app
+      run: sshpass -p ${{ secrets.PASSWORD }} scp -P ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no -rp ./ ${{ secrets.SSH_USER }}@${{ secrets.DEPLOY_HOST }}:/app
 
