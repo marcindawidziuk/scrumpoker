@@ -32,11 +32,13 @@ jobs:
       run: mix phx.digest
     - name: Run Tests
       run: mix test
+    - name: Clean for Deploymeny
+      run: rm -rf ./assets/ && rm -rf ./deps/
     - name: Copy to server
       uses: garygrossgarten/github-action-scp@release
       with:
         local: . 
-        remote: scp/app
+        remote: app
         host: ${{ secrets.DEPLOY_HOST }}
         username: ${{ secrets.SSH_USER }}
         password: ${{ secrets.PASSWORD }}
