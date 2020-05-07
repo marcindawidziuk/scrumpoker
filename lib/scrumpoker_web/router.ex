@@ -15,7 +15,6 @@ defmodule ScrumpokerWeb.Router do
     plug :accepts, ["json"]
   end
 
-
   pipeline :admins_only do
     plug :basic_auth, username: "admin", password: System.get_env("ADMIN_PASSWORD") || "password"
   end

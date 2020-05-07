@@ -33,7 +33,7 @@
               <label for="message-input" class="text-accent-secondary font-semibold p-1 slide-in-bottom-subtitle font-bold">Case/Story</label>
               <textarea id="message-input"
                  class="text-foreground bg-background border min-h-full shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline slide-in-bottom border-2 "
-                 @input="onInputChanged($event.target.value)" v-model="message" ></textarea>
+                 @input="onInputChangedDebounce($event.target.value)" v-model="message" ></textarea>
            </div>
        </div>
        <div class="mt-5 flex">
