@@ -20,11 +20,9 @@ defmodule ScrumpokerWeb.Router do
     plug :basic_auth, username: "admin", password: System.get_env("ADMIN_PASSWORD") || "password"
   end
 
-  if Mix.env() == :dev do
-    scope "/" do
-      pipe_through [:browser, :admins_only]
-      live_dashboard "/dashboard"
-    end
+  scope "/" do
+    pipe_through [:browser, :admins_only]
+    live_dashboard "/dashboard"
   end
 
   scope "/", ScrumpokerWeb do

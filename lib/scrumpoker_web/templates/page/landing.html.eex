@@ -150,9 +150,11 @@ let app = new Vue({
           this.userName = userNameFromCookie;
 		}
 		
-		var roomNameFromCookie = readCookie("roomName");
-		if (roomNameFromCookie != null){
-          this.roomName = roomNameFromCookie;
+		if (this.roomName === ""){
+            var roomNameFromCookie = readCookie("roomName");
+            if (roomNameFromCookie != null){
+              this.roomName = roomNameFromCookie;
+            }
 		}
      },
     methods: {
