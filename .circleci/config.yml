@@ -26,5 +26,5 @@ jobs:
       - run: cd ./assets/ && npm install --save-dev webpack
       - run: cd ./assets/ && npm install 
       - run: npm run deploy --prefix ./assets/
-      - run: phx.digest
+      - run: mix phx.digest
       - run: mix test
