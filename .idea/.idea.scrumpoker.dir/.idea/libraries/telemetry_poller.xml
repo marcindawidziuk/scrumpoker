@@ -1,0 +1,8 @@
+﻿<component name="libraryTable">
+  <library name="telemetry_poller" type="mix">
+    <CLASSES />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/deps/telemetry_poller/src" />
+    </SOURCES>
+  </library>
+</component>

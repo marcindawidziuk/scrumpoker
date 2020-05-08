@@ -1,7 +1,7 @@
 use Mix.Config
 
 # Configure your database
-config :scrumpoker, Scrumpoker.Repo,
+config :scrumpoker, ScrumPoker.Repo,
   username: "postgres",
   password: "postgres",
   database: "scrumpoker_dev",
@@ -15,7 +15,7 @@ config :scrumpoker, Scrumpoker.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :scrumpoker, ScrumpokerWeb.Endpoint,
+config :scrumpoker, ScrumPokerWeb.Endpoint,
   http: [port: System.get_env("POKER_PORT") || 4000],
   debug_errors: true,
   code_reloader: true,
@@ -55,7 +55,7 @@ config :scrumpoker, ScrumpokerWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :scrumpoker, ScrumpokerWeb.Endpoint,
+config :scrumpoker, ScrumPokerWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",

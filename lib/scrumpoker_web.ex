@@ -1,12 +1,12 @@
-defmodule ScrumpokerWeb do
+defmodule ScrumPokerWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use ScrumpokerWeb, :controller
-      use ScrumpokerWeb, :view
+      use ScrumPokerWeb, :controller
+      use ScrumPokerWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,11 +19,11 @@ defmodule ScrumpokerWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: ScrumpokerWeb
+      use Phoenix.Controller, namespace: ScrumPokerWeb
 
       import Plug.Conn
-      import ScrumpokerWeb.Gettext
-      alias ScrumpokerWeb.Router.Helpers, as: Routes
+      import ScrumPokerWeb.Gettext
+      alias ScrumPokerWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -31,7 +31,7 @@ defmodule ScrumpokerWeb do
     quote do
       use Phoenix.View,
         root: "lib/scrumpoker_web/templates",
-        namespace: ScrumpokerWeb
+        namespace: ScrumPokerWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
@@ -39,9 +39,9 @@ defmodule ScrumpokerWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import ScrumpokerWeb.ErrorHelpers
-      import ScrumpokerWeb.Gettext
-      alias ScrumpokerWeb.Router.Helpers, as: Routes
+      import ScrumPokerWeb.ErrorHelpers
+      import ScrumPokerWeb.Gettext
+      alias ScrumPokerWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -56,7 +56,7 @@ defmodule ScrumpokerWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import ScrumpokerWeb.Gettext
+      import ScrumPokerWeb.Gettext
     end
   end
 

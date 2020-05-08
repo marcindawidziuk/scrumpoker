@@ -8,14 +8,14 @@
 use Mix.Config
 
 config :scrumpoker,
-  ecto_repos: [Scrumpoker.Repo]
+  ecto_repos: [ScrumPoker.Repo]
 
 # Configures the endpoint
-config :scrumpoker, ScrumpokerWeb.Endpoint,
+config :scrumpoker, ScrumPokerWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "dUCw+1MVXkDsM2Q7ojO44F1x0jS/BsYFAu27pEyAzDqKipsdCLZ/cmzFTgHum7zt",
-  render_errors: [view: ScrumpokerWeb.ErrorView, accepts: ~w(html json)],
-  pubsub_server: ScrumpokerWeb.PubSub,
+  render_errors: [view: ScrumPokerWeb.ErrorView, accepts: ~w(html json)],
+  pubsub_server: ScrumPokerWeb.PubSub,
   live_view: [signing_salt: "y4l6Jmw6"]
 
 # Configures Elixir's Logger

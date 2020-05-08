@@ -1,4 +1,4 @@
-defmodule Scrumpoker.MixProject do
+defmodule ScrumPoker.MixProject do
   use Mix.Project
 
   def project do
@@ -19,7 +19,7 @@ defmodule Scrumpoker.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Scrumpoker.Application, []},
+      mod: {ScrumPoker.Application, []},
       extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end

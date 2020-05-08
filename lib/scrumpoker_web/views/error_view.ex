@@ -1,5 +1,5 @@
-defmodule ScrumpokerWeb.ErrorView do
-  use ScrumpokerWeb, :view
+defmodule ScrumPokerWeb.ErrorView do
+  use ScrumPokerWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

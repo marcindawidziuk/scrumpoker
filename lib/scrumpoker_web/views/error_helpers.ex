@@ -1,4 +1,4 @@
-defmodule ScrumpokerWeb.ErrorHelpers do
+defmodule ScrumPokerWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -39,9 +39,9 @@ defmodule ScrumpokerWeb.ErrorHelpers do
     # should be written to the errors.po file. The :count option is
     # set by Ecto and indicates we should also apply plural rules.
     if count = opts[:count] do
-      Gettext.dngettext(ScrumpokerWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(ScrumPokerWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(ScrumpokerWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(ScrumPokerWeb.Gettext, "errors", msg, opts)
     end
   end
 end

@@ -9,6 +9,36 @@
     <e p="C:\Users\cinek\.Rider2019.3\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\cinek\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_.19.00" t="ExcludeRecursive" />
     <e p="D:\Development\scrumpoker" t="IncludeFlat">
+      <e p="_build\dev\lib\cowboy\ebin" t="IncludeRecursive" />
+      <e p="_build\dev\lib\file_system\ebin" t="IncludeRecursive" />
+      <e p="_build\dev\lib\gettext\ebin" t="IncludeRecursive" />
+      <e p="_build\dev\lib\jason\ebin" t="IncludeRecursive" />
+      <e p="_build\dev\lib\mime\ebin" t="IncludeRecursive" />
+      <e p="_build\dev\lib\phoenix\ebin" t="IncludeRecursive" />
+      <e p="_build\dev\lib\phoenix_html\ebin" t="IncludeRecursive" />
+      <e p="_build\dev\lib\phoenix_live_dashboard\ebin" t="IncludeRecursive" />
+      <e p="_build\dev\lib\phoenix_live_reload\ebin" t="IncludeRecursive" />
+      <e p="_build\dev\lib\phoenix_live_view\ebin" t="IncludeRecursive" />
+      <e p="_build\dev\lib\phoenix_pubsub\ebin" t="IncludeRecursive" />
+      <e p="_build\dev\lib\plug\ebin" t="IncludeRecursive" />
+      <e p="_build\dev\lib\plug_cowboy\ebin" t="IncludeRecursive" />
+      <e p="_build\dev\lib\plug_crypto\ebin" t="IncludeRecursive" />
+      <e p="_build\dev\lib\telemetry\ebin" t="IncludeRecursive" />
+      <e p="_build\dev\lib\telemetry_metrics\ebin" t="IncludeRecursive" />
+      <e p="_build\test\lib\cowboy\ebin" t="IncludeRecursive" />
+      <e p="_build\test\lib\gettext\ebin" t="IncludeRecursive" />
+      <e p="_build\test\lib\jason\ebin" t="IncludeRecursive" />
+      <e p="_build\test\lib\mime\ebin" t="IncludeRecursive" />
+      <e p="_build\test\lib\phoenix\ebin" t="IncludeRecursive" />
+      <e p="_build\test\lib\phoenix_html\ebin" t="IncludeRecursive" />
+      <e p="_build\test\lib\phoenix_live_dashboard\ebin" t="IncludeRecursive" />
+      <e p="_build\test\lib\phoenix_live_view\ebin" t="IncludeRecursive" />
+      <e p="_build\test\lib\phoenix_pubsub\ebin" t="IncludeRecursive" />
+      <e p="_build\test\lib\plug\ebin" t="IncludeRecursive" />
+      <e p="_build\test\lib\plug_cowboy\ebin" t="IncludeRecursive" />
+      <e p="_build\test\lib\plug_crypto\ebin" t="IncludeRecursive" />
+      <e p="_build\test\lib\telemetry\ebin" t="IncludeRecursive" />
+      <e p="_build\test\lib\telemetry_metrics\ebin" t="IncludeRecursive" />
       <e p="assets\node_modules\@babel\core" t="IncludeRecursive" />
       <e p="assets\node_modules\@babel\preset-env" t="IncludeRecursive" />
       <e p="assets\node_modules\@types" t="IncludeRecursive" />
@@ -19,8 +49,6 @@
       <e p="assets\node_modules\css-loader" t="IncludeRecursive" />
       <e p="assets\node_modules\mini-css-extract-plugin" t="IncludeRecursive" />
       <e p="assets\node_modules\optimize-css-assets-webpack-plugin" t="IncludeRecursive" />
-      <e p="assets\node_modules\phoenix" t="IncludeRecursive" />
-      <e p="assets\node_modules\phoenix_html" t="IncludeRecursive" />
       <e p="assets\node_modules\postcss" t="IncludeRecursive" />
       <e p="assets\node_modules\postcss-loader" t="IncludeRecursive" />
       <e p="assets\node_modules\source-map" t="IncludeRecursive" />
@@ -29,6 +57,33 @@
       <e p="assets\node_modules\terser-webpack-plugin" t="IncludeRecursive" />
       <e p="assets\node_modules\webpack" t="IncludeRecursive" />
       <e p="assets\node_modules\webpack-cli" t="IncludeRecursive" />
+      <e p="deps\cowboy\src" t="IncludeRecursive" />
+      <e p="deps\file_system\c_src" t="IncludeRecursive" />
+      <e p="deps\file_system\lib" t="IncludeRecursive" />
+      <e p="deps\file_system\priv" t="IncludeRecursive" />
+      <e p="deps\gettext\lib" t="IncludeRecursive" />
+      <e p="deps\gettext\src" t="IncludeRecursive" />
+      <e p="deps\jason\lib" t="IncludeRecursive" />
+      <e p="deps\mime\lib" t="IncludeRecursive" />
+      <e p="deps\mime\priv" t="IncludeRecursive" />
+      <e p="deps\phoenix\lib" t="IncludeRecursive" />
+      <e p="deps\phoenix\priv" t="IncludeRecursive" />
+      <e p="deps\phoenix_html\lib" t="IncludeRecursive" />
+      <e p="deps\phoenix_html\priv" t="IncludeRecursive" />
+      <e p="deps\phoenix_live_dashboard\lib" t="IncludeRecursive" />
+      <e p="deps\phoenix_live_dashboard\priv" t="IncludeRecursive" />
+      <e p="deps\phoenix_live_reload\lib" t="IncludeRecursive" />
+      <e p="deps\phoenix_live_reload\priv" t="IncludeRecursive" />
+      <e p="deps\phoenix_live_view\lib" t="IncludeRecursive" />
+      <e p="deps\phoenix_live_view\priv" t="IncludeRecursive" />
+      <e p="deps\phoenix_pubsub\lib" t="IncludeRecursive" />
+      <e p="deps\plug\lib" t="IncludeRecursive" />
+      <e p="deps\plug\src" t="IncludeRecursive" />
+      <e p="deps\plug_cowboy\lib" t="IncludeRecursive" />
+      <e p="deps\plug_crypto\lib" t="IncludeRecursive" />
+      <e p="deps\telemetry\src" t="IncludeRecursive" />
+      <e p="deps\telemetry_metrics\lib" t="IncludeRecursive" />
+      <e p="deps\telemetry_poller\src" t="IncludeRecursive" />
     </e>
     <e p="D:\Elixir\lib\eex\ebin" t="IncludeRecursive" />
     <e p="D:\Elixir\lib\Elixir\ebin" t="IncludeRecursive" />

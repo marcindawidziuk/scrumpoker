@@ -1,3 +1,3 @@
-defmodule ScrumpokerWeb.LayoutView do
-  use ScrumpokerWeb, :view
+defmodule ScrumPokerWeb.LayoutView do
+  use ScrumPokerWeb, :view
 end

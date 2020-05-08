@@ -1,5 +1,5 @@
-defmodule ScrumpokerWeb.Router do
-  use ScrumpokerWeb, :router
+defmodule ScrumPokerWeb.Router do
+  use ScrumPokerWeb, :router
   import Plug.BasicAuth
   import Phoenix.LiveDashboard.Router
 
@@ -24,7 +24,7 @@ defmodule ScrumpokerWeb.Router do
     live_dashboard "/dashboard"
   end
 
-  scope "/", ScrumpokerWeb do
+  scope "/", ScrumPokerWeb do
     pipe_through :browser
 
     get "/", PageController, :index
@@ -36,7 +36,7 @@ defmodule ScrumpokerWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", ScrumpokerWeb do
+  # scope "/api", ScrumPokerWeb do
   #   pipe_through :api
   # end
 end

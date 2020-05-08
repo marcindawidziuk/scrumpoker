@@ -1,4 +1,4 @@
-defmodule ScrumpokerWeb.Presence do
+defmodule ScrumPokerWeb.Presence do
   @moduledoc """
   Provides presence tracking to channels and processes.
 
@@ -9,9 +9,9 @@ defmodule ScrumpokerWeb.Presence do
 
   Presences can be tracked in your channel after joining:
 
-      defmodule Scrumpoker.MyChannel do
-        use ScrumpokerWeb, :channel
-        alias ScrumpokerWeb.Presence
+      defmodule ScrumPoker.MyChannel do
+        use ScrumPokerWeb, :channel
+        alias ScrumPokerWeb.Presence
 
         def join("some:topic", _params, socket) do
           send(self(), :after_join)
@@ -69,5 +69,5 @@ defmodule ScrumpokerWeb.Presence do
   original presence data.
   """
   use Phoenix.Presence, otp_app: :scrumpoker,
-                        pubsub_server: ScrumpokerWeb.PubSub
+                        pubsub_server: ScrumPokerWeb.PubSub
 end

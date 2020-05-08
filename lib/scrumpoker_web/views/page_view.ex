@@ -1,3 +1,3 @@
-defmodule ScrumpokerWeb.PageView do
-  use ScrumpokerWeb, :view
+defmodule ScrumPokerWeb.PageView do
+  use ScrumPokerWeb, :view
 end

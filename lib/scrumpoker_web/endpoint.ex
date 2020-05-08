@@ -1,4 +1,4 @@
-defmodule ScrumpokerWeb.Endpoint do
+defmodule ScrumPokerWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :scrumpoker
 
   # The session will be stored in the cookie and signed,
@@ -10,7 +10,7 @@ defmodule ScrumpokerWeb.Endpoint do
     signing_salt: "Sqwb2ZM6"
   ]
 
-  socket "/socket", ScrumpokerWeb.UserSocket,
+  socket "/socket", ScrumPokerWeb.UserSocket,
     websocket: true,
     longpoll: false
 
@@ -49,5 +49,5 @@ defmodule ScrumpokerWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug ScrumpokerWeb.Router
+  plug ScrumPokerWeb.Router
 end

@@ -1,6 +1,6 @@
-defmodule ScrumpokerWeb.RoomChannel do
-  use ScrumpokerWeb, :channel
-  alias ScrumpokerWeb.Presence
+defmodule ScrumPokerWeb.RoomChannel do
+  use ScrumPokerWeb, :channel
+  alias ScrumPokerWeb.Presence
 
   def join("room:" <> room_id, payload, socket) do
     if authorized?(payload) do

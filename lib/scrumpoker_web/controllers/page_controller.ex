@@ -1,5 +1,5 @@
-defmodule ScrumpokerWeb.PageController do
-  use ScrumpokerWeb, :controller
+defmodule ScrumPokerWeb.PageController do
+  use ScrumPokerWeb, :controller
 
   plug :put_layout, false when action in [:index]
   
