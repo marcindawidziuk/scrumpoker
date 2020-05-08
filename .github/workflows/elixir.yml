@@ -19,11 +19,11 @@ jobs:
         
     - name: Setup Node.js environment
       uses: actions/setup-node@v1.4.2
-    - run: sudo apt-get install sshpass
-    
     - name: Setup enviroment variables
-      run: echo ::set-env name=MIX_ENV::prod
-    - run: echo ::set-env name=SECRET_KEY_BASE::${{ secrets.SECRET_KEY_BASE }}
+      run: |
+        echo ::set-env name=MIX_ENV::prod
+        echo ::set-env name=SECRET_KEY_BASE::${{ secrets.SECRET_KEY_BASE }}
+         
     - name: Install Dependencies
       run: mix deps.get
     - name: Compile
@@ -36,7 +36,3 @@ jobs:
       run: mix phx.digest
     - name: Phoenix Release
       run: mix release
-    - run: rm -rf ./assets && rm -rf ./deps/
-    - name: Copy to server
-      run: sshpass -p ${{ secrets.PASSWORD }} scp -P ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no -rp ./ ${{ secrets.SSH_USER }}@${{ secrets.DEPLOY_HOST }}:/app
-
