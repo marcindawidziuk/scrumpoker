@@ -12,6 +12,11 @@
         </div>
         <div style="min-height: 300px;">
            <div class="text-on-secondary p-2">
+              <div v-if="sortedUsers.length < 2" class="mt-3 mb-5">
+               <span class="mb-6 font-semibold">Seems like you are here by yourself, send this link to your team-mates:</span>
+               <input onClick="this.setSelectionRange(0, this.value.length)" class="self-strech shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                   value="http://poker.marcin.uk/<%= @room %>" readonly>
+              </div>
               <ul id="votes" class="list-disc text-xl pl-2" >
                  <li v-for="user in sortedUsers">
                     <span>{{ user.name }} {{ user.time | isOnline }}</span>
@@ -61,9 +66,9 @@
       <div class="row" v-if="isShowingVotes && votes[userName] === undefined">
          <h3 style="color: #dd3235">You didn't vote!</h3>
       </div>
-      <div class="flex mb-4">
-         <div class="h-10 p-2"><span class="my-auto font-bold align-middle pt-3">Invitation:</span></div>
-            <input onClick="this.setSelectionRange(0, this.value.length)" class="test self-strech shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      <div class="flex mb-4 mt-5">
+         <div class="h-10 p-2"><span class="my-auto font-bold align-middle text-align-top">Invitation:</span></div>
+            <input onClick="this.setSelectionRange(0, this.value.length)" class="self-strech shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                value="http://poker.marcin.uk/<%= @room %>" readonly>
       </div>
    </div>
