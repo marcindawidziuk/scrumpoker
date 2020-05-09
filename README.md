@@ -1,5 +1,5 @@
 # Scrum Pointing Poker Online
-[![Build status](https://github.com/cinekdawidziuk/scrumpoker/workflows/Elixir%20CI/badge.svg)](https://github.com/cinekdawidziuk/scrumpoker/actions?query=workflow%3A%22Elixir+CI%22)  [![Uptime](https://stats.uptimerobot.com/assets/img/uptime-logo.png)](https://stats.uptimerobot.com/wnzXlSL0Dr)  
+[![Release](https://github.com/cinekdawidziuk/scrumpoker/workflows/Release/badge.svg)](https://github.com/cinekdawidziuk/scrumpoker/actions?query=workflow%3A%22Elixir+CI%22) [![Uptime](https://stats.uptimerobot.com/assets/img/uptime-logo.png)](https://stats.uptimerobot.com/wnzXlSL0Dr)  
 
 
 Simple Pointing Poker with quick joining and dark mode, built on top of Phoenix Framework. Available at
