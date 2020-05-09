@@ -19,6 +19,8 @@ jobs:
         
     - name: Setup Node.js environment
       uses: actions/setup-node@v1.4.2
+    - name: Tests
+      run: mix test
     - name: Setup enviroment variables
       run: |
         echo ::set-env name=MIX_ENV::prod
@@ -32,8 +34,6 @@ jobs:
       run: npm run deploy --prefix ./assets/
     - name: Phoenix Digest
       run: mix phx.digest
-    - name: Test
-      run: mix test
     - name: Phoenix Release
       run: mix release
 
