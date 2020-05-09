@@ -1,4 +1,4 @@
-name: Elixir CI
+name: Release
 
 on:
   push:
@@ -36,3 +36,9 @@ jobs:
       run: mix phx.digest
     - name: Phoenix Release
       run: mix release
+
+    - name: Trigger Docker Deployment
+      uses: joelwmale/webhook-action@master
+      env:
+       WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+       data: "{'secret': '${{ secrets.WEBHOOK_SECRET }}', 'ref': 'refs/heads/master'}"
