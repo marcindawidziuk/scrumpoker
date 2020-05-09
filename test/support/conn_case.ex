@@ -1,4 +1,4 @@
-defmodule ScrumpokerWeb.ConnCase do
+defmodule ScrumPokerWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -11,7 +11,7 @@ defmodule ScrumpokerWeb.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use ScrumpokerWeb.ConnCase, async: true`, although
+  by setting `use ScrumPokerWeb.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -21,10 +21,10 @@ defmodule ScrumpokerWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      alias ScrumpokerWeb.Router.Helpers, as: Routes
+      alias ScrumPokerWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint ScrumpokerWeb.Endpoint
+      @endpoint ScrumPokerWeb.Endpoint
     end
   end
 

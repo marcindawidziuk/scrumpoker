@@ -1,10 +1,10 @@
-defmodule ScrumpokerWeb.RoomChannelTest do
-  use ScrumpokerWeb.ChannelCase
+defmodule ScrumPokerWeb.RoomChannelTest do
+  use ScrumPokerWeb.ChannelCase
 
   setup do
     {:ok, _, socket} =
-      socket(ScrumpokerWeb.UserSocket, "user_id", %{user_id: :assign})
-      |> subscribe_and_join(ScrumpokerWeb.RoomChannel, "room:lobby")
+      socket(ScrumPokerWeb.UserSocket, "user_id", %{user_id: :assign})
+      |> subscribe_and_join(ScrumPokerWeb.RoomChannel, "room:lobby")
 
     {:ok, socket: socket}
   end

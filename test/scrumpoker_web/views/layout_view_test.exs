@@ -1,5 +1,5 @@
-defmodule ScrumpokerWeb.LayoutViewTest do
-  use ScrumpokerWeb.ConnCase, async: true
+defmodule ScrumPokerWeb.LayoutViewTest do
+  use ScrumPokerWeb.ConnCase, async: true
 
   # When testing helpers, you may want to import Phoenix.HTML and
   # use functions such as safe_to_string() to convert the helper

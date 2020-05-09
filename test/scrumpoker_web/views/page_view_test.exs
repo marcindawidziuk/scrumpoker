@@ -1,3 +1,3 @@
-defmodule ScrumpokerWeb.PageViewTest do
-  use ScrumpokerWeb.ConnCase, async: true
+defmodule ScrumPokerWeb.PageViewTest do
+  use ScrumPokerWeb.ConnCase, async: true
 end
