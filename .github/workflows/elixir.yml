@@ -37,6 +37,9 @@ jobs:
     - name: Phoenix Release
       run: mix release
 
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
     - name: Trigger Docker Deployment
       uses: joelwmale/webhook-action@master
       env:
