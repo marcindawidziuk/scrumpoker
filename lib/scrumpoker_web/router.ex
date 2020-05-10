@@ -28,7 +28,6 @@ defmodule ScrumPokerWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/rick", PageController, :rick
     get "/landing/", PageController, :landing
     get "/:room/", PageController, :room
     

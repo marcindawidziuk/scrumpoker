@@ -89,11 +89,11 @@
                     </div>
     			
 					 <button v-on:click="connect"
-					 class="myButton m-2 bg-indigo-500 text-white hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline fade-in" type="button">
+                         class="myButton m-2 bg-indigo-500 text-white hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline fade-in" type="button">
 						 Start a Session
 					 </button>
 					 
-                     <a href="https://en.wikipedia.org/wiki/Planning_poker" class="underline text-on-secondary m-3" target="_blank">How to play?</a> <br/>
+                     <a href="https://en.wikipedia.org/wiki/Planning_poker" class="underline text-on-secondary m-3 fade-in" target="_blank">How to play?</a> <br/>
     		
     			<div class="flex w-full justify-center md:justify-start pb-24 lg:pb-0 mt-3 fade-in">
     				<% #<img src="<%= Routes.static_path(@conn, "/images/landing/Play Store.svg")% >" class="h-12 bounce-top-icons"> %>

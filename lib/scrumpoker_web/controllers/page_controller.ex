@@ -2,14 +2,6 @@ defmodule ScrumPokerWeb.PageController do
   use ScrumPokerWeb, :controller
 
   plug :put_layout, false when action in [:index]
-  
-  def rick(conn, _params)do
-    if :erlang.date |> :calendar.day_of_the_week >= 5 do
-      redirect(conn, external: "https://youtu.be/4z95SAFud7w")
-    else
-      redirect(conn, external: "https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-    end
-  end
 
   def index(conn, %{"room" => room}) do
     render(conn, "landing.html", room: room)
