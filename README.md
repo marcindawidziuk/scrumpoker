@@ -23,11 +23,15 @@ For security replace SECRET_KEY_BASE value. The key given below is just an examp
 You can generate new key by running: ```mix phx.gen.secret```
 
 ```
-SECRET_KEY_BASE=PBd3wijcYcO+nHS7uIbtYFY7HWc1R/VTjPpuFzeZDUBH4CGjO/VjONjr2WdI7utG docker build --build-arg SECRET_KEY_BASE -t cinekdawidziuk/scrumpoker .
+ADMIN_PASSWORD="mypassword" SECRET_KEY_BASE=PBd3wijcYcO+nHS7uIbtYFY7HWc1R/VTjPpuFzeZDUBH4CGjO/VjONjr2WdI7utG docker build --build-arg SECRET_KEY_BASE -t cinekdawidziuk/scrumpoker .
 
 docker stop ScrumPoker
 docker rm ScrumPoker
 docker run --env SECRET_KEY_BASE=PBd3wijcYcO+nHS7uIbtYFY7HWc1R/VTjPpuFzeZDUBH4CGjO/VjONjr2WdI7utG --publish 3401:4000 --restart=always --name ScrumPoker cinekdawidziuk/scrumpoker:latest
 ```
 
-Now you can visit [`localhost:3401`](http://localhost:3401) from your browser. For SSL I recommend running it through Ngnix reverse proxy.
+Now you can visit [`localhost:3401`](http://localhost:3401) from your browser. 
+
+You can also acess Phoenix Live Dashboard with ```admin``` as your username and ```mypassword``` as your password on [`localhost:3401/dashboard`](http://localhost:3401/dashboard).  
+
+For SSL I recommend running it through Ngnix reverse proxy. 
