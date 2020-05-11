@@ -61,7 +61,6 @@ let app = new Vue({
     },
     created: function () {
         this.userName = userName;
-        setInterval(function(){ app.ping(); }, 30000);
 
         socket.connect();
         channel.join()
@@ -75,31 +74,22 @@ let app = new Vue({
 
         channel.on('voted', function (payload) { // listen to the 'shout' event
             console.log(payload.name + " voted");
-            app.markOnline(payload.name);
             app.$set(app.votes, payload.name, payload.message);
         });
 
         channel.on('show_votes', function (payload) { // listen to the 'shout' event
             console.log('show_votes');
-            app.markOnline(payload.name);
             app.isShowingVotes = true
         });
 
         channel.on('clear_votes', function (payload) { // listen to the 'shout' event
             console.log('clear_votes');
-            app.markOnline(payload.name);
             app.isShowingVotes = false;
             app.votes = {};
             app.myVote = null;
         });
     },
     methods: {
-        markOnline: function (userName) {
-            if (app.users.some(x => x.name === userName) === false) {
-                app.users.push({name: userName, time: new Date()})
-            }
-            app.users.filter(x => x.name === userName).forEach(x => x.time = new Date());
-        },
         onInputChangedDebounce: function (input) {
             this.debounceCaseChanged(this, 500)
         },
@@ -146,11 +136,6 @@ let app = new Vue({
                 name: this.userName,     // get value of "name" of person sending the message
             });
         },
-        ping: function () {
-            channel.push('ping', { // send the message to the server on "shout" channel
-                name: this.userName,     // get value of "name" of person sending the message
-            });
-        },
         debounceCaseChanged(env, timeMs) {
             if (this.case_input_timeout) {
                 clearTimeout(this.case_input_timeout);
@@ -177,8 +162,8 @@ let app = new Vue({
             let presenceUsers = this.presences.map(x => x.name);
             let voteKeys = Object.keys(this.votes);
             let userNames = Array.from(new Set(presenceUsers.concat(voteKeys)));
+            //TODO: store vote in the presence
             let users = userNames.map(u => {
-                // TODO: Save vote in the presence
                 let n = {};
                 let pres = this.presences.filter(function (item) {
                     return item.name === u;
@@ -198,14 +183,8 @@ let app = new Vue({
     }
 });
 
-channel.on('ping', function (payload) { // listen to the 'shout' event
-    console.log('ping from ' + payload.name);
-    app.markOnline(payload.name)
-});
-
-channel.on('change_message', function (payload) { // listen to the 'shout' event
+channel.on('change_message', function (payload) { 
     console.log('changed message by ' + payload.name + ' to ' + payload.message);
-    app.markOnline(payload.name);
     if (app.userName === payload.name
         && document.getElementById("message-input") === document.activeElement) {
         return;
@@ -215,7 +194,6 @@ channel.on('change_message', function (payload) { // listen to the 'shout' event
 
 channel.on('joined', function (payload) {
     console.log('user ' + payload.name + ' joined');
-    app.ping();
     if (app.userName !== payload.name){
         app.onInputChanged();
     }
