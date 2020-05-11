@@ -1,4 +1,4 @@
-﻿// We need to import the CSS so that webpack will load it.
+// We need to import the CSS so that webpack will load it.
 // The MiniCssExtractPlugin is used to separate it out into
 // its own CSS file.
 
@@ -49,6 +49,7 @@ Vue.filter('isOnline', function (date) {
 let app = new Vue({
     el: '#app',
     data: {
+        isShowingConnectionError: false,
         presences: [],
         userName: "",
         channelName: channelName,
@@ -63,6 +64,13 @@ let app = new Vue({
         this.userName = userName;
 
         socket.connect();
+        channel.onError(() => this.isShowingConnectionError = true);
+        
+        // Overwrite default method
+        channel.onMessage = function(event, payload, ref){ 
+            app.isShowingConnectionError = false;
+            return payload 
+        };
         channel.join()
             .receive("ok", ({messages}) => console.log("catching up", messages) )
             .receive("error", ({reason}) => console.log("failed join", reason) )
