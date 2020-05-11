@@ -71,10 +71,10 @@
          <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == '☕')}" v-on:click="vote('☕')" :disabled="canVote === false"> <i class="fas fa-mug-hot"></i> </button>
       </div>
       <div class="grid grid-cols-2">
-         <button class="myButton m-2 bg-indigo-500 text-white" type="button" v-on:click="showVotes()" :disabled="canVote === false || isShowingVotes"> Show votes </button>
+         <button class="myButton m-2 bg-indigo-500 text-white" type="button" v-on:click="showVotes()" :disabled="isShowingVotes"> Show votes </button>
          <button class="myButton m-2 bg-indigo-500 text-white" type="button" :disabled="isShowingVotes == false" v-on:click="clearVotes()"> Next case/story </button>
       </div>
-      <div class="row" v-if="isShowingVotes && votes[userName] === undefined">
+      <div class="row" v-if="canVote && isShowingVotes && votes[userName] === undefined">
          <h3 style="color: #dd3235">You didn't vote!</h3>
       </div>
       <div class="flex mb-4 mt-5">

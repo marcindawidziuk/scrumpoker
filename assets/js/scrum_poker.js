@@ -152,6 +152,9 @@ let app = new Vue({
             return (this.isShowingVotes && this.votes[this.userName] !== undefined) === false 
                 && this.myPresence !== null && this.myPresence.observer === false;
         },
+        canShowVotes: function() {
+            return this.isShowingVotes === false;
+        },
         myPresence: function(){
             let userName = this.userName;
             return this.presences.filter(function (item) {
