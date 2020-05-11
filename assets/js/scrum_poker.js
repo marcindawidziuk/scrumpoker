@@ -63,8 +63,11 @@ let app = new Vue({
     created: function () {
         this.userName = userName;
 
-        socket.connect();
-        channel.onError(() => this.isShowingConnectionError = true);
+        socket.connect()
+            .on("error", ({reason}) => app.isShowingConnectionError = true )
+            .on("timeout", () => app.isShowingConnectionError = true );
+        
+        channel.onError(() => app.isShowingConnectionError = true);
         
         // Overwrite default method
         channel.onMessage = function(event, payload, ref){ 
