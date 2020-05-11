@@ -22,13 +22,14 @@
                     <span>{{ user.name }} {{ user.time | isOnline }}</span>
                     <span v-if="user.isOffline" title="User is no longer connected"> (Offline)</span>
                     <span v-if="user.count > 1" title="Users connected under this name" class="text-brand"> ({{ user.count }} connected)</span>
-                    <span v-if="user.vote && isShowingVotes" class="fade-in-quick" >voted</span>
-                    <i v-if="user.vote && isShowingVotes == false" class="ml-1 fas fa-check-square fade-in-quick"></i>
-                    <div class="inline-block w-4" v-if="user.vote == null && isShowingVotes == false">
+                    <span v-if="user.isObserver" title="User is not voting"> is watching</span>
+                    <span v-if="user.vote && isShowingVotes && user.isObserver == false" class="fade-in-quick" >voted</span>
+                    <i v-if="user.vote && isShowingVotes == false && user.isObserver == false" class="ml-1 fas fa-check-square fade-in-quick"></i>
+                    <div class="inline-block w-4" v-if="user.vote == null && isShowingVotes == false && user.isObserver == false">
                         <span class="loading"></span>
                     </div>
-                    <span v-if="user.vote == null && isShowingVotes" >didn't vote</span>
-                    <span v-if="isShowingVotes" class="font-bold fade-in-quick" style="font-weight: bold;" > {{ user.vote }}</span>
+                    <span v-if="user.vote == null && isShowingVotes && user.isObserver == false" >didn't vote</span>
+                    <span v-if="isShowingVotes && user.isObserver == false" class="font-bold fade-in-quick" style="font-weight: bold;" > {{ user.vote }}</span>
                  </li>
               </ul>
            </div>
@@ -43,7 +44,17 @@
        </div>
        <div class="mt-5 flex">
            <span :style="{visibility: myVote == null ? 'visible' : 'hidden'}" class="font-semibold text-accent-secondary">Please select your card</span>
-           <a href="https://en.wikipedia.org/wiki/Planning_poker" class="underline ml-auto" target="_blank">How to play?</a> <br/>
+           
+          <div class="md:flex md:items-center my-2 ml-auto">
+             <div class=""></div>
+             <label class="block text-brand font-bold">
+               <input class="mr-2 leading-tight font-semibold" type="checkbox" v-on:input="setObserver($event.target.checked)">
+               <span class="text-sm" title="Just observe, don't participate in voting">
+                 Just watching, don't vote
+               </span>
+             </label>
+          </div>
+          <%= # <a href="https://en.wikipedia.org/wiki/Planning_poker" class="underline ml-auto" target="_blank">How to play?</a> <br/> %>
        </div>
       <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 pt-3">
          <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == 0)}" v-on:click="vote('0')" :disabled="canVote === false"> 0 </button>

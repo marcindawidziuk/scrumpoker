@@ -9,12 +9,14 @@
 // Import dependencies
 //
 import "phoenix_html"
-
 // Import local files
 //
 // Local files can be imported directly using relative paths, for example:
 import socket from "./socket"
+let Enumerable = require("linq/linq");
+
 import {Presence} from "phoenix"
+
 const urlParams = new URLSearchParams(window.location.search);
 const channelName = window.channelRoomId;
 const userName = urlParams.get('name');
@@ -102,24 +104,37 @@ let app = new Vue({
             this.debounceCaseChanged(this, 500)
         },
         onInputChanged: function () {
-            channel.push('change_message', { // send the message to the server on "shout" channel
-                name: this.userName,     // get value of "name" of person sending the message
+            channel.push('change_message', { 
+                name: this.userName,
                 message: this.message
             });
         },
         vote: function (message) {
-            channel.push('voted', { // send the message to the server on "shout" channel
-                name: this.userName,     // get value of "name" of person sending the message
-                message: message// get message text (value) from msg input field.
+            channel.push('voted', { 
+                name: this.userName, 
+                message: message
             });
             this.myVote = message;
-            if (app.users.some(u => app.userName !== u.name && app.votes[u.name] === undefined) === false) {
+            // If we are the last to vote then trigger showing votes
+            let usersWhoDidntVote = Enumerable.from(app.sortedUsers)
+                .where(x => x.name !== app.userName)
+                .where(x => x.isObserver === false)
+                .where(x => x.vote === null || x.vote === undefined);
+            
+            if (usersWhoDidntVote.any() === false){
+            // if (app.users.some(u => app.userName !== u.name && app.votes[u.name] === undefined) === false) {
                 app.showVotes();
             }
         },
         showVotes: function () {
-            channel.push('show_votes', { // send the message to the server on "shout" channel
+            channel.push('show_votes', { 
+                name: this.userName, 
+            });
+        },
+        setObserver: function (observer) {
+            channel.push("user_set_observer", {
                 name: this.userName,     // get value of "name" of person sending the message
+                observer: observer
             });
         },
         clearVotes: function () {
@@ -147,21 +162,22 @@ let app = new Vue({
                 timeMs);
         },
     },
-    watch: {
-        message: function (val, val2) {
-            // document.getElementById("element")
-            // this.fullName = val + ' ' + this.lastName
-        }
-    },
     computed: {
         canVote: function() {
-            return (this.isShowingVotes && this.votes[this.userName] !== undefined) === false;
+            return (this.isShowingVotes && this.votes[this.userName] !== undefined) === false 
+                && this.myPresence !== null && this.myPresence.observer === false;
+        },
+        myPresence: function(){
+            let userName = this.userName;
+            return this.presences.filter(function (item) {
+                return item.name === userName;
+            })[0] || null;
         },
         sortedUsers: function() {
             let presenceUsers = this.presences.map(x => x.name);
             let voteKeys = Object.keys(this.votes);
             let userNames = Array.from(new Set(presenceUsers.concat(voteKeys)));
-            return userNames.sort((a, b) => a.localeCompare(b)).map(u => {
+            let users = userNames.map(u => {
                 // TODO: Save vote in the presence
                 let n = {};
                 let pres = this.presences.filter(function (item) {
@@ -169,11 +185,15 @@ let app = new Vue({
                 })[0] || null;
 
                 n.isOffline = pres == null;
+                n.isObserver = pres !== null && pres.observer;
                 n.name = u;
                 n.vote = this.votes[u];
                 n.count = (this.presences.filter(x => x.name === u).map(x => x.count)[0]);
                 return n;
             });
+            return Enumerable.from(users)
+                .orderBy(x => x.isObserver)
+                .thenBy(x => x.name).toArray();
         }
     }
 });

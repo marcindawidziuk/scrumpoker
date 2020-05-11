@@ -50,12 +50,23 @@ defmodule ScrumPokerWeb.RoomChannel do
   
   def handle_info(:after_join, socket) do
     {:ok, _} = Presence.track(socket, socket.assigns.user_id, %{
+      observer: false,
       online_at: inspect(System.system_time(:second))
     })
 
     push socket, "presence_state", Presence.list(socket)
     {:noreply, socket}
   end
+
+  def handle_in("user_set_observer", %{"observer" => observer}, socket) do
+    {:ok, _} = Presence.update(socket, socket.assigns.user_id, %{
+      observer: observer,
+      online_at: inspect(System.system_time(:second))
+    })
+
+    {:reply, :ok, socket}
+  end
+
 
   # Add authorization logic here as required.
   defp authorized?(_payload) do
