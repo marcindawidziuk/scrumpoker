@@ -76,7 +76,10 @@ let app = new Vue({
         channel.join()
             .receive("ok", ({messages}) => console.log("catching up", messages) )
             .receive("error", ({reason}) => console.log("failed join", reason) )
-            .receive("timeout", () => console.log("Networking issue. Still waiting..."));
+            .receive("timeout", () => {
+                app.isShowingConnectionError = true;
+                console.log("Networking issue. Still waiting...")
+            });
             
         channel.push('joined', { // send the message to the server on "shout" channel
             name: this.userName     // get value of "name" of person sending the message
