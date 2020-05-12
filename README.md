@@ -6,7 +6,7 @@ Simple Pointing Poker with quick joining and dark mode, built on top of Phoenix 
 https://poker.marcin.uk/
 
 
-![screenshot](https://raw.githubusercontent.com/cinekdawidziuk/scrumpoker/master/assets/static/images/github_screenshot.png)
+![screenshot](https://i.imgur.com/4TA5pby.png)
 ## Getting started
 
 To start your Phoenix server:
