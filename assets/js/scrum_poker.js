@@ -70,7 +70,9 @@ let app = new Vue({
         
         // Overwrite default method
         channel.onMessage = function(event, payload, ref){ 
-            app.isShowingConnectionError = false;
+            if (event !== "timeout" && event !== "error"){
+                app.isShowingConnectionError = false;
+            }
             return payload 
         };
         channel.join()
