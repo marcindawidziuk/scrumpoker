@@ -119,27 +119,6 @@
     </body>
     
 <script>
-function createCookie(name,value,days) {
-	if (days) {
-		var date = new Date();
-		date.setTime(date.getTime()+(days*24*60*60*1000));
-		var expires = "; expires="+date.toGMTString();
-	}
-	else var expires = "";
-	document.cookie = name+"="+value+expires+"; path=/";
-}
-
-function readCookie(name) {
-	var nameEQ = name + "=";
-	var ca = document.cookie.split(';');
-	for(var i=0;i < ca.length;i++) {
-		var c = ca[i];
-		while (c.charAt(0)==' ') c = c.substring(1,c.length);
-		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-	}
-	return null;
-}
-
 let app = new Vue({
     el: '#app',
     data: {
@@ -147,13 +126,13 @@ let app = new Vue({
         roomName: "<%= @room %>",
     },
     created: function () {
-		var userNameFromCookie = readCookie("userName");
+		var userNameFromCookie = localStorage.getItem('userName');
 		if (userNameFromCookie != null){
           this.userName = userNameFromCookie;
 		}
 		
 		if (this.roomName === ""){
-            var roomNameFromCookie = readCookie("roomName");
+            var roomNameFromCookie = localStorage.getItem("roomName");
             if (roomNameFromCookie != null){
               this.roomName = roomNameFromCookie;
             }
@@ -170,8 +149,8 @@ let app = new Vue({
               return;
           }
           
-			createCookie("roomName", this.roomName, 14);
-			createCookie("userName", this.userName, 14);
+            localStorage.setItem('roomName', this.roomName);
+            localStorage.setItem('userName', this.userName);
 			window.location.href = "/" + this.roomName + "?name="+this.userName;
         }
     }
