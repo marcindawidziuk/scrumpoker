@@ -1,5 +1,5 @@
 # Scrum Pointing Poker Online
-[![Release](https://github.com/cinekdawidziuk/scrumpoker/workflows/Release/badge.svg)](https://github.com/cinekdawidziuk/scrumpoker/actions?query=workflow%3A%22Elixir+CI%22) [![Uptime](https://stats.uptimerobot.com/assets/img/uptime-logo.png)](https://stats.uptimerobot.com/wnzXlSL0Dr)  
+[![Release](https://github.com/marcindawidziuk/scrumpoker/workflows/Release/badge.svg)](https://github.com/marcindawidziuk/scrumpoker/actions?query=workflow%3A%22Elixir+CI%22) [![Uptime](https://stats.uptimerobot.com/assets/img/uptime-logo.png)](https://stats.uptimerobot.com/wnzXlSL0Dr)  
 
 
 Simple Pointing Poker with quick joining and dark mode, built on top of Phoenix Framework. Available at
@@ -23,11 +23,11 @@ For security replace SECRET_KEY_BASE value. The key given below is just an examp
 You can generate new key by running: ```mix phx.gen.secret```
 
 ```
-ADMIN_PASSWORD="mypassword" SECRET_KEY_BASE=PBd3wijcYcO+nHS7uIbtYFY7HWc1R/VTjPpuFzeZDUBH4CGjO/VjONjr2WdI7utG docker build --build-arg SECRET_KEY_BASE -t cinekdawidziuk/scrumpoker .
+ADMIN_PASSWORD="mypassword" SECRET_KEY_BASE=PBd3wijcYcO+nHS7uIbtYFY7HWc1R/VTjPpuFzeZDUBH4CGjO/VjONjr2WdI7utG docker build --build-arg SECRET_KEY_BASE -t marcindawidziuk/scrumpoker .
 
 docker stop ScrumPoker
 docker rm ScrumPoker
-docker run --env SECRET_KEY_BASE=PBd3wijcYcO+nHS7uIbtYFY7HWc1R/VTjPpuFzeZDUBH4CGjO/VjONjr2WdI7utG --publish 3401:4000 --restart=always --name ScrumPoker cinekdawidziuk/scrumpoker:latest
+docker run --env SECRET_KEY_BASE=PBd3wijcYcO+nHS7uIbtYFY7HWc1R/VTjPpuFzeZDUBH4CGjO/VjONjr2WdI7utG --publish 3401:4000 --restart=always --name ScrumPoker marcindawidziuk/scrumpoker:latest
 ```
 
 Now you can visit [`localhost:3401`](http://localhost:3401) from your browser. 
