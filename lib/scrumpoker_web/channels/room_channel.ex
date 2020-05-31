@@ -51,6 +51,7 @@ defmodule ScrumPokerWeb.RoomChannel do
   def handle_info(:after_join, socket) do
     {:ok, _} = Presence.track(socket, socket.assigns.user_id, %{
       observer: false,
+      userName: socket.assigns.user_id,
       online_at: inspect(System.system_time(:second))
     })
 
@@ -61,6 +62,7 @@ defmodule ScrumPokerWeb.RoomChannel do
   def handle_in("user_set_observer", %{"observer" => observer}, socket) do
     {:ok, _} = Presence.update(socket, socket.assigns.user_id, %{
       observer: observer,
+      userName: socket.assigns.user_id,
       online_at: inspect(System.system_time(:second))
     })
 
