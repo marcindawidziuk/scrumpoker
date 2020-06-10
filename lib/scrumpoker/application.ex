@@ -4,6 +4,7 @@ defmodule ScrumPoker.Application do
   @moduledoc false
 
   use Application
+  use Supervisor
 
   def start(_type, _args) do
     # List all child processes to be supervised
@@ -12,7 +13,8 @@ defmodule ScrumPoker.Application do
       # Start the endpoint when the application starts
       {Phoenix.PubSub, name: ScrumPokerWeb.PubSub},
       ScrumPokerWeb.Presence,
-      ScrumPokerWeb.Endpoint
+      ScrumPokerWeb.Endpoint,
+      worker(ScrumPokerWeb.Monitor, [%{}])
       # Starts a worker by calling: ScrumPoker.Worker.start_link(arg)
       # {ScrumPoker.Worker, arg},
     ]

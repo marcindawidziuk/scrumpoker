@@ -35,6 +35,17 @@ let listBy = (id, {metas: [first, ...rest]}) => {
     return first;
 };
 
+Vue.filter('toCard', function (value) {
+    if (value !== "∞" && value !== "☕") {
+        return value;
+    }
+    if (value === "☕"){
+        return "<i class=\"fas fa-mug-hot\"></i>";
+    }
+    else if (value === "∞"){
+        return "<i class=\"fas fa-infinity\"></i>";
+    }
+});
 
 Vue.filter('isOnline', function (date) {
     var b = new Date();
@@ -58,10 +69,16 @@ let app = new Vue({
         votes: {},
         users: [],
         search_timeout: null,
-        myVote: null
+        myVote: null,
+        deck: null,
+        decks: [
+            {name: "Standard deck", cards: "0|0.5|1|2|3|5|8|13|20|40|∞|☕"},
+            {name: "Time estimate", cards: "30m|1h|2h|4h|8h|2d|4d|7d|14d|30d|∞|☕"},
+        ]
     },
     created: function () {
         this.userName = userName;
+        this.deck = this.decks[0].cards;
 
         socket.connect();
         socket.onError((_) => app.isShowingConnectionError = true);
@@ -69,12 +86,14 @@ let app = new Vue({
         channel.onError((_) => app.isShowingConnectionError = true);
         
         // Overwrite default method
-        channel.onMessage = function(event, payload, ref){ 
+        channel.onMessage = function(event, payload, ref){
+            console.log(" received" + JSON.stringify(payload) );
             if (event !== "timeout" && event !== "error"){
                 app.isShowingConnectionError = false;
             }
             return payload 
         };
+
         channel.join()
             .receive("ok", ({messages}) => console.log("catching up", messages) )
             .receive("error", ({reason}) => console.log("failed join", reason) )
@@ -87,10 +106,17 @@ let app = new Vue({
             name: this.userName     // get value of "name" of person sending the message
         });
 
+        channel.on('active_deck', function (payload) { // listen to the 'shout' event
+            console.log(payload.cards);
+            app.deck = payload.cards;
+        });
+
+
         channel.on('voted', function (payload) { // listen to the 'shout' event
             console.log(payload.name + " voted");
             app.$set(app.votes, payload.name, payload.message);
         });
+
 
         channel.on('show_votes', function (payload) { // listen to the 'shout' event
             console.log('show_votes');
@@ -105,6 +131,13 @@ let app = new Vue({
         });
     },
     methods: {
+        changeDeck: function (deckIndex){
+            let selectedDeck = this.decks[deckIndex];
+            channel.push('update_deck', { 
+                cards: selectedDeck.cards
+            });
+            console.log(selectedDeck.cards)
+        },
         onInputChangedDebounce: function (input) {
             this.debounceCaseChanged(this, 500)
         },
@@ -163,6 +196,11 @@ let app = new Vue({
         },
     },
     computed: {
+        cards: function() {
+            if (this.deck)
+                  return this.deck.split('|');
+            return ''
+        },
         canVote: function() {
             return (this.isShowingVotes && this.votes[this.userName] !== undefined) === false 
                 && this.myPresence !== null && this.myPresence.observer === false;
