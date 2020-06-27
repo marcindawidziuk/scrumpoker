@@ -50,9 +50,19 @@ defmodule ScrumPokerWeb.RoomChannel do
   end
 
   def handle_in("update_deck", payload, socket) do
-    Monitor.deck_update(socket.assigns.room_id, payload)
+    new_current_deck = Jason.decode!(payload["cards"])
+    Monitor.deck_update(socket.assigns.room_id, new_current_deck)
 
     broadcast! socket, "active_deck", Monitor.get_deck(socket.assigns.room_id)
+    push socket, "active_deck", Monitor.get_deck(socket.assigns.room_id)
+    {:noreply, socket}
+  end
+
+  def handle_in("add_deck", payload, socket) do
+    Monitor.add_deck(socket.assigns.room_id, payload["deck"])
+
+    broadcast! socket, "active_deck", Monitor.get_deck(socket.assigns.room_id)
+    push socket, "active_deck", Monitor.get_deck(socket.assigns.room_id)
     {:noreply, socket}
   end
   
@@ -64,8 +74,7 @@ defmodule ScrumPokerWeb.RoomChannel do
     })
 
     broadcast! socket, "active_deck", Monitor.get_deck(room_id)
-
-    push socket, "presence_state", Presence.list(socket)
+    push socket, "presence_state", ScrumPokerWeb.Presence.list(socket)
     {:noreply, socket}
   end
 
@@ -78,7 +87,6 @@ defmodule ScrumPokerWeb.RoomChannel do
 
     {:reply, :ok, socket}
   end
-
 
   # Add authorization logic here as required.
   defp authorized?(_payload) do

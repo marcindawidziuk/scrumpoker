@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\cinek\.Rider2019.3\config\javascript\extLibs\http_cdn.jsdelivr.net_npm_vue_dist_vue.js" t="IncludeRecursive" />
-    <e p="C:\Users\cinek\.Rider2019.3\config\javascript\extLibs\http_kit.fontawesome.com_4d5ba17133.js" t="IncludeRecursive" />
-    <e p="C:\Users\cinek\.Rider2019.3\config\javascript\extLibs\http_unpkg.com_tailwindcss_dist_tailwind.css" t="IncludeRecursive" />
-    <e p="C:\Users\cinek\.Rider2019.3\config\javascript\nodejs\12.14.1\core-modules" t="IncludeRecursive" />
-    <e p="C:\Users\cinek\.Rider2019.3\config\javascript\nodejs\12.14.1\node-typings\node_modules\@types" t="IncludeRecursive" />
-    <e p="C:\Users\cinek\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\cinek\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_.19.00" t="ExcludeRecursive" />
+    <e p="C:\Users\cinek\AppData\Local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\cinek\AppData\Roaming\JetBrains\Rider2020.1\javascript\extLibs\http_cdn.jsdelivr.net_npm_vue_dist_vue.js" t="IncludeRecursive" />
+    <e p="C:\Users\cinek\AppData\Roaming\JetBrains\Rider2020.1\javascript\extLibs\http_kit.fontawesome.com_4d5ba17133.js" t="IncludeRecursive" />
+    <e p="C:\Users\cinek\AppData\Roaming\JetBrains\Rider2020.1\javascript\extLibs\http_unpkg.com_tailwindcss_dist_tailwind.css" t="IncludeRecursive" />
+    <e p="C:\Users\cinek\AppData\Roaming\JetBrains\Rider2020.1\javascript\nodejs\12.14.1\core-modules" t="IncludeRecursive" />
+    <e p="C:\Users\cinek\AppData\Roaming\JetBrains\Rider2020.1\javascript\nodejs\12.14.1\node-typings\node_modules\@types" t="IncludeRecursive" />
     <e p="D:\Development\scrumpoker" t="IncludeFlat">
       <e p="_build\dev\lib\cowboy\ebin" t="IncludeRecursive" />
       <e p="_build\dev\lib\file_system\ebin" t="IncludeRecursive" />
@@ -39,6 +38,7 @@
       <e p="_build\test\lib\plug_crypto\ebin" t="IncludeRecursive" />
       <e p="_build\test\lib\telemetry\ebin" t="IncludeRecursive" />
       <e p="_build\test\lib\telemetry_metrics\ebin" t="IncludeRecursive" />
+      <e p="_ReSharper.Caches\ReSharperHost201.00" t="ExcludeRecursive" />
       <e p="assets\node_modules\@babel\core" t="IncludeRecursive" />
       <e p="assets\node_modules\@babel\preset-env" t="IncludeRecursive" />
       <e p="assets\node_modules\@types" t="IncludeRecursive" />
@@ -50,6 +50,8 @@
       <e p="assets\node_modules\linq" t="IncludeRecursive" />
       <e p="assets\node_modules\mini-css-extract-plugin" t="IncludeRecursive" />
       <e p="assets\node_modules\optimize-css-assets-webpack-plugin" t="IncludeRecursive" />
+      <e p="assets\node_modules\phoenix" t="IncludeRecursive" />
+      <e p="assets\node_modules\phoenix_html" t="IncludeRecursive" />
       <e p="assets\node_modules\postcss" t="IncludeRecursive" />
       <e p="assets\node_modules\postcss-loader" t="IncludeRecursive" />
       <e p="assets\node_modules\source-map" t="IncludeRecursive" />

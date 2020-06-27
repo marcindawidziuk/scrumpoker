@@ -71,6 +71,9 @@ let app = new Vue({
         search_timeout: null,
         myVote: null,
         deck: null,
+        isShowingAddCustomDeck: false,
+        customDeckName: "Custom deck",
+        customDeckCards: "0|0.5|1|2|3|5|8|13|20|40|∞|☕",
         decks: [
             {name: "Standard deck", cards: "0|0.5|1|2|3|5|8|13|20|40|∞|☕"},
             {name: "Time estimate", cards: "30m|1h|2h|4h|8h|2d|4d|7d|14d|30d|∞|☕"},
@@ -87,7 +90,7 @@ let app = new Vue({
         
         // Overwrite default method
         channel.onMessage = function(event, payload, ref){
-            console.log(" received" + JSON.stringify(payload) );
+            console.log(" received event " + event + " " + JSON.stringify(payload) );
             if (event !== "timeout" && event !== "error"){
                 app.isShowingConnectionError = false;
             }
@@ -108,7 +111,8 @@ let app = new Vue({
 
         channel.on('active_deck', function (payload) { // listen to the 'shout' event
             console.log(payload.cards);
-            app.deck = payload.cards;
+            app.deck = payload.currentDeck;
+            app.decks = payload.decks;
         });
 
 
@@ -132,11 +136,20 @@ let app = new Vue({
     },
     methods: {
         changeDeck: function (deckIndex){
-            let selectedDeck = this.decks[deckIndex];
+            let selectedDeck = JSON.stringify(this.decks[deckIndex]);
             channel.push('update_deck', { 
-                cards: selectedDeck.cards
+                cards: selectedDeck
             });
-            console.log(selectedDeck.cards)
+            console.log(selectedDeck)
+        },
+        addDeck: function (){
+            channel.push('add_deck', {
+                deck: {
+                    cards: this.customDeckCards,
+                    name: this.customDeckName
+                }
+            });
+            this.isShowingAddCustomDeck = false;
         },
         onInputChangedDebounce: function (input) {
             this.debounceCaseChanged(this, 500)
@@ -197,8 +210,8 @@ let app = new Vue({
     },
     computed: {
         cards: function() {
-            if (this.deck)
-                  return this.deck.split('|');
+            if (this.deck && this.deck.cards)
+                  return this.deck.cards.split('|');
             return ''
         },
         canVote: function() {

@@ -40,5 +40,6 @@
     <orderEntry type="library" name="dialyxir" level="project" />
     <orderEntry type="library" name="excoveralls" level="project" />
     <orderEntry type="library" name="html_entities" level="project" />
+    <orderEntry type="library" name="Elixir 1.10.2" level="application" />
   </component>
 </module>

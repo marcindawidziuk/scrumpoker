@@ -51,8 +51,8 @@
            <span :style="{visibility: myVote == null ? 'visible' : 'hidden'}" class="font-semibold text-accent-secondary">Please select your card</span>
            
           <div class="md:flex md:items-center my-2 ml-auto">
-          <select v-model="deck" class="m-2 text-accent p-1" @change="changeDeck($event.target.selectedIndex)">
-            <option v-for="(item, key) in decks" :value="item.cards">
+          <select v-bind:value="deck" class="m-2 text-accent p-1" @change="changeDeck($event.target.selectedIndex)">
+            <option v-for="(item, key) in decks" :value="item">
                   {{item.name}}
                 </option>          
             </select>
@@ -64,9 +64,74 @@
                  Just watching, don't vote
                </span>
              </label>
+             <button v-on:click="isShowingAddCustomDeck = true" v-if="isShowingAddCustomDeck == false" class="myButton bg-indigo-500 m-2">Add deck</button>
           </div>
           <%= # <a href="https://en.wikipedia.org/wiki/Planning_poker" class="underline ml-auto" target="_blank">How to play?</a> <br/> %>
        </div>
+       <div v-if="isShowingAddCustomDeck" class="modal">
+          <span class="text-accent-secondary font-bold font-lg">Adding Custom Deck</span>
+          <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 p-3 m-2 shadow rounded border-solid border-accent-secondary border-2">
+              <label class="m-2"> Custom Deck Name:
+              </label>
+                <input v-model="customDeckName" class="text-accent-secondary m-4"/>
+              <label class="m-2"> Custom Deck Cards (split by |):
+              </label>
+               <input v-model="customDeckCards" class="text-accent-secondary m-4" />
+               <div>
+                  <button v-on:click="addDeck" class="myButton m-2 bg-indigo-500">Add</button>
+                  <button v-on:click="isShowingAddCustomDeck = false" class="myButton m-2 bg-indigo-500">Cancel</button>
+               </div>
+          </div>
+       </div>
+    <div class="fixed bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center" v-if="isShowingAddCustomDeck">
+      <div class="fixed inset-0 transition-opacity">
+        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+      </div>
+      <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
+              <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <img src="<%= Routes.static_path(@conn, "/images/poker_logo.svg") %>" class="h-10 mr-2" alt="logo" height="20">
+              </svg>
+            </div>
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+                Adding Custom Deck
+              </h3>
+              <div class="mt-2">
+                <p class="text-sm leading-5 text-gray-500">
+                  Add your own Deck of Cards to the session. There must be 12 cards in the Deck, split by '|'.
+                </p>
+                
+              </div>
+              <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-1">
+                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> Custom Deck Name:
+                  </label>
+                    <input v-model="customDeckName" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"/>
+                    
+                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> Cards:
+                  </label>
+                    <input v-model="customDeckCards" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+            <button type="button" v-on:click="addDeck" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-accent text-base leading-6 font-medium text-white shadow-sm hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+              Add Deck
+            </button>
+          </span>
+          <span class="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
+            <button type="button" v-on:click="isShowingAddCustomDeck = false" class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+              Cancel
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+         
       <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 pt-3">
          <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == cards[0])}" v-on:click="vote(cards[0])" :disabled="canVote === false" :inner-html.prop="cards[0] | toCard" ></button>
          <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == cards[1])}" v-on:click="vote(cards[1])" :disabled="canVote === false" :inner-html.prop="cards[1] | toCard" ></button>
