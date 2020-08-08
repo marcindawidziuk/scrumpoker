@@ -73,7 +73,7 @@ let app = new Vue({
         deck: null,
         isShowingAddCustomDeck: false,
         customDeckName: "Custom deck",
-        customDeckCards: "0|0.5|1|2|3|5|8|13|20|40|∞|☕",
+        customCards: ["0", "0.0", "1", "2", "3", "5", "8", "13", "20", "40", "∞", "☕"],
         decks: [
             {name: "Standard deck", cards: "0|0.5|1|2|3|5|8|13|20|40|∞|☕"},
             {name: "Time estimate", cards: "30m|1h|2h|4h|8h|2d|4d|7d|14d|30d|∞|☕"},
@@ -209,6 +209,9 @@ let app = new Vue({
         },
     },
     computed: {
+        customDeckCards: function () {
+            return this.customCards.join('|')
+        },
         cards: function() {
             if (this.deck && this.deck.cards)
                   return this.deck.cards.split('|');

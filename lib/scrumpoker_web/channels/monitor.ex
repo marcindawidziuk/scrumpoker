@@ -11,10 +11,7 @@ defmodule ScrumPokerWeb.Monitor  do
   Getting deck for current room
   """
   def get_deck(state, room_id) do
-    default_decks = [
-      %{name: "Standard", cards: "0|0.5|1|2|3|5|8|13|20|40|∞|☕"},
-      %{name: "Time estimate", cards: "30m|1h|2h|4h|8h|2d|4d|7d|14d|30d|∞|☕"},
-    ]
+    default_decks = get_default_deck()
     case state[room_id] do
       nil ->
         state
@@ -52,7 +49,7 @@ defmodule ScrumPokerWeb.Monitor  do
       exit("don't be greedy, too many decks")
     end
     
-    Map.replace!(room_state, :decks, [new_deck | room_state[:decks]])
+    Map.replace!(room_state, :decks, [new_deck | get_default_deck()])
   end
 
   defp deck_update(state, room_id, deck) do
@@ -60,5 +57,12 @@ defmodule ScrumPokerWeb.Monitor  do
                 |> get_deck(room_id)
                 |> Map.replace(:currentDeck, deck)
     put_in(state, [room_id], new_state)
+  end
+
+  defp get_default_deck() do
+    [
+      %{name: "Standard", cards: "0|0.5|1|2|3|5|8|13|20|40|∞|☕"},
+      %{name: "Time estimate", cards: "30m|1h|2h|4h|8h|2d|4d|7d|14d|30d|∞|☕"},
+    ]
   end
 end
