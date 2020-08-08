@@ -23,7 +23,7 @@ defmodule ScrumPokerWeb.Endpoint do
     from: :scrumpoker,
     gzip: true,
     only: ~w(css fonts images js favicon.ico robots.txt)
-    
+
   socket "/live", Phoenix.LiveView.Socket
 
   # Code reloading can be explicitly enabled under the
@@ -35,9 +35,9 @@ defmodule ScrumPokerWeb.Endpoint do
   end
 
   plug Phoenix.LiveDashboard.RequestLogger,
-       param_key: "request_logger",
-       cookie_key: "request_logger"
-       
+    param_key: "request_logger",
+    cookie_key: "request_logger"
+
   plug Plug.RequestId
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 

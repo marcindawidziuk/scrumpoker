@@ -10,12 +10,12 @@ defmodule ScrumPokerWeb.RoomChannelTest do
   end
 
   test "shout broadcasts to room:lobby", %{socket: socket} do
-    push socket, "shout", %{"hello" => "all"}
+    push(socket, "shout", %{"hello" => "all"})
     assert_broadcast "shout", %{"hello" => "all"}
   end
 
   test "broadcasts are pushed to the client", %{socket: socket} do
-    broadcast_from! socket, "broadcast", %{"some" => "data"}
+    broadcast_from!(socket, "broadcast", %{"some" => "data"})
     assert_push "broadcast", %{"some" => "data"}
   end
 end

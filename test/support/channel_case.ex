@@ -28,7 +28,6 @@ defmodule ScrumPokerWeb.ChannelCase do
   end
 
   setup tags do
-
     unless tags[:async] do
     end
 

@@ -30,8 +30,6 @@ defmodule ScrumPokerWeb.Router do
     get "/", PageController, :index
     get "/landing/", PageController, :landing
     get "/:room/", PageController, :room
-    
-    
   end
 
   # Other scopes may use custom stacks.

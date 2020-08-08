@@ -29,7 +29,6 @@ defmodule ScrumPokerWeb.ConnCase do
   end
 
   setup tags do
-
     unless tags[:async] do
     end
 
