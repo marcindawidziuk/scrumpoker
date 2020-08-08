@@ -1,6 +1,7 @@
 ﻿<component name="libraryTable">
   <library name="postgrex" type="mix">
     <CLASSES />
+    <JAVADOC />
     <SOURCES>
       <root url="file://$PROJECT_DIR$/deps/postgrex/lib" />
     </SOURCES>

@@ -1,6 +1,7 @@
 ﻿<component name="libraryTable">
   <library name="ecto" type="mix">
     <CLASSES />
+    <JAVADOC />
     <SOURCES>
       <root url="file://$PROJECT_DIR$/deps/ecto/lib" />
     </SOURCES>

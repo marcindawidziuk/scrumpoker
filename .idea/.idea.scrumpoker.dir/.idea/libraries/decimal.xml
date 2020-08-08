@@ -1,6 +1,7 @@
 ﻿<component name="libraryTable">
   <library name="decimal" type="mix">
     <CLASSES />
+    <JAVADOC />
     <SOURCES>
       <root url="file://$PROJECT_DIR$/deps/decimal/lib" />
     </SOURCES>

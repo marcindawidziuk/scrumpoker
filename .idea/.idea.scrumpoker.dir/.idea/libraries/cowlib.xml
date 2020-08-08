@@ -4,6 +4,7 @@
       <root url="file://$PROJECT_DIR$/_build/dev/lib/cowlib/ebin" />
       <root url="file://$PROJECT_DIR$/_build/test/lib/cowlib/ebin" />
     </CLASSES>
+    <JAVADOC />
     <SOURCES>
       <root url="file://$PROJECT_DIR$/deps/cowlib/src" />
     </SOURCES>

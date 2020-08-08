@@ -4,6 +4,7 @@
       <root url="file://$PROJECT_DIR$/_build/dev/lib/plug_crypto/ebin" />
       <root url="file://$PROJECT_DIR$/_build/test/lib/plug_crypto/ebin" />
     </CLASSES>
+    <JAVADOC />
     <SOURCES>
       <root url="file://$PROJECT_DIR$/deps/plug_crypto/lib" />
     </SOURCES>

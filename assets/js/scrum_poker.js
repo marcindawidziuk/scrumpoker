@@ -127,6 +127,7 @@ let app = new Vue({
             app.isShowingVotes = true
         });
 
+
         channel.on('clear_votes', function (payload) { // listen to the 'shout' event
             console.log('clear_votes');
             app.isShowingVotes = false;
