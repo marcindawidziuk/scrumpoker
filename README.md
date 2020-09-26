@@ -2,9 +2,13 @@
 [![Release](https://github.com/marcindawidziuk/scrumpoker/workflows/Release/badge.svg)](https://github.com/marcindawidziuk/scrumpoker/actions?query=workflow%3A%22Elixir+CI%22) [![Uptime](https://stats.uptimerobot.com/assets/img/uptime-logo.png)](https://stats.uptimerobot.com/wnzXlSL0Dr)  
 
 
-Simple Pointing Poker with quick joining and dark mode, built on top of Phoenix Framework. Available at
+Simple Scrum Pointing Poker online, built on top of Phoenix Framework. Available at
 https://poker.marcin.uk/
 
+ * Quick joining, just send a link to your teammates
+ * Dark more (and light mode if that's your preference) 
+ * Usable UI on mobile
+ * Multiple decks of cards to choose from: Standard and Time estimate, but you can also set your own!
 
 ![screenshot](https://i.imgur.com/4TA5pby.png)
 ## Getting started
