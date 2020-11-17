@@ -36,6 +36,6 @@ docker run --env SECRET_KEY_BASE=PBd3wijcYcO+nHS7uIbtYFY7HWc1R/VTjPpuFzeZDUBH4CG
 
 Now you can visit [`localhost:3401`](http://localhost:3401) from your browser. 
 
-You can also acess Phoenix Live Dashboard with ```admin``` as your username and ```mypassword``` as your password on [`localhost:3401/dashboard`](http://localhost:3401/dashboard).  
+You can also acess Phoenix Live Dashboard with ```admin``` as your username and ```password``` as your password on [`localhost:3401/dashboard`](http://localhost:3401/dashboard).  
 
 For SSL I recommend running it through Ngnix reverse proxy. 
