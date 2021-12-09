@@ -14,7 +14,7 @@
     	-->
     	
         <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-    	<link rel="stylesheet" href="https://unpkg.com/tailwindcss/dist/tailwind.min.css">
+    	<link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css">
     	
         <script src="https://kit.fontawesome.com/4d5ba17133.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
