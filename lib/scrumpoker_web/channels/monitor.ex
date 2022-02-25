@@ -68,7 +68,8 @@ defmodule ScrumPokerWeb.Monitor do
   defp get_default_deck() do
     [
       %{name: "Standard", cards: "0|0.5|1|2|3|5|8|13|20|40|∞|☕"},
-      %{name: "Time estimate", cards: "30m|1h|2h|4h|8h|2d|4d|7d|14d|30d|∞|☕"}
+      %{name: "Time estimate", cards: "30m|1h|2h|4h|8h|2d|4d|7d|14d|30d|∞|☕"},
+      %{name: "Shirts", cards: "XXS|XS|S|M|L|XL|XXL|XXXL|||∞|☕"},
     ]
   end
 end
