@@ -3,7 +3,7 @@
 
 
 Simple Scrum Pointing Poker online, built on top of Phoenix Framework. Available at
-https://poker.marcin.uk/
+https://scrumpoker.uk/
 
  * Quick joining, just send a link to your teammates
  * Dark more (and light mode if that's your preference) 
