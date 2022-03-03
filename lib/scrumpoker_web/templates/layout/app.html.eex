@@ -40,7 +40,7 @@
           <div class="w-full flex items-center justify-between">
           <a href="/" class="flex items-center text-indigo-400 no-underline hover:no-underline font-bold text-lg lg:text-2xl">
           <img src="<%= Routes.static_path(@conn, "/images/poker_logo.svg") %>" class="h-10 mr-2" alt="logo" height="20">
-           SCRUM POKER
+           SCRUM POKER.UK
                   </a> <div class="flex justify-end content-center">
             <a href="https://github.com/marcindawidziuk/scrumpoker" class="mr-5" target="_blank"><i class="fab fa-github fa-2x text-accent"></i></a>
               <button id="theme-button" class="fas fa-2x flex w-10 bg-transparent font-semibold text-accent" 

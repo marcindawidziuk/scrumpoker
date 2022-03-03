@@ -52,7 +52,7 @@
     		<div class="w-full flex items-center justify-between">
     			<a class="flex items-center text-indigo-400 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"  href="#"> 
                       <img src="<%= Routes.static_path(@conn, "/images/poker_logo.svg") %>" class="h-12 mr-2" alt="logo" height="20">
-    				 SCRUM POKER
+    				 SCRUM POKER.UK
     			</a>
     			
     			<div class="flex justify-end content-center">		
