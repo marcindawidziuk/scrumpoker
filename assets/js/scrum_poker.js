@@ -60,6 +60,7 @@ Vue.filter('isOnline', function (date) {
 let app = new Vue({
     el: '#app',
     data: {
+        neverVoted: true,
         isShowingConnectionError: false,
         presences: [],
         userName: "",
@@ -90,7 +91,7 @@ let app = new Vue({
         
         // Overwrite default method
         channel.onMessage = function(event, payload, ref){
-            console.log(" received event " + event + " " + JSON.stringify(payload) );
+            console.log(" received event " + event);
             if (event !== "timeout" && event !== "error"){
                 app.isShowingConnectionError = false;
             }
@@ -162,6 +163,7 @@ let app = new Vue({
             });
         },
         vote: function (message) {
+            this.neverVoted = false;
             channel.push('voted', { 
                 name: this.userName, 
                 message: message

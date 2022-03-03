@@ -27,7 +27,7 @@
                     <span>{{ user.name }} {{ user.time | isOnline }}</span>
                     <span v-if="user.isOffline" title="User is no longer connected"> (Offline)</span>
                     <span v-if="user.count > 1" title="Users connected under this name" class="text-brand"> ({{ user.count }} connected)</span>
-                    <span v-if="user.isObserver" title="User is not voting"> is watching</span>
+                    <span v-if="user.isObserver" title="User is not voting"> is observing</span>
                     <span v-if="user.vote && isShowingVotes && user.isObserver == false" class="fade-in-quick" >voted</span>
                     <i v-if="user.vote && isShowingVotes == false && user.isObserver == false" class="ml-1 fas fa-check-square fade-in-quick"></i>
                     <div class="inline-block w-4" v-if="user.vote == null && isShowingVotes == false && user.isObserver == false">
@@ -48,14 +48,15 @@
            </div>
        </div>
        <div class="mt-5 flex">
-           <span :style="{visibility: myVote == null ? 'visible' : 'hidden'}" class="font-semibold text-accent-secondary">Please select your card</span>
+           <span v-if="!neverVoted" :style="{visibility: myVote == null ? 'visible' : 'hidden'}" class="font-semibold text-accent-secondary">Please select your card</span>
 
+           <div v-if="neverVoted" class="font-semibold text-accent-secondary w-100">Please make sure everyone joined before you vote <button class="myButton m-2 bg-indigo-500 text-white" @click="neverVoted = false">Okay</button></div>
 
           <div class="md:flex md:items-center my-2 ml-auto">
              <label class="block text-brand font-bold">
                <input class="mr-2 leading-tight font-semibold" type="checkbox" v-on:input="setObserver($event.target.checked)">
                <span class="text-sm" title="Just observe, don't participate in voting">
-                 Just watching, don't vote
+                 Just observe, don't vote
                </span>
              </label>
           <select v-bind:value="deck" class="m-2 text-accent p-1" @change="changeDeck($event.target.selectedIndex)">
@@ -132,20 +133,11 @@
         </div>
       </div>
     </div>
-         
-      <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 pt-3">
-         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == cards[0])}" v-on:click="vote(cards[0])" :disabled="canVote === false" :inner-html.prop="cards[0] | toCard" ></button>
-         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == cards[1])}" v-on:click="vote(cards[1])" :disabled="canVote === false" :inner-html.prop="cards[1] | toCard" ></button>
-         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == cards[2])}" v-on:click="vote(cards[2])" :disabled="canVote === false" :inner-html.prop="cards[2] | toCard" > </button>
-         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == cards[3])}" v-on:click="vote(cards[3])" :disabled="canVote === false" :inner-html.prop="cards[3] | toCard" > </button>
-         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == cards[4])}" v-on:click="vote(cards[4])" :disabled="canVote === false" :inner-html.prop="cards[4] | toCard" > </button>
-         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == cards[5])}" v-on:click="vote(cards[5])" :disabled="canVote === false" :inner-html.prop="cards[5] | toCard" > </button>
-         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == cards[6])}" v-on:click="vote(cards[6])" :disabled="canVote === false" :inner-html.prop="cards[6] | toCard" > </button>
-         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == cards[7])}" v-on:click="vote(cards[7])" :disabled="canVote === false" :inner-html.prop="cards[7] | toCard" > </button>
-         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == cards[8])}" v-on:click="vote(cards[8])" :disabled="canVote === false" :inner-html.prop="cards[8] | toCard" > </button>
-         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == cards[9])}" v-on:click="vote(cards[9])" :disabled="canVote === false" :inner-html.prop="cards[9] | toCard" > </button>
-         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32 text-4xl" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == cards[10])}" v-on:click="vote(cards[10])" :disabled="canVote === false" :inner-html.prop="cards[10] | toCard" ></button>
-         <button class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == cards[11])}" v-on:click="vote(cards[11])" :disabled="canVote === false" :inner-html.prop="cards[11] | toCard" ></button>
+
+       <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 pt-3">
+
+          <button v-for="card in cards" v-if="card" class="cardButtonBig p-2 m-2 h-20 md:h-32 lg:h-32" v-bind:class="{'cardButtonBigSelected slide-top': (myVote == card)}" v-on:click="vote(card)" :disabled="canVote === false" :inner-html.prop="card" ></button>
+
       </div>
       <div class="grid grid-cols-2">
          <button class="myButton m-2 bg-indigo-500 text-white" type="button" v-on:click="showVotes()" :disabled="isShowingVotes"> Show votes </button>
