@@ -38,8 +38,8 @@ COPY lib lib
 RUN mix do compile, release
 
 # prepare release image
-FROM alpine:3.9 AS app
-RUN apk add --no-cache openssl ncurses-libs
+FROM alpine:3.14 AS app
+RUN apk add --no-cache openssl ncurses-libs libstdc++
 
 WORKDIR /app
 
