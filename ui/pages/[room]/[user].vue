@@ -275,6 +275,8 @@ onMounted(() => {
     if (route.params.user){
       userName.value = route.params.user as string
     }
+    console.log('config', config)
+    console.log('config socket', config.WEBSOCKET_URL)
     // wss://scrumpoker.uk/socket/websocket?user_id=MyTest&vsn=2.0.0
     // let socket = new Socket("ws://localhost:4000/socket", {params: {user_id: userName.value}});
     let socket = new Socket(config.WEBSOCKET_URL, {params: {user_id: userName.value}});
