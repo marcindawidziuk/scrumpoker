@@ -6,6 +6,8 @@ COPY . .
 
 RUN npm install
 
+ARG WEBSOCKET_URL
+ENV WEBSOCKET_URL=$WEBSOCKET_URL
 RUN npm run build
 
 RUN rm -rf node_modules
