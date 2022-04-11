@@ -231,6 +231,11 @@
 
 
       </main>
+      <div class="w-full pl-5 pt-16 pb-6 text-sm text-center md:text-left fade-in">
+        <a class="text-gray-500 no-underline hover:no-underline" href="https://github.com/marcindawidziuk">
+          © Marcin Dawidziuk 2022
+        </a>
+      </div>
     </div>
   </div>
 </template>
