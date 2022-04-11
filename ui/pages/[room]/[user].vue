@@ -94,7 +94,7 @@
                 </div>
               </div>
               <div class="column p-2">
-                <span class="text-gray-50 float-right">
+                <span class="hidden text-gray-50 float-right">
                   Vote history (1)
                 </span>
 
@@ -102,7 +102,7 @@
                   class="text-accent-secondary font-semibold p-1 slide-in-bottom-subtitle font-bold dark:text-gray-50"
                   for="message-input">Story description</label>
 
-                <textarea v-model="storyDescription" class="mt-2 dark:bg-gray-800 dark:text-gray-50 bg-background border appearance-none rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline slide-in-bottom border-1 border-gray-600"></textarea>
+                <textarea v-model="storyDescription" @input="updateMessage()" class="mt-2 dark:bg-gray-800 dark:text-gray-50 bg-background border appearance-none rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline slide-in-bottom border-1 border-gray-600"></textarea>
 
                 <textarea id="message-input"
                           class="mt-2 hidden dark:bg-gray-50 dark:text-gray-700 text-foreground bg-background border shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline slide-in-bottom border-2 "></textarea>
@@ -265,6 +265,13 @@ function getCards(cardsString: string): string[]{
   .filter(x => x !== '')
 }
 
+function updateMessage(){
+    channel.push('change_message', { // send the message to the server on "shout" channel
+      name: this.userName,     // get value of "name" of person sending the message
+      message: storyDescription.value
+    });
+}
+
 let channel: Channel = null
 
 const config = useRuntimeConfig()
@@ -277,21 +284,18 @@ onMounted(() => {
     }
     console.log('config', config)
     console.log('config socket', config.WEBSOCKET_URL)
-    // wss://scrumpoker.uk/socket/websocket?user_id=MyTest&vsn=2.0.0
-    // let socket = new Socket("ws://localhost:4000/socket", {params: {user_id: userName.value}});
     let socket = new Socket(config.WEBSOCKET_URL, {params: {user_id: userName.value}});
-  // let socket = new Socket("wss://scrumpoker.uk/socket", {params: {user_id: 'Marcin'}});
 
-  channel = socket.channel('room:'+ channelName.value +':lobby', {}); // connect to chat "room"
-  let presence = new Presence(channel);
+    channel = socket.channel('room:'+ channelName.value +':lobby', {}); // connect to chat "room"
+    let presence = new Presence(channel);
 
-  socket.onError((a) => console.log(a));
-  presence.onSync(() => {
-    connected.value = true;
-    console.log("PRESENCE SYNC");
-    presences.value = presence.list(listBy);
-  });
-  socket.connect();
+    socket.onError((a) => console.log(a));
+    presence.onSync(() => {
+      connected.value = true;
+      console.log("PRESENCE SYNC");
+      presences.value = presence.list(listBy);
+    });
+    socket.connect();
 
   // channel.push('change_message', {
   //   name: userName.value,
