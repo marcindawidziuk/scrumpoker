@@ -1,0 +1,9 @@
+.loading:after {
+    overflow:hidden;
+    display:inline-block;
+    vertical-align:bottom;
+    -webkit-animation:ellipsis 1.9s steps(4) infinite;
+    animation:ellipsis 1.9s steps(4) infinite;
+    content:"...";
+    width:50px
+}
