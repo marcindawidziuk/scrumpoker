@@ -1,6 +1,6 @@
 <template>
-  <div class="dark h-full">
-    <div class="bg-gray-50 dark:bg-gray-900" data-theme="dark">
+  <div class="h-full">
+    <div class="bg-gray-50 dark:bg-gray-900">
       <header>
         <section class="mx-auto">
           <div class="w-full container mx-auto p-6">
@@ -92,7 +92,6 @@
 
           </div>
         </div>
-        <!--        </div>-->
 
         <div class="w-full pt-16 pb-6 text-sm text-center md:text-left fade-in">
           <a class="text-gray-500 no-underline hover:no-underline" href="https://github.com/marcindawidziuk">

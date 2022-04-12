@@ -1,6 +1,6 @@
 ﻿<template>
-  <div class="dark h-full">
-    <div class="bg-gray-50 dark:bg-gray-900" data-theme="dark">
+  <div class="h-full bg-gray-50 dark:bg-gray-900">
+    <div>
       <header>
         <section class="mx-auto">
           <div class="w-full container mx-auto p-6">
@@ -26,9 +26,10 @@
       </header>
       <main class="container mx-auto" role="main">
         <div v-if="alone" class="p-2 mb-5 dark:bg-gray-200 dark:text-gray-700 px-4 bg-gray-700 text-gray-50 rounded">
-          <div class="mt-3 mb-5"><span class="mb-6 font-semibold">
-                      Seems like you are here all by yourself, send this link to your team-mates:
-                    </span>
+          <div class="mt-3 mb-5">
+            <span class="mb-6 font-semibold">
+              Seems like you are here all by yourself, send this link to your team-mates:
+            </span>
             <input
                 class="mt-2 self-strech shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 onclick="this.setSelectionRange(0, this.value.length)"
@@ -37,19 +38,23 @@
           </div>
         </div>
 
-        <div id="app" class="bg-gray-700">
-          <div class="mx-auto max-w-8xl bg-secondary text-on-secondary border shadow rounded dark:border-gray-500 p-5">
+        <div id="app" class="bg-gray-200 dark:bg-gray-700">
+          <div class="mx-auto max-w-8xl bg-secondary text-on-secondary border shadow rounded border-gray-300 dark:border-gray-500 p-5">
             <div class="grid grid-cols-2">
               <div>
-                <div class="row lg:text-3xl dark:text-gray-50 text-gray-500 font-semibold slide-in-bottom-h1 uppercase">
+                <div class="row lg:text-3xl dark:text-gray-50 text-indigo-500 font-semibold slide-in-bottom-h1 uppercase">
                   <h1>
-                    #Connect-draco
+                    #{{channelName}}
                   </h1>
                 </div>
 
-                <div v-if="users.length < 2" class="mt-2 bg-gray-800 p-2 rounded border border-gray-600">
-                  <span class="block text-gray-100">Send this link to your team-mates</span>
-                  <span class="block text-indigo-300">https://scrumpoker.uk/{{ channelName }}</span>
+                <div v-if="users.length < 2" class="mt-2 bg-gray-50 dark:bg-gray-800 p-2 rounded border border-gray-400 dark:border-gray-600">
+                  <span class="block text-indigo-600 dark:text-gray-100 font-semibold">Send this link to your team-mates</span>
+                  <input
+                      class="mt-2 self-strech shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      onclick="this.setSelectionRange(0, this.value.length)"
+                      readonly="readonly"
+                      value="https://scrumpoker.uk/wingen">
                 </div>
 
                 <div v-else class="mt-2 text-lg dark:text-gray-50">
@@ -61,7 +66,7 @@
 
                   <div class="text-on-secondary p-2">
                     <ul id="votes" class="list-disc text-xl pl-2">
-                      <li v-for="user in users" class="text-gray-50">
+                      <li v-for="user in users" class="text-gray-700 dark:text-gray-50">
                         <span>
                           {{ user.name }}
                           <span v-if="!user.online"> (Offline)</span>
@@ -74,7 +79,7 @@
                           <span v-else-if="user.vote" >
                             voted {{ user.vote }}
                           </span>
-                          <div v-else class="inline-block"><span class="text-gray-50">didn't vote</span></div>
+                          <div v-else class="inline-block"><span class="text-gray-700 dark:text-gray-50">didn't vote</span></div>
                         </div>
                         <div v-else class="inline">
                           <svg v-if="user.isObserving" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -89,8 +94,8 @@
                       </li>
                     </ul>
                   </div>
-                  <span class="text-indigo-300 ml-2 block">Please make sure everyone joined before you vote!</span>
-                  <span v-if="!connected" class="text-red-300 ml-2 block">Failed connecting to the server...</span>
+                  <span v-if="firstVote" class="text-indigo-700 dark:text-indigo-300 ml-2 block">Please make sure everyone joined before you vote!</span>
+                  <span v-if="!connected" class="text-red-600 dark:text-red-300 ml-2 block">Failed connecting to the server...</span>
                 </div>
               </div>
               <div class="column p-2">
@@ -99,29 +104,30 @@
                 </span>
 
                 <label
-                  class="text-accent-secondary font-semibold p-1 slide-in-bottom-subtitle font-bold dark:text-gray-50"
-                  for="message-input">Story description</label>
+                  class="text-accent-secondary font-semibold p-1 slide-in-bottom-subtitle font-bold dark:text-gray-50">
+                  Story description
+                </label>
 
-                <textarea v-model="storyDescription" @input="updateMessage()" class="mt-2 dark:bg-gray-800 dark:text-gray-50 bg-background border appearance-none rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline slide-in-bottom border-1 border-gray-600"></textarea>
-
-                <textarea id="message-input"
-                          class="mt-2 hidden dark:bg-gray-50 dark:text-gray-700 text-foreground bg-background border shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline slide-in-bottom border-2 "></textarea>
+                <textarea v-model="storyDescription"
+                          @input="updateMessage()"
+                          class="mt-2 dark:bg-gray-800 dark:text-gray-50 bg-background border appearance-none rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline slide-in-bottom border-1 border-gray-400 dark:border-gray-600"></textarea>
               </div>
             </div>
             <div class="mt-3 grid grid-cols-1">
               <div class="ml-auto flex mr-2">
-                <div class="inline">
-                <label class="inline font-bold mr-4"><input
-                    class="mr-2 dark:text-gray-50 leading-tight form-checkbox font-semibold checked:bg-red-300 checked:text-indigo-500" type="checkbox"> <span
-                    class="text-sm" title="Just observe, don't participate in voting">
-                 <span class="text-gray-50">I don't want to vote</span>
-                 </span>
-                </label>
+                <div class="inline my-auto">
+                  <label class="inline font-semibold mr-4">
+                    <input
+                      class="mr-2 dark:text-gray-50 leading-tight form-checkbox font-semibold checked:bg-red-300 checked:text-indigo-500 scale-125" type="checkbox"> <span
+                      class="text-md" title="Just observe, don't participate in voting">
+                   <span class="text-gray-700 dark:text-gray-50">I'm an observer</span>
+                   </span>
+                  </label>
                 </div>
 
                 <div class="inline">
 
-                <span class="text-gray-50 mr-2 font-semibold">Card deck: </span>
+                <span class="text-gray-700 dark:text-gray-50 mr-2 font-semibold">Card deck: </span>
                 <select class="p-1" v-model="activeDeck">
                   <option v-for="deck in decks" :value="deck" >
                     {{ deck.name }}
@@ -142,24 +148,38 @@
 
             <div class="relative">
               <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 pt-3">
-                <button v-for="card in activeDeck.cards"
+                <button v-for="card in activeDeck.cards.filter(x => x)"
                         @click="selectCard(card)"
-                        :class="[activeCard === card ? 'dark:border-indigo-400 dark:bg-indigo-200 outline outline-indigo-500 dark:hover:bg-indigo-300' : 'dark:hover:bg-gray-400 active:dark:bg-gray-500 dark:hover:text-gray-50 dark:bg-gray-50',
-                        activeCard && activeCard !== card ? 'bg-red-300' : '']"
+                        :class="[activeCard === card
+                        ? '-translate-y-3 bg-gray-50 dark:border-indigo-400 dark:bg-indigo-200 outline outline-indigo-500 dark:hover:bg-indigo-300'
+                        : 'bg-gray-50 hover:bg-gray-400 hover:text-white dark:hover:bg-gray-400 active:dark:bg-gray-500 dark:hover:text-gray-50 dark:bg-gray-50 border border-gray-400 dark:border-0',
+                        (isShowingVotes && activeCard !== card) ? 'bg-gray-300 text-gray-400' : '']"
                         class="p-2 m-2 h-20 font-semibold rounded text-xl md:h-32 lg:h-32">
                   {{ card }}
                 </button>
               </div>
             </div>
             <div class="grid grid-cols-2">
-              <button @click="showVotes()" class="m-2 dark:hover:bg-gray-300 dark:bg-gray-50 dark:text-gray-900 font-semibold px-2 py-1 rounded">Show votes</button>
-              <button @click="nextStory()" :class="isShowingVotes ? 'dark:hover:bg-gray-300 dark:bg-gray-50 dark:text-gray-900 ' : 'dark:bg-gray-400 dark:text-gray-600 '" class="m-2 font-semibold px-2 py-1 rounded">
+              <PButton class="m-2" :disabled="isShowingVotes" @click="showVotes">
+                Show votes
+              </PButton>
+              <PButton class="m-2" :disabled="!isShowingVotes" @click="nextStory">
                 Next story
-              </button>
+              </PButton>
+<!--              <button @click="showVotes()"-->
+<!--                      class="m-2 bg-gray-50 hover:bg-gray-400 hover:text-gray-50 dark:hover:bg-gray-300 dark:bg-gray-50 dark:text-gray-900 font-semibold px-2 py-1 rounded border border-gray-400 dark:border-0">-->
+<!--                Show votes-->
+<!--              </button>-->
+<!--              <button @click="nextStory()" :class="isShowingVotes-->
+<!--              ? 'm-2 bg-gray-50 hover:bg-gray-400 hover:text-gray-50 dark:hover:bg-gray-300 dark:bg-gray-50 dark:text-gray-900 font-semibold px-2 py-1 rounded border border-gray-400 dark:border-0'-->
+<!--              : 'border border-gray-400 bg-gray-100 text-gray-500 dark:bg-gray-400 dark:text-gray-600 '"-->
+<!--                      class="m-2 font-semibold px-2 py-1 rounded">-->
+<!--                Next story-->
+<!--              </button>-->
             </div>
 
             <div class="block flex mt-5">
-              <span class="text-align-top text-gray-50 text-xs mt-1">
+              <span class="text-align-top text-gray-700 dark:text-gray-50 text-xs mt-1">
                 You can invite other users by sending them link:
                 <span>https://scrumpoker.uk/{{ channelName }}</span>
               </span>
@@ -247,9 +267,11 @@ import {Channel, Presence, Socket} from "phoenix";
 import {onMounted, watch} from "@vue/runtime-core";
 import {useRoute} from "vue-router";
 import {useRuntimeConfig} from "#app";
+import PButton from "~/components/PButton.vue";
 const toggleTheme = () => { }
 
 const connected = ref(false)
+const firstVote = ref(true)
 const userName = ref("marcin")
 
 const presences = ref([])
@@ -302,10 +324,6 @@ onMounted(() => {
     });
     socket.connect();
 
-  // channel.push('change_message', {
-  //   name: userName.value,
-  //   message: storyDescription.value
-  // });
 
   channel.on('change_message', function (payload) {
     connected.value = true;
@@ -417,6 +435,7 @@ function addCustomDeck(){
 }
 
 function userVoted(userName: string, vote: string){
+  firstVote.value = false
   const user = users.value.find(x => x.name == userName)
   user.vote = vote
 }
@@ -513,6 +532,7 @@ const selectCard = function (card: string){
   let hasEveryoneVoted = users.value
       .filter(x => x.name !== userName.value)
       .filter(x => !x.isObserving)
+      .filter(x => x.online)
       .every(x => x.vote != null)
   console.log('hasEveryoneVoted', hasEveryoneVoted)
 
@@ -533,11 +553,11 @@ function nextStory(){
   }
 
   channel.push('change_message', { // send the message to the server on "shout" channel
-    name: this.userName,     // get value of "name" of person sending the message
+    name: userName.value,     // get value of "name" of person sending the message
     message: ""
   });
   channel.push('clear_votes', { // send the message to the server on "shout" channel
-    name: this.userName,     // get value of "name" of person sending the message
+    name: userName.value,     // get value of "name" of person sending the message
   });
 }
 
