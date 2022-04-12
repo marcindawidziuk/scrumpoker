@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="128px"
+   height="128px"
+   viewBox="0 0 128 128"
+   version="1.1"
+   id="SVGRoot"
+   sodipodi:docname="poker_logo.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="4"
+     inkscape:cx="63.400881"
+     inkscape:cy="71.408629"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="3366"
+     inkscape:window-height="1417"
+     inkscape:window-x="66"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:grid-bbox="true"
+     inkscape:snap-text-baseline="true" />
+  <defs
+     id="defs18">
+    <linearGradient
+       id="linearGradient6012"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#667eea;stop-opacity:1;"
+         offset="0"
+         id="stop6010" />
+    </linearGradient>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter6475">
+      <feFlood
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood6465" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite6467" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="2.3"
+         result="blur"
+         id="feGaussianBlur6469" />
+      <feOffset
+         dx="1.1"
+         dy="2.7"
+         result="offset"
+         id="feOffset6471" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="fbSourceGraphic"
+         id="feComposite6473" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix6477" />
+      <feFlood
+         id="feFlood6479"
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         in="fbSourceGraphic" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite6481"
+         in="flood"
+         operator="in"
+         result="composite1" />
+      <feGaussianBlur
+         id="feGaussianBlur6483"
+         in="composite1"
+         stdDeviation="2.3"
+         result="blur" />
+      <feOffset
+         id="feOffset6485"
+         dx="1.1"
+         dy="2.7"
+         result="offset" />
+      <feComposite
+         in2="offset"
+         id="feComposite6487"
+         in="fbSourceGraphic"
+         operator="over"
+         result="composite2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter6630">
+      <feFlood
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood6620" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite6622" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="2.3"
+         result="blur"
+         id="feGaussianBlur6624" />
+      <feOffset
+         dx="1.1"
+         dy="2.7"
+         result="offset"
+         id="feOffset6626" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite6628" />
+    </filter>
+  </defs>
+  <metadata
+     id="metadata21">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2"
+     style="display:inline">
+    <a
+       id="a6492" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot6045"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"><flowRegion
+         id="flowRegion6047"><rect
+           id="rect6049"
+           width="36.416"
+           height="42.956738"
+           x="-3.1819806"
+           y="49.8647" /></flowRegion><flowPara
+         id="flowPara6051"></flowPara></flowRoot>  </g>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1"
+     style="display:inline">
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot6016"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"><flowRegion
+         id="flowRegion6018"><rect
+           id="rect6020"
+           width="40.481865"
+           height="50.204582"
+           x="66.114487"
+           y="48.804039" /></flowRegion><flowPara
+         id="flowPara6022"></flowPara></flowRoot>    <g
+       id="g6499"
+       transform="matrix(1.2019273,-0.04415385,0.04787993,1.1083918,-52.745997,-15.122642)"
+       style="display:inline;fill:#d38d5f;stroke:#ffff00;filter:url(#filter6630)">
+      <g
+         id="g6533"
+         transform="translate(66.811577,6.0229246)">
+        <g
+           id="g6539"
+           transform="rotate(-5.9393115,7.2400833,81.444781)">
+          <rect
+             id="rect34-4"
+             width="59.453575"
+             height="89.246422"
+             x="-14.481428"
+             y="25.554686"
+             style="display:inline;fill:#fafafa;fill-opacity:1;stroke:#667eea;stroke-width:2.39700174;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+             ry="3.3849645"
+             transform="matrix(1,-7.1663155e-5,-0.00166046,0.99999862,0,0)" />
+          <g
+             id="g6511">
+            <text
+               xml:space="preserve"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;line-height:1.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:0"
+               x="1.4142134"
+               y="86.811035"
+               id="text6055"><tspan
+                 sodipodi:role="line"
+                 id="tspan6053"
+                 x="1.4142134"
+                 y="86.811035">2</tspan></text>
+          </g>
+        </g>
+      </g>
+    </g>
+    <rect
+       id="rect34"
+       width="60.287689"
+       height="88.555458"
+       x="53.712311"
+       y="27.444544"
+       style="fill:#667eea;fill-opacity:1;stroke:#8094ee;stroke-opacity:0;filter:url(#filter6475)"
+       ry="3.3587573"
+       transform="matrix(1.2028806,0,0,1.1092709,-19.400598,-15.087161)" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:55.44614029px;line-height:1.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#f9f9f9;fill-opacity:1;stroke:none;stroke-width:1.15512788"
+       x="62.436852"
+       y="85.792175"
+       id="text6026"
+       transform="scale(1.0413398,0.96030137)"><tspan
+         sodipodi:role="line"
+         id="tspan6024"
+         x="62.436852"
+         y="85.792175"
+         style="stroke-width:1.15512788">1</tspan></text>
+  </g>
+</svg>
