@@ -102,7 +102,7 @@
 
                 <textarea v-model="storyDescription"
                           @input="updateMessage()"
-                          class="mt-2 dark:bg-gray-800 dark:text-gray-50 bg-background border appearance-none rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline slide-in-bottom border-1 border-gray-400 dark:border-gray-600 min-h-[100px]"></textarea>
+                          class="mt-2 transition dark:bg-gray-800 dark:text-gray-50 bg-background border appearance-none rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline slide-in-bottom border-1 border-gray-400 dark:border-gray-600 min-h-[100px]"></textarea>
               </div>
             </div>
             <div class="mt-3 grid grid-cols-1">
@@ -243,24 +243,21 @@
 
 
       </main>
-      <div class="w-full pl-5 pt-16 pb-6 text-sm text-center md:text-left fade-in">
-        <a class="text-gray-500 no-underline hover:no-underline" href="https://github.com/marcindawidziuk">
-          © Marcin Dawidziuk 2022
-        </a>
-      </div>
+      <Copyright/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import 'assets/app.css'
-import {ref} from "@vue/reactivity";
+import {computed, ref} from "@vue/reactivity";
 import {Channel, Presence, Socket} from "phoenix";
 import {onMounted, watch} from "@vue/runtime-core";
 import {useRoute} from "vue-router";
 import {useRuntimeConfig} from "#app";
 import PButton from "~/components/PButton.vue";
 import ThemePicker from "~/components/ThemePicker.vue";
+import Copyright from "~/components/Copyright.vue";
 const toggleTheme = () => { }
 
 const connected = ref(false)
@@ -321,10 +318,6 @@ onMounted(() => {
   channel.on('change_message', function (payload) {
     connected.value = true;
     console.log('changed message by ' + payload.name + ' to ' + payload.message);
-    // if (app.userName === payload.name
-    //     && document.getElementById("message-input") === document.activeElement) {
-    //   return;
-    // }
     storyDescription.value = payload.message;
   });
 
@@ -349,20 +342,15 @@ onMounted(() => {
         name: payload.currentDeck.name
       }
     }
-
-
-
-    // decks.value = payload.decks.map(x => {
-    //       name: x.name;
-    //       cards: x.cards.split('|')
-    // })
   });
 
   channel.on('joined', function (payload) {
-    // console.log('user ' + payload.name + ' joined');
-    // if (userName.value !== payload.name){
-    //   app.onInputChanged();
-    // }
+    if (userName.value !== payload.name){
+      channel.push('change_message', { // send the message to the server on "shout" channel
+        name: this.userName,     // get value of "name" of person sending the message
+        message: storyDescription.value
+      });
+    }
 
     if (activeCard.value){
       channel.push('voted', {
@@ -432,48 +420,6 @@ function userVoted(userName: string, vote: string){
   const user = users.value.find(x => x.name == userName)
   user.vote = vote
 }
-
-// socket.onError((_) => app.isShowingConnectionError = true);
-//
-// channel.onError((_) => app.isShowingConnectionError = true);
-//
-// // Overwrite default method
-// channel.onMessage = function(event, payload, ref){
-//   console.log(" received event " + event);
-//   if (event !== "timeout" && event !== "error"){
-//     app.isShowingConnectionError = false;
-//   }
-//   return payload
-// };
-//
-// channel.join()
-//     .receive("ok", ({messages}) => console.log("catching up", messages) )
-//     .receive("error", ({reason}) => console.log("failed join", reason) )
-//     .receive("timeout", () => {
-//       app.isShowingConnectionError = true;
-//       console.log("Networking issue. Still waiting...")
-//     });
-//
-// channel.push('joined', { // send the message to the server on "shout" channel
-//   name: this.userName     // get value of "name" of person sending the message
-// });
-//
-//
-//
-//
-//
-// channel.on('show_votes', function (payload) { // listen to the 'shout' event
-//   console.log('show_votes');
-//   app.isShowingVotes = true
-// });
-//
-//
-// channel.on('clear_votes', function (payload) { // listen to the 'shout' event
-//   console.log('clear_votes');
-//   app.isShowingVotes = false;
-//   app.votes = {};
-//   app.myVote = null;
-// });
 
 interface IVoteHistory
 {

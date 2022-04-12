@@ -93,11 +93,7 @@
           </div>
         </div>
 
-        <div class="w-full pt-16 pb-6 text-sm text-center md:text-left fade-in">
-          <a class="text-gray-500 no-underline hover:no-underline" href="https://github.com/marcindawidziuk">
-            © Marcin Dawidziuk 2022
-          </a>
-        </div>
+        <Copyright/>
       </main>
 
     </div>
@@ -109,6 +105,7 @@ import '~/assets/app.css'
 import {ref} from "@vue/reactivity";
 import {useRoute, useRouter} from "vue-router";
 import ThemePicker from "~/components/ThemePicker.vue";
+import Copyright from "~/components/Copyright.vue";
 
 const userName = ref("")
 const roomName = ref("")
