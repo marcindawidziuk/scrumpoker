@@ -19,19 +19,20 @@
                         class="fas fa-2x flex w-10 bg-transparent font-semibold text-accent fa-lightbulb"
                         title="Change theme" value="Light Theme"></button>
                 <span class="sr-only">Change theme</span>
+                <ThemePicker/>
               </div>
             </div>
           </div>
         </section>
       </header>
       <main class="container mx-auto" role="main">
-        <div v-if="alone" class="p-2 mb-5 dark:bg-gray-200 dark:text-gray-700 px-4 bg-gray-700 text-gray-50 rounded">
-          <div class="mt-3 mb-5">
-            <span class="mb-6 font-semibold">
+        <div v-if="alone" class="p-2 mb-5 dark:bg-gray-500 dark:text-gray-100 px-4 bg-indigo-500 text-gray-50 border dark:border-gray-400 rounded">
+          <div class="grid md:grid-cols-2 xs:grid-cols-1">
+            <span class="my-auto font-semibold">
               Seems like you are here all by yourself, send this link to your team-mates:
             </span>
             <input
-                class="mt-2 self-strech shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="self-strech shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 onclick="this.setSelectionRange(0, this.value.length)"
                 readonly="readonly"
                 value="https://scrumpoker.uk/wingen">
@@ -48,16 +49,7 @@
                   </h1>
                 </div>
 
-                <div v-if="users.length < 2" class="mt-2 bg-gray-50 dark:bg-gray-800 p-2 rounded border border-gray-400 dark:border-gray-600">
-                  <span class="block text-indigo-600 dark:text-gray-100 font-semibold">Send this link to your team-mates</span>
-                  <input
-                      class="mt-2 self-strech shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      onclick="this.setSelectionRange(0, this.value.length)"
-                      readonly="readonly"
-                      value="https://scrumpoker.uk/wingen">
-                </div>
-
-                <div v-else class="mt-2 text-lg dark:text-gray-50">
+                <div v-if="!alone" class="mt-2 text-lg dark:text-gray-50">
                   <span>{{ users.length }} users joined poker session</span>
                 </div>
 
@@ -66,7 +58,7 @@
 
                   <div class="text-on-secondary p-2">
                     <ul id="votes" class="list-disc text-xl pl-2">
-                      <li v-for="user in users" class="text-gray-700 dark:text-gray-50">
+                      <li v-for="user in users" class="transition text-gray-700 dark:text-gray-50">
                         <span>
                           {{ user.name }}
                           <span v-if="!user.online"> (Offline)</span>
@@ -89,12 +81,12 @@
                           <svg v-else-if="user.vote" xmlns="http://www.w3.org/2000/svg" class="ml-1 inline h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
-                          <div v-else class="inline-block w-4"><span class="text-gray-500 loading"></span></div>
+                          <div v-else class="inline-block -translate-x-1"><span class="te-spin dark:text-gray-200 text-gray-800 loading"></span></div>
                         </div>
                       </li>
                     </ul>
                   </div>
-                  <span v-if="firstVote" class="text-indigo-700 dark:text-indigo-300 ml-2 block">Please make sure everyone joined before you vote!</span>
+                  <span v-if="firstVote && alone" class="text-indigo-700 dark:text-indigo-300 ml-2 block">Please make sure everyone joined before you vote!</span>
                   <span v-if="!connected" class="text-red-600 dark:text-red-300 ml-2 block">Failed connecting to the server...</span>
                 </div>
               </div>
@@ -110,7 +102,7 @@
 
                 <textarea v-model="storyDescription"
                           @input="updateMessage()"
-                          class="mt-2 dark:bg-gray-800 dark:text-gray-50 bg-background border appearance-none rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline slide-in-bottom border-1 border-gray-400 dark:border-gray-600"></textarea>
+                          class="mt-2 dark:bg-gray-800 dark:text-gray-50 bg-background border appearance-none rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline slide-in-bottom border-1 border-gray-400 dark:border-gray-600 min-h-[100px]"></textarea>
               </div>
             </div>
             <div class="mt-3 grid grid-cols-1">
@@ -151,10 +143,10 @@
                 <button v-for="card in activeDeck.cards.filter(x => x)"
                         @click="selectCard(card)"
                         :class="[activeCard === card
-                        ? '-translate-y-3 bg-gray-50 dark:border-indigo-400 dark:bg-indigo-200 outline outline-indigo-500 dark:hover:bg-indigo-300'
+                        ? '-safe:animate-spin -translate-y-3 bg-indigo-100 dark:border-indigo-400 dark:bg-indigo-200 outline outline-indigo-500 dark:hover:bg-indigo-300'
                         : 'bg-gray-50 hover:bg-gray-400 hover:text-white dark:hover:bg-gray-400 active:dark:bg-gray-500 dark:hover:text-gray-50 dark:bg-gray-50 border border-gray-400 dark:border-0',
                         (isShowingVotes && activeCard !== card) ? 'bg-gray-300 text-gray-400' : '']"
-                        class="p-2 m-2 h-20 font-semibold rounded text-xl md:h-32 lg:h-32">
+                        class="transition p-2 m-2 h-20 font-semibold rounded text-xl md:h-32 lg:h-32">
                   {{ card }}
                 </button>
               </div>
@@ -212,7 +204,7 @@
             <div class="bg-gray-700 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
               <div class="sm:flex sm:items-start">
                 <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"><h3 id="modal-headline"
-                                                                               class="text-lg leading-6 font-medium dark:text-gray-50">
+                                                                               class="text-lg leading-6 font-semibold text-gray-50">
                   Setting Custom Deck
                 </h3>
                   <div class="mt-2"><p class="text-sm leading-5 text-gray-50">
@@ -268,6 +260,7 @@ import {onMounted, watch} from "@vue/runtime-core";
 import {useRoute} from "vue-router";
 import {useRuntimeConfig} from "#app";
 import PButton from "~/components/PButton.vue";
+import ThemePicker from "~/components/ThemePicker.vue";
 const toggleTheme = () => { }
 
 const connected = ref(false)
@@ -278,7 +271,7 @@ const presences = ref([])
 const storyDescription = ref("")
 
 const route = useRoute()
-const channelName = ref(route.params.room as string)
+const channelName = ref((route.params.room as string).toLowerCase())
 
 
 let listBy = (id, {metas: [first, ...rest]}) => {
@@ -515,7 +508,7 @@ const deckCards = ['0', '0.5', '1', '2', '3', '5', '8', '13', '20', '40', '∞',
 const customName = ref('Custom deck')
 const customCards = ref(deckCards)
 const activeCard = ref()
-const alone = ref(false)
+const alone = computed(() => users.value.length < 2)
 
 const selectCard = function (card: string){
   if (isShowingVotes.value)
@@ -596,5 +589,26 @@ watch(presences, (newPresence) => {
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
+}
+.loading:after {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+  -webkit-animation: ellipsis steps(4,end) 1500ms infinite;
+  animation: ellipsis steps(4,end) 1500ms infinite;
+  content: "\2026"; /* ascii code for the ellipsis character */
+  width: 0px;
+}
+
+@keyframes ellipsis {
+  to {
+    width: 20px;
+  }
+}
+
+@-webkit-keyframes ellipsis {
+  to {
+    width: 20px;
+  }
 }
 </style>

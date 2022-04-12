@@ -1,6 +1,6 @@
 ﻿<template>
-  <div class="h-full">
-    <div class="bg-gray-200 dark:bg-gray-900" data-theme="dark">
+  <div class="bg-gray-200 dark:bg-gray-900 h-full">
+    <div>
       <header>
         <section class="mx-auto">
           <div class="w-full container mx-auto p-6">
@@ -19,6 +19,8 @@
                         class="fas fa-2x flex w-10 bg-transparent font-semibold text-accent fa-lightbulb"
                         onclick="toggleTheme()" title="Change theme" value="Light Theme"></button>
                 <span class="sr-only">Change theme</span>
+
+                <ThemePicker/>
               </div>
             </div>
           </div>
@@ -114,11 +116,20 @@
 import '~/assets/app.css'
 import {ref} from "@vue/reactivity";
 import {useRouter} from "vue-router";
+import ThemePicker from "~/components/ThemePicker.vue";
+// import {useColorMode} from "@nuxtjs/color-mode/dist/runtime/composables";
 
 const userName = ref("")
 const roomName = ref("")
 
 const router = useRouter()
+// const colorMode = useColorMode()
+// function switchTheme(){
+//   if (colorMode.value === 'light')
+//     colorMode.value = 'dark'
+//   else
+//     colorMode.value = 'light'
+// }
 
 async function join(){
   if (userName.value.length < 3){

@@ -6,9 +6,10 @@
     "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
+    "@nuxtjs/color-mode": "^3.0.2",
     "@nuxtjs/tailwindcss": "^5.0.2",
     "@types/phoenix": "^1.5.4",
-    "nuxt3": "^3.0.0-27491748.3186841",
+    "nuxt3": "^3.0.0-27496514.0b12666",
     "phoenix": "^1.6.6"
   }
 }
