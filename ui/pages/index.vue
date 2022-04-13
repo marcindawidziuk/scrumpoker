@@ -52,6 +52,7 @@
               dark:bg-gray-800 dark:text-gray-50
 " placeholder="Username"
                      v-model="userName"
+                     @keydown.enter="join()"
                             type="text">
             </div>
             <div class="mb-5">
@@ -60,7 +61,7 @@
             </label>
               <input id="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-800 dark:text-gray-50
 " placeholder="Room Name"
-                     @keyup.enter="join()"
+                     @keydown.enter="join()"
                      v-model="roomName"
                             type="text">
             </div>
@@ -114,19 +115,11 @@ import {ref} from "@vue/reactivity";
 import {useRouter} from "vue-router";
 import ThemePicker from "~/components/ThemePicker.vue";
 import Copyright from "~/components/Copyright.vue";
-// import {useColorMode} from "@nuxtjs/color-mode/dist/runtime/composables";
 
 const userName = ref("")
 const roomName = ref("")
 
 const router = useRouter()
-// const colorMode = useColorMode()
-// function switchTheme(){
-//   if (colorMode.value === 'light')
-//     colorMode.value = 'dark'
-//   else
-//     colorMode.value = 'light'
-// }
 
 async function join(){
   if (userName.value.length < 3){

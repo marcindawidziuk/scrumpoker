@@ -39,7 +39,7 @@
           </div>
         </div>
 
-        <div id="app" class="bg-gray-200 dark:bg-gray-700">
+        <div id="app" class="bg-indigo-50 dark:bg-gray-700">
           <div class="mx-auto max-w-8xl bg-secondary text-on-secondary border shadow rounded border-gray-300 dark:border-gray-500 p-5">
             <div class="grid grid-cols-2">
               <div>
@@ -58,26 +58,20 @@
 
                   <div class="text-on-secondary p-2">
                     <ul id="votes" class="list-disc text-xl pl-2">
-                      <li v-for="user in users" class="transition text-gray-700 dark:text-gray-50">
+                      <li v-for="user in users" :key="user.name" class="transition text-gray-700 dark:text-gray-50">
                         <span>
                           {{ user.name }}
                           <span v-if="!user.online"> (Offline)</span>
                         </span>
                         <div v-if="isShowingVotes" class="inline">
-                          <svg v-if="user.isObserving" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                          </svg>
+                          <span v-if="user.isObserving">is observing</span>
                           <span v-else-if="user.vote" >
                             voted {{ user.vote }}
                           </span>
                           <div v-else class="inline-block"><span class="text-gray-700 dark:text-gray-50">didn't vote</span></div>
                         </div>
                         <div v-else class="inline">
-                          <svg v-if="user.isObserving" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                          </svg>
+                          <span v-if="user.isObserving">is observing</span>
                           <svg v-else-if="user.vote" xmlns="http://www.w3.org/2000/svg" class="ml-1 inline h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
@@ -110,6 +104,7 @@
                 <div class="inline my-auto">
                   <label class="inline font-semibold mr-4">
                     <input
+                        v-model="isObserving"
                       class="mr-2 dark:text-gray-50 leading-tight form-checkbox font-semibold checked:bg-red-300 checked:text-indigo-500 scale-125" type="checkbox"> <span
                       class="text-md" title="Just observe, don't participate in voting">
                    <span class="text-gray-700 dark:text-gray-50">I'm an observer</span>
@@ -158,16 +153,6 @@
               <PButton class="m-2" :disabled="!isShowingVotes" @click="nextStory">
                 Next story
               </PButton>
-<!--              <button @click="showVotes()"-->
-<!--                      class="m-2 bg-gray-50 hover:bg-gray-400 hover:text-gray-50 dark:hover:bg-gray-300 dark:bg-gray-50 dark:text-gray-900 font-semibold px-2 py-1 rounded border border-gray-400 dark:border-0">-->
-<!--                Show votes-->
-<!--              </button>-->
-<!--              <button @click="nextStory()" :class="isShowingVotes-->
-<!--              ? 'm-2 bg-gray-50 hover:bg-gray-400 hover:text-gray-50 dark:hover:bg-gray-300 dark:bg-gray-50 dark:text-gray-900 font-semibold px-2 py-1 rounded border border-gray-400 dark:border-0'-->
-<!--              : 'border border-gray-400 bg-gray-100 text-gray-500 dark:bg-gray-400 dark:text-gray-600 '"-->
-<!--                      class="m-2 font-semibold px-2 py-1 rounded">-->
-<!--                Next story-->
-<!--              </button>-->
             </div>
 
             <div class="block flex mt-5">
@@ -260,6 +245,7 @@ import ThemePicker from "~/components/ThemePicker.vue";
 import Copyright from "~/components/Copyright.vue";
 const toggleTheme = () => { }
 
+const isObserving = ref(false)
 const connected = ref(false)
 const firstVote = ref(true)
 const userName = ref("marcin")
@@ -513,16 +499,26 @@ const users = ref<User[]>([])
 
 watch(presences, (newPresence) => {
   console.log('watch', newPresence)
-  for (let p of newPresence){
+  for (let p of presences.value){
     console.log('p', p)
     const user = users.value.find(x => x.name == p.name)
     if (!user){
-      users.value.push({name: p.name, vote: null, isObserving: false, online: true})
+      users.value.push({name: p.name, vote: null, isObserving: p.observer, online: true})
+    }else{
+      user.isObserving = p.observer
     }
   }
   for (let user of users.value){
     user.online = newPresence.some(x => x.name == user.name)
   }
+  users.value.sort( (a, b) => a.name.localeCompare(b.name))
+})
+
+watch(isObserving, () => {
+  channel.push("user_set_observer", {
+    name: userName.value,
+    observer: isObserving.value
+  })
 })
 
 </script>
