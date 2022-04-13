@@ -35,7 +35,7 @@
                 class="self-strech shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 onclick="this.setSelectionRange(0, this.value.length)"
                 readonly="readonly"
-                value="https://scrumpoker.uk/wingen">
+                :value="'https://scrumpoker.uk/' + channelName">
           </div>
         </div>
 
