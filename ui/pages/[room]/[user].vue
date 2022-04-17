@@ -1,5 +1,8 @@
 ﻿<template>
   <div class="h-full bg-gray-50 dark:bg-gray-900">
+    <Head>
+      <Title>{{ channelName }}</Title>
+    </Head>
     <div>
       <header>
         <section class="mx-auto">
