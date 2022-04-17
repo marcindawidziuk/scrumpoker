@@ -17,11 +17,13 @@ useHead({
   titleTemplate: 'Scrum Pointing Poker - %s',
   charset: 'utf-8',
   meta: [
-    {name: 'Scrum Pointing Poker', content: 'Agile planning poker for your team'}
+    {name: 'Scrum Pointing Poker', content: 'Agile planning poker for your team'},
+    {name: 'theme-color', content: '#6666ff'}
   ],
   link: [
-    { rel: 'icon', href: 'favicon.svg'}
-  ]
+    { rel: 'icon', href: 'favicon.svg'},
+    { rel:"apple-touch-icon", sizes:"180x180", href:"/apple-touch-icon.png"},
+  ],
 })
 </script>
 
