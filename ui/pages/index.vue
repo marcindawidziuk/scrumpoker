@@ -135,6 +135,9 @@ async function join(){
 }
 
 function init(){
+  if (!process.client)
+    return;
+
   const savedRoom = localStorage.getItem("room")
   if (savedRoom){
     roomName.value = savedRoom

@@ -131,6 +131,9 @@ async function join(){
 }
 
 function init(){
+  if (!process.client)
+    return;
+
   const savedUserName = localStorage.getItem("username")
   if (savedUserName){
     userName.value = savedUserName
