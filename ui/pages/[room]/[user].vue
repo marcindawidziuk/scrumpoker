@@ -470,6 +470,9 @@ const selectCard = function (card: string){
 }
 
 function showVotes(){
+  if (confirm("Are you sure you want to complete voting?") != true) {
+    return;
+  }
   channel.push('show_votes', {
     name: userName.value,
   });
