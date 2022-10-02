@@ -131,7 +131,28 @@ async function join(){
     return
   }
 
+  if (process.client){
+    localStorage.setItem("user", userName.value)
+    localStorage.setItem("room", roomName.value)
+  }
+
   await router.push({path: `/${roomName.value}/${userName.value}`})
 }
 
+function init(){
+  if (!process.client)
+    return;
+
+  const savedRoom = localStorage.getItem("room")
+  if (savedRoom){
+    roomName.value = savedRoom
+  }
+
+  const savedUserName = localStorage.getItem("user")
+  if (savedUserName){
+    userName.value = savedUserName
+  }
+}
+
+init()
 </script>
