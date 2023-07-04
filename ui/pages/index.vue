@@ -1,5 +1,5 @@
 ﻿<template>
-  <div class="bg-gray-200 dark:bg-gray-900 h-full">
+  <div class="antialiased font-sans text-gray-700 dark:text-gray-200 bg-white dark:bg-black h-full">
     <div>
       <header>
         <section class="mx-auto">
@@ -34,7 +34,7 @@
 
           <div class="pl-2">
 
-            <h1 class="mt-4 mb-1 text-2xl text-gray-700 dark:text-gray-50 font-bold">
+            <h1 class="mt-4 mb-1 text-2xl text-gray-900 dark:text-gray-50 font-bold">
               Scrum Pointing Poker
             </h1>
             <h2 class="text-gray-700 dark:text-gray-200 pb-2">

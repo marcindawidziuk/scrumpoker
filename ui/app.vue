@@ -22,6 +22,7 @@ useHead({
   ],
   link: [
     { rel: 'icon', href: 'favicon.svg'},
+    {rel: 'stylesheet', href:"https://fonts.googleapis.com/css?family=Montserrat"},
     { rel:"apple-touch-icon", sizes:"180x180", href:"/apple-touch-icon.png"},
   ],
 })
