@@ -32,7 +32,7 @@
         <div v-if="alone" class="p-2 mb-5 dark:bg-gray-500 dark:text-gray-100 px-4 bg-indigo-500 text-gray-50 border dark:border-gray-400 rounded">
           <div class="grid md:grid-cols-2 xs:grid-cols-1">
             <span class="my-auto font-semibold">
-              Seems like you are here all by yourself, send this link to your team-mates:
+              Seems like you are here all by yourself, send this link to your team-mates: aa
             </span>
             <input
                 class="self-strech shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -246,7 +246,10 @@ import {useRuntimeConfig} from "#app";
 import PButton from "~/components/PButton.vue";
 import ThemePicker from "~/components/ThemePicker.vue";
 import Copyright from "~/components/Copyright.vue";
+import * as signalR from "@microsoft/signalr";
+import {HubConnection} from "@microsoft/signalr";
 const toggleTheme = () => { }
+
 
 const isObserving = ref(false)
 const connected = ref(false)
@@ -260,6 +263,11 @@ const route = useRoute()
 const channelName = ref((route.params.room as string).toLowerCase())
 
 
+async function send() {
+  // connection.send("newMessage", username, tbMessage.value)
+  //     .then(() => (tbMessage.value = ""));
+}
+
 let listBy = (id, {metas: [first, ...rest]}) => {
   first.name = id;
   first.count = rest.length + 1;
@@ -272,131 +280,186 @@ function getCards(cardsString: string): string[]{
 }
 
 function updateMessage(){
-    channel.push('change_message', { // send the message to the server on "shout" channel
-      name: this.userName,     // get value of "name" of person sending the message
-      message: storyDescription.value
-    });
+  connection?.invoke("UpdateDescription", storyDescription.value)
 }
 
-let channel: Channel = null
 
 const config = useRuntimeConfig()
+let connection: HubConnection | null = null;
 
-onMounted(() => {
-  try{
+onBeforeUnmount(async () => {
+  console.log("stopping")
+  connection?.stop();
+  }
+)
 
-    if (route.params.user){
+onMounted(async () => {
+  try {
+
+    if (route.params.user) {
       userName.value = route.params.user as string
     }
+    console.log('mounted')
+    connection?.stop();
+
+    connection = new signalR.HubConnectionBuilder()
+        .withUrl("http://localhost:4136/hub?username=" + userName.value + "&room=" + channelName.value)
+        .withAutomaticReconnect()
+        .build();
+
+    connection.on("description_updated", (description: string) => {
+      storyDescription.value = description
+    });
+
+    connection.on("next_story", (store: RoomStore) => {
+      isShowingVotes.value = false
+      activeCard.value = false;
+      storyDescription.value = "";
+
+      users.value = store.users.map<User>(x => {
+        const modal: User = {
+          name: x.userName,
+          vote: x.vote,
+          isObserving: false,
+          online: true
+        };
+        return modal
+      })
+    });
+
+    connection.on("joined", (store: RoomStore) => {
+      isShowingVotes.value = store.isShowingVotes
+
+      users.value = store.users.map<User>(x => {
+        const modal: User = {
+          name: x.userName,
+          vote: x.vote,
+          isObserving: false,
+          online: true
+        }; 
+        return modal
+      })
+      console.log('received message', store)
+    });
+
+    await connection.start()
+    await join()
+    
+    console.log('state', connection.state)
+    // connection.start().catch((err) => {
+    //   console.log('signalr', err)
+    // });
     console.log('config', config)
-    console.log('config socket', config.WEBSOCKET_URL)
-    let socket = new Socket(config.WEBSOCKET_URL, {params: {user_id: userName.value}});
-
-    channel = socket.channel('room:'+ channelName.value +':lobby', {}); // connect to chat "room"
-    let presence = new Presence(channel);
-
-    socket.onError((a) => console.log(a));
-    presence.onSync(() => {
-      connected.value = true;
-      console.log("PRESENCE SYNC");
-      presences.value = presence.list(listBy);
-    });
-    socket.connect();
-
-
-  channel.on('change_message', function (payload) {
-    connected.value = true;
-    console.log('changed message by ' + payload.name + ' to ' + payload.message);
-    storyDescription.value = payload.message;
-  });
-
-  channel.on('active_deck', function (payload) { // listen to the 'shout' event
-    connected.value = true;
-    console.log(payload.cards);
-
-    decks.value = payload.decks.map(x => ({
-      name: x.name,
-      cards: x.cards.split('|')
-    }))
-
-    const chosenDeck = decks.value
-        .filter(x => x.name == payload.currentDeck.name)
-        .find(x => x.cards == getCards(payload.currentDeck.cards))
-
-    if (chosenDeck){
-      activeDeck.value = chosenDeck
-    }else{
-      activeDeck.value = {
-        cards: getCards(payload.currentDeck.cards),
-        name: payload.currentDeck.name
-      }
-    }
-  });
-
-  channel.on('joined', function (payload) {
-    if (userName.value !== payload.name){
-      channel.push('change_message', { // send the message to the server on "shout" channel
-        name: this.userName,     // get value of "name" of person sending the message
-        message: storyDescription.value
-      });
-    }
-
-    if (activeCard.value){
-      channel.push('voted', {
-        name: userName.value,
-        message: activeCard.value
-      });
-    }
-  });
-
-  channel.join()
-    .receive("ok", ({messages}) => console.log("catching up", messages) )
-    .receive("error", ({reason}) => console.log("failed join", reason) )
-    .receive("timeout", () => {
-      console.log("Networking issue. Still waiting...")
-    });
-
-  channel.onError(x => connected.value = false)
-
-    channel.on('voted', function (payload) { // listen to the 'shout' event
-      connected.value = true;
-      console.log(payload.name + " voted", payload);
-      userVoted(payload.name, payload.message)
-    });
-
-  channel.on('show_votes', function (payload) { // listen to the 'shout' event
-    console.log('show_votes');
-    isShowingVotes.value = true
-  });
+    // let socket = new Socket(config.WEBSOCKET_URL, {params: {user_id: userName.value}});
+    //
+    // channel = socket.channel('room:' + channelName.value + ':lobby', {}); // connect to chat "room"
+    // let presence = new Presence(channel);
+    //
+    // socket.onError((a) => console.log(a));
+    // presence.onSync(() => {
+    //   connected.value = true;
+    //   console.log("PRESENCE SYNC");
+    //   // presences.value = presence.list(listBy);
+    // });
+    // socket.connect();
 
 
-  channel.on('clear_votes', function (payload) { // listen to the 'shout' event
-    console.log('clear_votes');
-    activeCard.value = null
-    isShowingVotes.value = false;
-    for (let user of users.value){
-      user.vote = null
-    }
-  });
+    // channel.on('change_message', function (payload) {
+    //   connected.value = true;
+    //   console.log('changed message by ' + payload.name + ' to ' + payload.message);
+    //   storyDescription.value = payload.message;
+    // });
+    //
+    // channel.on('active_deck', function (payload) { // listen to the 'shout' event
+    //   connected.value = true;
+    //   console.log(payload.cards);
+    //
+    //   decks.value = payload.decks.map(x => ({
+    //     name: x.name,
+    //     cards: x.cards.split('|')
+    //   }))
 
-  channel.push('joined', { // send the message to the server on "shout" channel
-    name: userName.value     // get value of "name" of person sending the message
-  });
+    //   const chosenDeck = decks.value
+    //       .filter(x => x.name == payload.currentDeck.name)
+    //       .find(x => x.cards == getCards(payload.currentDeck.cards))
+    //
+    //   if (chosenDeck) {
+    //     activeDeck.value = chosenDeck
+    //   } else {
+    //     activeDeck.value = {
+    //       cards: getCards(payload.currentDeck.cards),
+    //       name: payload.currentDeck.name
+    //     }
+    //   }
+    // });
+
+    // channel.on('joined', function (payload) {
+    //   if (userName.value !== payload.name) {
+    //     channel.push('change_message', { // send the message to the server on "shout" channel
+    //       name: this.userName,     // get value of "name" of person sending the message
+    //       message: storyDescription.value
+    //     });
+    //   }
+    //
+    //   if (activeCard.value) {
+    //     channel.push('voted', {
+    //       name: userName.value,
+    //       message: activeCard.value
+    //     });
+    //   }
+    // });
+
+    // channel.join()
+    //     .receive("ok", ({messages}) => console.log("catching up", messages))
+    //     .receive("error", ({reason}) => console.log("failed join", reason))
+    //     .receive("timeout", () => {
+    //       console.log("Networking issue. Still waiting...")
+    //     });
+    //
+    // channel.onError(x => connected.value = false)
+    //
+    // channel.on('voted', function (payload) { // listen to the 'shout' event
+    //   connected.value = true;
+    //   console.log(payload.name + " voted", payload);
+    //   userVoted(payload.name, payload.message)
+    // });
+    //
+    // channel.on('show_votes', function (payload) { // listen to the 'shout' event
+    //   console.log('show_votes');
+    //   isShowingVotes.value = true
+    // });
+    //
+    //
+    // channel.on('clear_votes', function (payload) { // listen to the 'shout' event
+    //   console.log('clear_votes');
+    //   activeCard.value = null
+    //   isShowingVotes.value = false;
+    //   for (let user of users.value) {
+    //     user.vote = null
+    //   }
+    // });
+    //
+    // channel.push('joined', { // send the message to the server on "shout" channel
+    //   name: userName.value     // get value of "name" of person sending the message
+    // });
 
 
-  }catch (e) {
-    console.log('catch',e)
+  } catch (e) {
+    console.log('catch', e)
   }
 })
 
+async function join() {
+  await connection?.invoke("join", channelName.value)
+}
 
 function addDeck(name: string, cards: string[]){
-  channel.push('add_deck', {
-    deck: {
-      cards: cards.join('|'),
-      name: name
-    }
-  });
+  // channel.push('add_deck', {
+  //   deck: {
+  //     cards: cards.join('|'),
+  //     name: name
+  //   }
+  // });
 }
 
 function addCustomDeck(){
@@ -450,11 +513,8 @@ const selectCard = function (card: string){
     return;
 
   activeCard.value = card
-
-  channel.push('voted', {
-    name: userName.value,
-    message: card
-  });
+  
+  connection?.invoke("Vote", card)
 
   // If we are the last to vote then trigger showing votes
   let hasEveryoneVoted = users.value
@@ -470,26 +530,27 @@ const selectCard = function (card: string){
 }
 
 function showVotes(){
-  if (confirm("Are you sure you want to complete voting?") != true) {
-    return;
-  }
-  channel.push('show_votes', {
-    name: userName.value,
-  });
+  // if (confirm("Are you sure you want to complete voting?") != true) {
+  //   return;
+  // }
+  // channel.push('show_votes', {
+  //   name: userName.value,
+  // });
 }
 
 function nextStory(){
   if (!isShowingVotes.value){
     return;
   }
+  connection?.invoke("NextStory")
 
-  channel.push('change_message', { // send the message to the server on "shout" channel
-    name: userName.value,     // get value of "name" of person sending the message
-    message: ""
-  });
-  channel.push('clear_votes', { // send the message to the server on "shout" channel
-    name: userName.value,     // get value of "name" of person sending the message
-  });
+  // channel.push('change_message', { // send the message to the server on "shout" channel
+  //   name: userName.value,     // get value of "name" of person sending the message
+  //   message: ""
+  // });
+  // channel.push('clear_votes', { // send the message to the server on "shout" channel
+  //   name: userName.value,     // get value of "name" of person sending the message
+  // });
 }
 
 const isShowingVotes = ref(false)

@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrumPoker.Domain", "ScrumPoker.Domain\ScrumPoker.Domain.csproj", "{1983F432-E919-4752-BD40-0E2FB4217D48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrumPoker.Api", "ScrumPoker.Api\ScrumPoker.Api.csproj", "{D9D5C910-E066-43B7-8089-49D430E541BC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1983F432-E919-4752-BD40-0E2FB4217D48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1983F432-E919-4752-BD40-0E2FB4217D48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1983F432-E919-4752-BD40-0E2FB4217D48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1983F432-E919-4752-BD40-0E2FB4217D48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9D5C910-E066-43B7-8089-49D430E541BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9D5C910-E066-43B7-8089-49D430E541BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9D5C910-E066-43B7-8089-49D430E541BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9D5C910-E066-43B7-8089-49D430E541BC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
